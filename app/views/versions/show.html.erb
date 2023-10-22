@@ -1,0 +1,65 @@
+<div class="contextual">
+<%= link_to(l(:button_edit), edit_version_path(@version), :class => 'icon icon-edit') if User.current.allowed_to?(:manage_versions, @version.project) %>
+<%= link_to_if_authorized(l(:button_edit_associated_wikipage, :page_title => @version.wiki_page_title), {:controller => 'wiki', :action => 'edit', :project_id => @version.project, :id => Wiki.titleize(@version.wiki_page_title)}, :class => 'icon icon-edit') unless @version.wiki_page_title.blank? || @version.project.wiki.nil? %>
+<%= delete_link version_path(@version, :back_url => url_for(:controller => 'versions', :action => 'index', :project_id => @version.project)) if User.current.allowed_to?(:manage_versions, @version.project) %>
+<%= link_to_new_issue(@version, @project) %>
+<%= call_hook(:view_versions_show_contextual, { :version => @version, :project => @project }) %>
+</div>
+
+<div id="roadmap" class="<%= @version.css_classes %>">
+  <h2 class="inline-flex"><%= @version.name %></h2>
+  <span class="badge badge-status-<%= @version.status %>"><%= l("version_status_#{@version.status}") %></span>
+
+<%= render :partial => 'versions/overview', :locals => {:version => @version} %>
+<%= render(:partial => "wiki/content", :locals => {:content => @version.wiki_page.content}) if @version.wiki_page %>
+
+<div id="version-summary">
+<% if @version.visible_fixed_issues.estimated_hours > 0 || User.current.allowed_to?(:view_time_entries, @project) %>
+<fieldset class="time-tracking"><legend><%= l(:label_time_tracking) %></legend>
+<table>
+<tr>
+    <th><%= l(:field_estimated_hours) %></th>
+    <td class="total-hours"><%= link_to html_hours(l_hours(@version.visible_fixed_issues.estimated_hours)),
+                                        project_issues_path(@version.project, :set_filter => 1, :status_id => '*', :fixed_version_id => @version.id, :c => [:tracker, :status, :subject, :estimated_hours], :t => [:estimated_hours]) %></td>
+</tr>
+<% if User.current.allowed_to_view_all_time_entries?(@project) %>
+<tr>
+    <th><%= l(:label_spent_time) %></th>
+    <td class="total-hours"><%= link_to html_hours(l_hours(@version.spent_hours)),
+                                        project_time_entries_path(@version.project, :set_filter => 1, :"issue.fixed_version_id" => @version.id) %></td>
+</tr>
+<% end %>
+</table>
+</fieldset>
+<% end %>
+
+<div id="status_by">
+<%= render_issue_status_by(@version, params[:status_by]) if @version.fixed_issues.exists? %>
+</div>
+</div>
+
+<% if @issues.present? %>
+<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do -%>
+  <table class="list related-issues">
+  <caption><%= l(:label_related_issues) %></caption>
+  <%- @issues.each do |issue| -%>
+    <tr class="hascontextmenu <%= issue.css_classes %>">
+      <td class="checkbox"><%= check_box_tag 'ids[]', issue.id, false, :id => nil %></td>
+      <td class="assigned_to"><%= assignee_avatar(issue.assigned_to, :size => 16) %></td>
+      <td class="subject"><%= link_to_issue(issue, :project => (@project != issue.project)) %></td>
+      <td class="buttons"><%= link_to_context_menu %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
+<%= context_menu %>
+<% end %>
+</div>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to_with_query_parameters 'TXT' %>
+<% end %>
+
+<%= call_hook :view_versions_show_bottom, :version => @version %>
+
+<% html_title @version.name %>

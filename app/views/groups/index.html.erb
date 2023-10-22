@@ -1,0 +1,39 @@
+<div class="contextual">
+<%= link_to l(:label_group_new), new_group_path, :class => 'icon icon-add' %>
+</div>
+
+<%= title l(:label_group_plural) %>
+
+<%= form_tag(groups_path, :method => :get) do %>
+<fieldset><legend><%= l(:label_filter_plural) %></legend>
+  <label for='name'><%= l(:label_group) %>:</label>
+  <%= text_field_tag 'name', params[:name], :size => 30 %>
+  <%= submit_tag l(:button_apply), :class => "small", :name => nil %>
+  <%= link_to l(:button_clear), groups_path, :class => 'icon icon-reload' %>
+  </fieldset>
+<% end %>
+&nbsp;
+
+<% if @groups.any? %>
+<div class="autoscroll">
+<table class="list groups">
+  <thead><tr>
+  <th><%=l(:label_group)%></th>
+  <th><%=l(:label_user_plural)%></th>
+  <th></th>
+  </tr></thead>
+  <tbody>
+<% @groups.each do |group| %>
+  <tr id="group-<%= group.id %>" class="<%= "builtin" if group.builtin? %>">
+    <td class="name"><%= link_to group, edit_group_path(group) %></td>
+    <td class="user_count"><%= (@user_count_by_group_id[group.id] || 0) unless group.builtin? %></td>
+    <td class="buttons"><%= delete_link group unless group.builtin? %></td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+</div>
+<span class="pagination"><%= pagination_links_full @group_pages, @group_count %></span>
+<% else %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>

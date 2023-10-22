@@ -1,0 +1,61 @@
+<h2><%= @author.nil? ? l(:label_activity) : l(:label_user_activity, link_to_user(@author)).html_safe %></h2>
+
+<p class="subtitle"><%= l(:label_date_from_to, :start => format_date(@date_to - @days), :end => format_date(@date_to-1)) %></p>
+
+<%= render :partial => 'activities/activities', :locals => {:events_by_day => @events_by_day} %>
+<%= content_tag('p', l(:label_no_data), :class => 'nodata') if @events_by_day.empty? %>
+
+<span class="pagination">
+  <ul class="pages">
+    <li class="previous page">
+<%= link_to("\xc2\xab " + l(:label_previous),
+                   {:params => request.query_parameters.merge(:from => @date_to - @days - 1)},
+                   :title => l(:label_date_from_to, :start => format_date(@date_to - 2*@days), :end => format_date(@date_to - @days - 1)),
+                   :accesskey => accesskey(:previous)) %>
+    </li><% unless @date_to > User.current.today %><li class="next page">
+<%= link_to(l(:label_next) + " \xc2\xbb",
+                   {:params => request.query_parameters.merge(:from => @date_to + @days - 1)},
+                   :title => l(:label_date_from_to, :start => format_date(@date_to), :end => format_date(@date_to + @days - 1)),
+                   :accesskey => accesskey(:next)) %></li><% end %>
+  </ul>
+</span>
+&nbsp;
+<% other_formats_links do |f| %>
+  <%= f.link_to_with_query_parameters 'Atom', 'from' => nil, :key => User.current.atom_key %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= auto_discovery_link_tag(:atom, :params => request.query_parameters.merge(:from => nil, :key => User.current.atom_key), :format => 'atom') %>
+<% end %>
+
+<% content_for :sidebar do %>
+<%= form_tag({}, :method => :get, :id => 'activity_scope_form') do %>
+<h3><%= l(:label_activity) %></h3>
+<p>
+  <%= t(:label_days_to_html, :days => @days, :date => date_field_tag('from', '', :value => (@date_to - 1), :size => 10)) %>
+  <%= calendar_for('from') %>
+</p>
+<p>
+  <%= l(:label_user) %>
+  <%= select_tag('user_id', activity_authors_options_for_select(@project, params[:user_id]), include_blank: true) %>
+</p>
+<ul>
+<% @activity.event_types.each do |t| %>
+  <li>
+    <%= check_box_tag "show_#{t}", 1, @activity.scope.include?(t) %>
+    <label for="show_<%=t%>">
+      <%= link_to(l("label_#{t.singularize}_plural"),
+                  {"show_#{t}" => 1, :user_id => params[:user_id], :from => params[:from]})%>
+    </label>
+  </li>
+<% end %>
+</ul>
+<% if @project && @project.descendants.active.any? %>
+    <%= hidden_field_tag 'with_subprojects', 0, :id => nil %>
+    <p><label><%= check_box_tag 'with_subprojects', 1, @with_subprojects %> <%=l(:label_subproject_plural)%></label></p>
+<% end %>
+<p><%= submit_tag l(:button_apply), :class => 'button-small', :name => 'submit' %></p>
+<% end %>
+<% end %>
+
+<% html_title(l(:label_activity), @author) -%>

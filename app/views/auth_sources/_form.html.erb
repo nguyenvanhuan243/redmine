@@ -1,0 +1,6 @@
+<%= error_messages_for 'auth_source' %>
+
+<div class="box tabular">
+  <p><%= f.text_field :name, :required => true %></p>
+  <p><%= f.check_box :onthefly_register, :label => :field_onthefly %></p>
+</div>

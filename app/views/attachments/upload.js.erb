@@ -1,0 +1,14 @@
+var fileSpan = $('#attachments_<%= j params[:attachment_id] %>');
+<% if @attachment.new_record? %>
+  fileSpan.hide();
+  alert("<%= escape_javascript @attachment.errors.full_messages.join(', ') %>");
+<% else %>
+fileSpan.find('input.token').val('<%= j @attachment.token %>');
+fileSpan.find('a.remove-upload')
+  .attr({
+    "data-remote": true,
+    "data-method": 'delete',
+    href: '<%= j attachment_path(@attachment, :attachment_id => params[:attachment_id], :format => 'js') %>'
+  })
+  .off('click');
+<% end %>

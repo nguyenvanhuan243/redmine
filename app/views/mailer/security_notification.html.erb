@@ -1,0 +1,12 @@
+<p><%= @message %><br />
+<% if @url && @title -%>
+<%= link_to @title, @url -%>
+<% elsif @url -%>
+<%= link_to @url  -%>
+<% elsif @title -%>
+<%= content_tag :h1, @title -%>
+<% end %></p>
+
+<p><%= l(:field_user) %>: <strong><%= @sender.login %></strong><br/>
+<%= l(:field_remote_ip) %>: <strong><%= @remote_ip %></strong><br/>
+<%= l(:label_date) %>: <strong><%= format_time Time.now, true %></strong></p>

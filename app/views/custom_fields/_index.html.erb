@@ -1,0 +1,31 @@
+<table class="list custom_fields">
+  <thead><tr>
+    <th><%=l(:field_name)%></th>
+    <th><%=l(:field_field_format)%></th>
+    <th><%=l(:field_is_required)%></th>
+    <% if tab[:name] == 'IssueCustomField' %>
+      <th><%=l(:field_is_for_all)%></th>
+      <th><%=l(:label_used_by)%></th>
+    <% end %>
+    <th></th>
+  </tr></thead>
+  <tbody>
+  <% (@custom_fields_by_type[tab[:name]] || []).sort.each do |custom_field| -%>
+    <% back_url = custom_fields_path(:tab => tab[:name]) %>
+    <tr>
+      <td class="name"><%= link_to custom_field.name, edit_custom_field_path(custom_field) %></td>
+      <td><%= l(custom_field.format.label) %></td>
+      <td><%= checked_image custom_field.is_required? %></td>
+      <% if tab[:name] == 'IssueCustomField' %>
+      <td><%= checked_image custom_field.is_for_all? %></td>
+      <td><%= l(:label_x_projects, :count => @custom_fields_projects_count[custom_field.id] || 0) if custom_field.is_a? IssueCustomField and !custom_field.is_for_all? %></td>
+      <% end %>
+      <td class="buttons">
+        <%= reorder_handle(custom_field, :url => custom_field_path(custom_field), :param => 'custom_field') %>
+        <%= link_to_function l(:button_copy), "location.href = '#{new_custom_field_path(:copy => custom_field)}&type=' + encodeURIComponent(($('.tabs a.selected').attr('id')||'').split('tab-').pop())", :class => 'icon icon-copy' %>
+        <%= delete_link custom_field_path(custom_field) %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

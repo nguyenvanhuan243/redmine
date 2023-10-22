@@ -1,0 +1,21 @@
+<%= back_url_hidden_field_tag %>
+<%= error_messages_for 'version' %>
+
+<div class="box tabular">
+<p><%= f.text_field :name, :maxlength => 60, :size => 60, :required => true %></p>
+<p><%= f.text_field :description, :size => 60 %></p>
+<% unless @version.new_record? %>
+  <p><%= f.select :status, Version::VERSION_STATUSES.collect {|s| [l("version_status_#{s}"), s]} %></p>
+<% end %>
+<p><%= f.text_field :wiki_page_title, :label => :label_wiki_page, :size => 60, :disabled => @project.wiki.nil? %></p>
+<p><%= f.date_field :effective_date, :size => 10 %><%= calendar_for('version_effective_date') %></p>
+<p><%= f.select :sharing, @version.allowed_sharings.collect {|v| [format_version_sharing(v), v]} %></p>
+<% if @version.new_record? %>
+<p><%= f.check_box :default_project_version, :label => :field_default_version %></p>
+<% end %>
+
+<% @version.visible_custom_field_values.each do |value| %>
+  <p><%= custom_field_tag_with_label :version, value %></p>
+<% end %>
+
+</div>

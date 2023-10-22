@@ -1,0 +1,16 @@
+<h2><%= l :label_password_required %></h2>
+<p class="nodata" style="font-size: 1em;"><%= t 'sudo_mode_new_info_html' %></p>
+<%= form_tag({}, method: :post, class: 'tabular', id: 'sudo-form') do %>
+
+  <%= hidden_field_tag '_method', request.request_method %>
+  <%= hash_to_hidden_fields @sudo_form.original_fields %>
+
+  <div class="box">
+    <p>
+      <label for="sudo_password"><%= l :field_password %><span class="required">*</span></label>
+      <%= password_field_tag :sudo_password, nil, size: 25, autofocus: true %>
+      </br><%= link_to l(:label_password_lost), lost_password_path, :class => "lost_password" if Setting.lost_password? %>
+    </p>
+  </div>
+  <%= submit_tag l(:button_submit) %>
+<% end %>

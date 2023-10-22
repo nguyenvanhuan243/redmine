@@ -1,0 +1,24 @@
+<% if User.current.allowed_to?(:edit_wiki_pages, @project) &&
+      (@wiki && @wiki.find_or_new_page('Sidebar').editable_by?(User.current)) %>
+  <div class="contextual">
+    <%= link_to l(:button_edit), edit_project_wiki_page_path(@project, 'sidebar'),
+                :class => 'icon icon-edit' %>
+  </div>
+<% end -%>
+
+<% if @wiki && @wiki.sidebar -%>
+  <div class="wiki">
+    <%= textilizable @wiki.sidebar.content, :text %>
+  </div>
+<% end -%>
+
+<h3><%= l(:label_wiki) %></h3>
+<ul>
+  <li><%= link_to(l(:field_start_page), {:action => 'show', :id => nil}) %></li>
+  <li><%= link_to(l(:label_index_by_title), {:action => 'index'}) %></li>
+  <li><%= link_to(l(:label_index_by_date),
+                  {:controller => 'wiki', :project_id => @project,
+                   :action => 'date_index'}) %></li>
+</ul>
+
+<%= call_hook(:view_wiki_show_sidebar_bottom, :wiki => @wiki, :page => @page) %>

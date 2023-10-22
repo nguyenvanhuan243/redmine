@@ -1,0 +1,58 @@
+<% if @changeset && @changeset_to.nil? %>
+<div class="contextual">
+  &#171;
+  <% unless @changeset.previous.nil? -%>
+    <%= link_to_revision(@changeset.previous, @repository,
+      :text => l(:label_previous), :accesskey => accesskey(:previous)) %>
+  <% else -%>
+    <%= l(:label_previous) %>
+  <% end -%>
+|
+  <% unless @changeset.next.nil? -%>
+    <%= link_to_revision(@changeset.next, @repository,
+      :text => l(:label_next), :accesskey => accesskey(:next)) %>
+  <% else -%>
+    <%= l(:label_next) %>
+  <% end -%>
+  &#187;&nbsp;
+
+  <%= form_tag({:controller => 'repositories',
+               :action     => 'revision',
+               :id         => @project,
+               :repository_id => @repository.identifier_param,
+               :rev        => nil},
+               :method     => :get) do %>
+    <%= text_field_tag 'rev', @rev, :size => 8 %>
+    <%= submit_tag 'OK', :name => nil %>
+  <% end %>
+</div>
+<%= render :partial => 'changeset' %>
+<% else %>
+<h2><%= l(:label_revision) %> <%= @diff_format_revisions %> <%= @path %></h2>
+<% end %>
+
+<!-- Choose view type -->
+<%= form_tag({:action => 'diff', :id => @project,
+              :repository_id => @repository.identifier_param,
+              :path => to_path_param(@path), :rev=> @rev}, :method => 'get') do %>
+  <%= hidden_field_tag('rev_to', params[:rev_to]) if params[:rev_to] %>
+  <p>
+    <%= l(:label_view_diff) %>:
+    <label><%= radio_button_tag 'type', 'inline', @diff_type != 'sbs', :onchange => "this.form.submit()" %> <%= l(:label_diff_inline) %></label>
+    <label><%= radio_button_tag 'type', 'sbs', @diff_type == 'sbs', :onchange => "this.form.submit()" %> <%= l(:label_diff_side_by_side) %></label>
+  </p>
+<% end %>
+
+<% cache(@cache_key) do -%>
+<%= render :partial => 'common/diff', :locals => {:diff => @diff, :diff_type => @diff_type, :diff_style => @repository.class.scm_name} %>
+<% end -%>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to_with_query_parameters 'Diff', {}, :caption => 'Unified diff' %>
+<% end %>
+
+<% html_title(with_leading_slash(@path), 'Diff') -%>
+
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag "scm" %>
+<% end %>

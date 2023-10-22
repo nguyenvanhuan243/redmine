@@ -1,0 +1,38 @@
+<div class="version-overview">
+<% if version.completed? %>
+  <p><%= format_date(version.effective_date) %></p>
+<% elsif version.effective_date %>
+  <p><strong><%= due_date_distance_in_words(version.effective_date) %></strong> (<%= format_date(version.effective_date) %>)</p>
+<% end %>
+
+<p><%=h version.description %></p>
+<% if version.custom_field_values.any? %>
+<ul>
+  <% render_custom_field_values(version) do |custom_field, formatted| %>
+    <li><span class="label"><%= custom_field.name %>:</span> <%= formatted %></li>
+  <% end %>
+</ul>
+<% end %>
+
+<% if version.visible_fixed_issues.count > 0 %>
+    <%= progress_bar([version.visible_fixed_issues.closed_percent, version.visible_fixed_issues.completed_percent],
+                     :titles =>
+                       ["%s: %i%%" % [l(:label_closed_issues_plural), version.visible_fixed_issues.closed_percent],
+                        "%s: %i%%" % [l(:field_done_ratio), version.visible_fixed_issues.completed_percent]],
+                     :legend => ('%i%%' % version.visible_fixed_issues.completed_percent)) %>
+    <p class="progress-info">
+      <%= link_to(l(:label_x_issues, :count => version.visible_fixed_issues.count),
+                  version_filtered_issues_path(version, :status_id => '*')) %>
+      &nbsp;
+      (<%= link_to_if(version.visible_fixed_issues.closed_count > 0,
+                      l(:label_x_closed_issues_abbr, :count => version.visible_fixed_issues.closed_count),
+                      version_filtered_issues_path(version, :status_id => 'c')) %>
+      &#8212;
+      <%= link_to_if(version.visible_fixed_issues.open_count > 0,
+                     l(:label_x_open_issues_abbr, :count => version.visible_fixed_issues.open_count),
+                     version_filtered_issues_path(version, :status_id => 'o')) %>)
+    </p>
+<% else %>
+    <p class="progress-info"><%= l(:label_roadmap_no_issues) %></p>
+<% end %>
+</div>

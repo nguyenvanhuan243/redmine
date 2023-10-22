@@ -1,0 +1,25 @@
+<div class="contextual">
+<% if User.current.allowed_to?(:manage_issue_relations, @project) %>
+  <%= toggle_link l(:button_add), 'new-relation-form', {:focus => 'relation_issue_to_id'} %>
+<% end %>
+</div>
+
+<p>
+  <strong><%=l(:label_related_issues)%></strong>
+  <%= render_relations_stats(@issue, @relations) if @relations.present? %>
+</p>
+
+<% if @relations.present? %>
+<%= form_tag({}, :data => {:cm_url => issues_context_menu_path}) do %>
+  <%= render_issue_relations(@issue, @relations) %>
+<% end %>
+<% end %>
+
+<%= form_for @relation, {
+                 :as => :relation, :remote => true,
+                 :url => issue_relations_path(@issue),
+                 :method => :post,
+                 :html => {:id => 'new-relation-form', :style => 'display: none;'}
+               } do |f| %>
+<%= render :partial => 'issue_relations/form', :locals => {:f => f}%>
+<% end %>

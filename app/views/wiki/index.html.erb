@@ -1,0 +1,41 @@
+<div class="contextual">
+<% if User.current.allowed_to?(:edit_wiki_pages, @project) %>
+<%= link_to l(:label_wiki_page_new), new_project_wiki_page_path(@project), :remote => true, :class => 'icon icon-add' %>
+<% end %>
+<%= watcher_link(@wiki, User.current) %>
+<% if User.current.allowed_to?(:manage_wiki, @project) %>
+<%= link_to l(:button_delete), {:controller => 'wikis', :action => 'destroy', :id => @project}, :class => 'icon icon-del' %>
+<% end %>
+</div>
+
+<h2><%= l(:label_index_by_title) %></h2>
+
+<% if @pages.empty? %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
+<%= render_page_hierarchy(@pages_by_parent_id, nil, :timestamp => true) %>
+
+<% content_for :sidebar do %>
+  <%= render :partial => 'sidebar' %>
+<% end %>
+
+<% unless @pages.empty? %>
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom',
+                :url => {:controller => 'activities', :action => 'index',
+                         :id => @project, :show_wiki_edits => 1,
+                         :key => User.current.atom_key} %>
+  <% if User.current.allowed_to?(:export_wiki_pages, @project) %>
+  <%= f.link_to('PDF', :url => {:action => 'export', :format => 'pdf'}) %>
+  <%= f.link_to('HTML', :url => {:action => 'export'}) %>
+  <% end %>
+<% end %>
+<% end %>
+
+<% content_for :header_tags do %>
+<%= auto_discovery_link_tag(
+      :atom, :controller => 'activities', :action => 'index',
+      :id => @project, :show_wiki_edits => 1, :format => 'atom',
+      :key => User.current.atom_key) %>
+<% end %>

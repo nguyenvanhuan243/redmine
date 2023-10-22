@@ -1,0 +1,22 @@
+<p><%= link_to l(:label_user_new), new_group_users_path(@group), :remote => true, :class => "icon icon-add" %></p>
+
+<% if @group.users.any? %>
+  <table class="list users">
+    <thead><tr>
+      <th><%= l(:label_user) %></th>
+      <th style="width:15%"></th>
+    </tr></thead>
+    <tbody>
+    <% @group.users.sort.each do |user| %>
+      <tr id="user-<%= user.id %>">
+        <td class="name"><%= link_to_user user %></td>
+        <td class="buttons">
+          <%= delete_link group_user_path(@group, :user_id => user), :remote => true %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>

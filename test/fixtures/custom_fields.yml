@@ -1,0 +1,149 @@
+--- 
+custom_fields_001: 
+  name: Database
+  description: Select one of the databases
+  regexp: ""
+  is_for_all: true
+  is_filter: true
+  type: IssueCustomField
+  possible_values: 
+  - MySQL
+  - PostgreSQL
+  - Oracle
+  id: 1
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  position: 2
+custom_fields_002: 
+  name: Searchable field
+  min_length: 1
+  regexp: ""
+  is_for_all: true
+  is_filter: true
+  type: IssueCustomField
+  max_length: 100
+  possible_values: ""
+  id: 2
+  is_required: false
+  field_format: string
+  searchable: true
+  default_value: "Default string"
+  editable: true
+  position: 1
+custom_fields_003: 
+  name: Development status
+  regexp: ""
+  is_for_all: false
+  is_filter: true
+  type: ProjectCustomField
+  possible_values: 
+  - Stable
+  - Beta
+  - Alpha
+  - Planning
+  id: 3
+  is_required: false
+  field_format: list
+  default_value: ""
+  editable: true
+  position: 1
+custom_fields_004: 
+  name: Phone number
+  regexp: ""
+  is_for_all: false
+  type: UserCustomField
+  possible_values: ""
+  id: 4
+  is_required: false
+  field_format: string
+  default_value: ""
+  editable: true
+  position: 1
+custom_fields_005: 
+  name: Money
+  regexp: ""
+  is_for_all: false
+  type: UserCustomField
+  possible_values: ""
+  id: 5
+  is_required: false
+  field_format: float
+  default_value: ""
+  editable: true
+  position: 2
+custom_fields_006: 
+  name: Float field
+  regexp: ""
+  is_for_all: true
+  type: IssueCustomField
+  possible_values: ""
+  id: 6
+  is_required: false
+  field_format: float
+  default_value: ""
+  editable: true
+  position: 3
+custom_fields_007: 
+  name: Billable
+  regexp: ""
+  is_for_all: false
+  is_filter: true
+  type: TimeEntryActivityCustomField
+  possible_values: ""
+  id: 7
+  is_required: false
+  field_format: bool
+  default_value: ""
+  editable: true
+  position: 1
+custom_fields_008: 
+  name: Custom date
+  regexp: ""
+  is_for_all: true
+  is_filter: false
+  type: IssueCustomField
+  possible_values: ""
+  id: 8
+  is_required: false
+  field_format: date
+  default_value: ""
+  editable: true
+  position: 4
+custom_fields_009: 
+  name: Project 1 cf
+  regexp: ""
+  is_for_all: false
+  is_filter: true
+  type: IssueCustomField
+  possible_values: ""
+  id: 9
+  is_required: false
+  field_format: date
+  default_value: ""
+  editable: true
+  position: 5
+custom_fields_010: 
+  name: Overtime
+  regexp: ""
+  is_for_all: false
+  is_filter: false
+  type: TimeEntryCustomField
+  possible_values: ""
+  id: 10
+  is_required: false
+  field_format: bool
+  default_value: 0
+  editable: true
+  position: 1
+custom_fields_011:
+  id: 11
+  name: Binary
+  type: CustomField
+  possible_values: 
+  - !binary |
+    SGXDqWzDp2prc2Tigqw2NTTDuQ==
+  - Other value
+  field_format: list
+  position: 1

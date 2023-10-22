@@ -1,0 +1,1494 @@
+# Galician (Spain) for Ruby on Rails
+# By:
+# Marcos Arias Pena <markus@agil-e.com>
+# Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>
+
+gl:
+  number:
+    format:
+      separator: ","
+      delimiter: "."
+      precision: 3
+
+    currency:
+      format:
+        format: "%n %u"
+        unit: "€"
+        separator: ","
+        delimiter: "."
+        precision: 2
+
+    percentage:
+      format:
+        # separator:
+        delimiter: ""
+        # precision:
+
+    precision:
+      format:
+        # separator:
+        delimiter: ""
+        # precision:
+
+    human:
+      format:
+        # separator:
+        delimiter: ""
+        precision: 3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "B"
+            other: "B"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+  direction: ltr
+  date:
+    formats:
+      default:  "%e/%m/%Y"
+      short:    "%e %b"
+      long:     "%A %e de %B de %Y"
+    day_names:        [Domingo, Luns, Martes, Mércores, Xoves, Venres, Sábado]
+    abbr_day_names:   [Dom, Lun, Mar, Mer, Xov, Ven, Sab]
+    month_names:      [~, Xaneiro, Febreiro, Marzo, Abril, Maio, Xunio, Xullo, Agosto, Setembro, Outubro, Novembro, Decembro]
+    abbr_month_names: [~, Xan, Feb, Maz, Abr, Mai, Xun, Xul, Ago, Set, Out, Nov, Dec]
+    order:
+      - :day
+      - :month
+      - :year
+
+  time:
+    formats:
+      default:    "%A, %e de %B de %Y, %H:%M hs"
+      time:       "%H:%M hs"
+      short:      "%e/%m, %H:%M hs"
+      long:       "%A %e de %B de %Y ás %H:%M horas"
+
+    am: ''
+    pm: ''
+
+  datetime:
+    distance_in_words:
+      half_a_minute: 'medio minuto'
+      less_than_x_seconds:
+        zero: 'menos dun segundo'
+        one: '1 segundo'
+        few: 'poucos segundos'
+        other: '%{count} segundos'
+      x_seconds:
+        one: '1 segundo'
+        other: '%{count} segundos'
+      less_than_x_minutes:
+        zero: 'menos dun minuto'
+        one: '1 minuto'
+        other: '%{count} minutos'
+      x_minutes:
+        one: '1 minuto'
+        other: '%{count} minuto'
+      about_x_hours:
+        one: 'aproximadamente unha hora'
+        other: '%{count} horas'
+      x_hours:
+        one:   "1 hora"
+        other: "%{count} horas"
+      x_days:
+        one: '1 día'
+        other: '%{count} días'
+      x_weeks:
+        one: '1 semana'
+        other: '%{count} semanas'
+      about_x_months:
+        one: 'aproximadamente 1 mes'
+        other: '%{count} meses'
+      x_months:
+        one: '1 mes'
+        other: '%{count} meses'
+      about_x_years:
+        one: 'aproximadamente 1 ano'
+        other: '%{count} anos'
+      over_x_years:
+        one: 'máis dun ano'
+        other: '%{count} anos'
+      almost_x_years:
+        one:   "almost 1 year"
+        other: "almost %{count} years"
+      now: 'agora'
+      today: 'hoxe'
+      tomorrow: 'mañá'
+      in: 'dentro de'
+
+  support:
+    array:
+      sentence_connector: e
+
+  activerecord:
+    models:
+    attributes:
+    errors:
+      template:
+        header:
+          one: "1 erro evitou que se poidese gardar o %{model}"
+          other: "%{count} erros evitaron que se poidese gardar o %{model}"
+        body: "Atopáronse os seguintes problemas:"
+      messages:
+        inclusion: "non está incluido na lista"
+        exclusion: "xa existe"
+        invalid: "non é válido"
+        confirmation: "non coincide coa confirmación"
+        accepted: "debe ser aceptado"
+        empty: "non pode estar baleiro"
+        blank: "non pode estar en branco"
+        too_long: "é demasiado longo (non máis de %{count} carácteres)"
+        too_short: "é demasiado curto (non menos de %{count} carácteres)"
+        wrong_length: "non ten a lonxitude correcta (debe ser de %{count} carácteres)"
+        taken: "non está dispoñíbel"
+        not_a_number: "non é un número"
+        greater_than: "debe ser maior que %{count}"
+        greater_than_or_equal_to: "debe ser maior ou igual que %{count}"
+        equal_to: "debe ser igual a %{count}"
+        less_than: "debe ser menor que %{count}"
+        less_than_or_equal_to: "debe ser menor ou igual que %{count}"
+        odd: "debe ser par"
+        even: "debe ser impar"
+        greater_than_start_date: "debe ser posterior á data de comezo"
+        not_same_project: "non pertence ao mesmo proxecto"
+        circular_dependency: "Esta relación podería crear unha dependencia circular"
+        cant_link_an_issue_with_a_descendant: "As peticións non poden estar ligadas coas súas subtarefas"
+        earlier_than_minimum_start_date: "Non pode ser antes de %{date} por mor de peticións anteriores"
+        not_a_regexp: "non é unha expresión regular válida"
+        open_issue_with_closed_parent: "Unha petición aberta non pode ser asignada a unha tarefa pai pechada"
+        must_contain_uppercase: "debe conter letras maiúsculas (A-Z)"
+        must_contain_lowercase: "debe conter letras minúsculas (a-z)"
+        must_contain_digits: "debe conter díxitos (0-9)"
+        must_contain_special_chars: "debe conter caracteres especiais (!, $, %, ...)"
+        domain_not_allowed: "contén un dominio non permitido (%{domain})"
+
+  actionview_instancetag_blank_option: Por favor seleccione
+
+  button_activate: Activar
+  button_add: Engadir
+  button_annotate: Anotar
+  button_apply: Aceptar
+  button_archive: Arquivar
+  button_back: Atrás
+  button_cancel: Cancelar
+  button_change: Cambiar
+  button_change_password: "Cambiar o contrasinal"
+  button_check_all: "Seleccionalo todo"
+  button_clear: Anular
+  button_configure: Configurar
+  button_copy: Copiar
+  button_create: Crear
+  button_delete: Borrar
+  button_download: Descargar
+  button_edit: Modificar
+  button_list: Listar
+  button_lock: Bloquear
+  button_log_time: Tempo dedicado
+  button_login: Acceder
+  button_move: Mover
+  button_quote: Citar
+  button_rename: Renomear
+  button_reply: Respostar
+  button_reset: Restablecer
+  button_rollback: Volver a esta versión
+  button_save: Gardar
+  button_sort: Ordenar
+  button_submit: Aceptar
+  button_test: Probar
+  button_unarchive: Desarquivar
+  button_uncheck_all: Non seleccionar nada
+  button_unlock: Desbloquear
+  button_unwatch: Non monitorizar
+  button_update: Actualizar
+  button_view: Ver
+  button_watch: Monitorizar
+  default_activity_design: Deseño
+  default_activity_development: Desenvolvemento
+  default_doc_category_tech: Documentación técnica
+  default_doc_category_user: Documentación de usuario
+  default_issue_status_in_progress: "En curso"
+  default_issue_status_closed: Pechada
+  default_issue_status_feedback: Comentarios
+  default_issue_status_new: Nova
+  default_issue_status_rejected: Rexeitada
+  default_issue_status_resolved: Resolta
+  default_priority_high: Alta
+  default_priority_immediate: Inmediata
+  default_priority_low: Baixa
+  default_priority_normal: Normal
+  default_priority_urgent: Urxente
+  default_role_developer: Desenvolvedor
+  default_role_manager: Xefe de proxecto
+  default_role_reporter: Informador
+  default_tracker_bug: Erros
+  default_tracker_feature: Tarefas
+  default_tracker_support: Soporte
+  enumeration_activities: Actividades (tempo dedicado)
+  enumeration_doc_categories: Categorías do documento
+  enumeration_issue_priorities: Prioridade das peticións
+  error_can_t_load_default_data: "Non se puido cargar a configuración predeterminada: %{value}"
+  error_issue_not_found_in_project: 'A petición non se atopa ou non está asociada a este proxecto'
+  error_scm_annotate: "Non existe a entrada ou non se puido anotar"
+  error_scm_command_failed: "Aconteceu un erro ao acceder ao repositorio: %{value}"
+  error_scm_not_found: "A entrada e/ou revisión non existe no repositorio."
+  field_account: Conta
+  field_activity: Actividade
+  field_admin: Administrador
+  field_assignable: Pódense asignar peticións a este perfil
+  field_assigned_to: Asignado a
+  field_attr_firstname: "Atributo do nome"
+  field_attr_lastname: "Atributo dos apelidos"
+  field_attr_login: "Atributo do nome de usuario"
+  field_attr_mail: "Atributo da conta de correo electrónico"
+  field_auth_source: Modo de identificación
+  field_author: Autor
+  field_base_dn: DN base
+  field_category: Categoría
+  field_column_names: Columnas
+  field_comments: Comentario
+  field_comments_sorting: Mostrar comentarios
+  field_created_on: Creado
+  field_default_value: "Estado predeterminado"
+  field_delay: Retraso
+  field_description: Descrición
+  field_done_ratio: "% Realizado"
+  field_downloads: Descargas
+  field_due_date: Data fin
+  field_effective_date: Data
+  field_estimated_hours: Tempo estimado
+  field_field_format: Formato
+  field_filename: Ficheiro
+  field_filesize: Tamaño
+  field_firstname: Nome
+  field_fixed_version: Versión prevista
+  field_hide_mail: "Agochar o enderezo de correo."
+  field_homepage: Sitio web
+  field_host: Anfitrión
+  field_hours: Horas
+  field_identifier: Identificador
+  field_is_closed: Petición resolta
+  field_is_default: "Estado predeterminado"
+  field_is_filter: Usado como filtro
+  field_is_for_all: Para todos os proxectos
+  field_is_in_roadmap: Consultar as peticións na planificación
+  field_is_public: Público
+  field_is_required: Obrigatorio
+  field_issue: Petición
+  field_issue_to: Petición relacionada
+  field_language: Idioma
+  field_last_login_on: "Último acceso"
+  field_lastname: "Apelidos"
+  field_login: "Usuario"
+  field_mail: Correo electrónico
+  field_mail_notification: Notificacións por correo
+  field_max_length: Lonxitude máxima
+  field_min_length: Lonxitude mínima
+  field_name: Nome
+  field_new_password: Novo contrasinal
+  field_notes: Notas
+  field_onthefly: Creación do usuario "ao voo"
+  field_parent: Proxecto pai
+  field_parent_title: Páxina pai
+  field_password: Contrasinal
+  field_password_confirmation: Confirmación
+  field_port: Porto
+  field_possible_values: Valores posibles
+  field_priority: Prioridade
+  field_project: Proxecto
+  field_redirect_existing_links: Redireccionar ligazóns existentes
+  field_regexp: Expresión regular
+  field_role: Perfil
+  field_searchable: Incluír nas buscas
+  field_spent_on: Data
+  field_start_date: Data de inicio
+  field_start_page: Páxina principal
+  field_status: Estado
+  field_subject: Tema
+  field_subproject: Proxecto secundario
+  field_summary: Resumo
+  field_time_zone: Zona horaria
+  field_title: Título
+  field_tracker: Tipo
+  field_type: Tipo
+  field_updated_on: Actualizado
+  field_url: URL
+  field_user: Usuario
+  field_value: Valor
+  field_version: Versión
+  general_csv_decimal_separator: ','
+  general_csv_encoding: ISO-8859-15
+  general_csv_separator: ';'
+  general_pdf_fontname: freesans
+  general_pdf_monospaced_fontname: freemono
+  general_first_day_of_week: '1'
+  general_lang_name: 'Galician (Galego)'
+  general_text_No: 'Non'
+  general_text_Yes: 'Si'
+  general_text_no: 'non'
+  general_text_yes: 'si'
+  label_activity: Actividade
+  label_add_another_file: Engadir outro ficheiro
+  label_add_note: Engadir unha nota
+  label_added: engadido
+  label_added_time_by: "Engadido por %{author} hai %{age}"
+  label_administration: Administración
+  label_age: Idade
+  label_ago: "hai"
+  label_all: todos
+  label_all_words: Tódalas palabras
+  label_and_its_subprojects: "%{value} e proxectos secundarios"
+  label_applied_status: Aplicar estado
+  label_assigned_to_me_issues: "Peticións asignadas a vostede"
+  label_associated_revisions: Revisións asociadas
+  label_attachment: Ficheiro
+  label_attachment_delete: Borrar o ficheiro
+  label_attachment_new: Novo ficheiro
+  label_attachment_plural: Ficheiros
+  label_attribute: Atributo
+  label_attribute_plural: Atributos
+  label_auth_source: Modo de autenticación
+  label_auth_source_new: Novo modo de autenticación
+  label_auth_source_plural: Modos de autenticación
+  label_authentication: Autenticación
+  label_blocked_by: bloqueado por
+  label_blocks: bloquea a
+  label_board: Foro
+  label_board_new: Novo foro
+  label_board_plural: Foros
+  label_boolean: Booleano
+  label_browse: Ollar
+  label_bulk_edit_selected_issues: Editar as peticións seleccionadas
+  label_calendar: Calendario
+  label_change_plural: Cambios
+  label_change_properties: Cambiar propiedades
+  label_change_status: Cambiar o estado
+  label_change_view_all: Ver todos os cambios
+  label_changes_details: Detalles de todos os cambios
+  label_changeset_plural: Cambios
+  label_chronological_order: En orde cronolóxica
+  label_closed_issues: pechada
+  label_closed_issues_plural: pechadas
+  label_x_open_issues_abbr:
+    zero:  0 open
+    one:   1 open
+    other: "%{count} open"
+  label_x_closed_issues_abbr:
+    zero:  0 closed
+    one:   1 closed
+    other: "%{count} closed"
+  label_comment: Comentario
+  label_comment_add: Engadir un comentario
+  label_comment_added: Comentario engadido
+  label_comment_delete: Borrar comentarios
+  label_comment_plural: Comentarios
+  label_x_comments:
+    zero: no comments
+    one: 1 comment
+    other: "%{count} comments"
+  label_commits_per_author: Remisións por autor
+  label_commits_per_month: Remisións por mes
+  label_confirmation: Confirmación
+  label_contains: contén
+  label_copied: copiado
+  label_copy_workflow_from: Copiar fluxo de traballo dende
+  label_current_status: Estado actual
+  label_current_version: Versión actual
+  label_custom_field: Campo personalizado
+  label_custom_field_new: Novo campo personalizado
+  label_custom_field_plural: Campos personalizados
+  label_date: Data
+  label_date_from: Dende
+  label_date_range: Rango de datas
+  label_date_to: Ata
+  label_day_plural: días
+  label_default: Predeterminada
+  label_default_columns: Columnas predeterminadas
+  label_deleted: suprimido
+  label_details: Detalles
+  label_diff_inline: liña por liña
+  label_diff_side_by_side: un a cada lado
+  label_disabled: deshabilitado
+  label_display_per_page: "Por páxina: %{value}"
+  label_document: Documento
+  label_document_added: Documento engadido
+  label_document_new: Novo documento
+  label_document_plural: Documentos
+  label_downloads_abbr: D/L
+  label_duplicated_by: duplicada por
+  label_duplicates: duplicada de
+  label_enumeration_new: Novo valor
+  label_enumerations: Listas de valores
+  label_environment: Entorno
+  label_equals: igual
+  label_example: Exemplo
+  label_export_to: 'Exportar a:'
+  label_f_hour: "%{value} hora"
+  label_f_hour_plural: "%{value} horas"
+  label_feed_plural: Feeds
+  label_feeds_access_key_created_on: "Chave de acceso por Atom creada hai %{value}"
+  label_file_added: Ficheiro engadido
+  label_file_plural: Ficheiros
+  label_filter_add: Engadir o filtro
+  label_filter_plural: Filtros
+  label_float: Flotante
+  label_follows: posterior a
+  label_gantt: Gantt
+  label_general: Xeral
+  label_generate_key: Xerar chave
+  label_help: Axuda
+  label_history: Histórico
+  label_home: Inicio
+  label_in: en
+  label_in_less_than: "en menos de"
+  label_in_more_than: "en máis de"
+  label_incoming_emails: Correos entrantes
+  label_index_by_date: Índice por data
+  label_index_by_title: Índice por título
+  label_information: Información
+  label_information_plural: Información
+  label_integer: Número
+  label_internal: Interno
+  label_issue: Petición
+  label_issue_added: Petición engadida
+  label_issue_category: Categoría das peticións
+  label_issue_category_new: Nova categoría
+  label_issue_category_plural: Categorías das peticións
+  label_issue_new: Nova petición
+  label_issue_plural: Peticións
+  label_issue_status: Estado da petición
+  label_issue_status_new: Novo estado
+  label_issue_status_plural: Estados das peticións
+  label_issue_tracking: Peticións
+  label_issue_updated: Petición actualizada
+  label_issue_view_all: Ver todas as peticións
+  label_issue_watchers: Seguidores
+  label_issues_by: "Peticións por %{value}"
+  label_jump_to_a_project: Ir ao proxecto…
+  label_language_based: Baseado no idioma
+  label_last_changes: "últimos %{count} cambios"
+  label_last_month: último mes
+  label_last_n_days: "últimos %{count} días"
+  label_last_week: última semana
+  label_latest_revision: Última revisión
+  label_latest_revision_plural: Últimas revisións
+  label_ldap_authentication: Autenticación LDAP
+  label_less_than_ago: "hai menos de"
+  label_list: Lista
+  label_loading: Cargando…
+  label_logged_as: "Identificado como"
+  label_login: "Acceder"
+  label_logout: "Saír"
+  label_max_size: Tamaño máximo
+  label_me: eu mesmo
+  label_member: Membro
+  label_member_new: Novo membro
+  label_member_plural: Membros
+  label_message_last: Última mensaxe
+  label_message_new: Nova mensaxe
+  label_message_plural: Mensaxes
+  label_message_posted: Mensaxe engadida
+  label_min_max_length: Lonxitude mín - máx
+  label_modified: modificado
+  label_module_plural: Módulos
+  label_month: Mes
+  label_months_from: meses de
+  label_more_than_ago: "hai máis de"
+  label_my_account: "Conta"
+  label_my_page: "Páxina persoal"
+  label_my_projects: "Proxectos persoais"
+  label_new: Novo
+  label_new_statuses_allowed: Novos estados autorizados
+  label_news: Noticia
+  label_news_added: Noticia engadida
+  label_news_latest: Últimas noticias
+  label_news_new: Nova noticia
+  label_news_plural: Noticias
+  label_news_view_all: Ver todas as noticias
+  label_next: Seguinte
+  label_no_change_option: (sen cambios)
+  label_no_data: "Non hai ningún dato que mostrar."
+  label_nobody: ninguén
+  label_none: ningún
+  label_not_contains: non contén
+  label_not_equals: non igual
+  label_open_issues: aberta
+  label_open_issues_plural: abertas
+  label_optional_description: Descrición opcional
+  label_options: Opcións
+  label_overview: Vistazo
+  label_password_lost: "Esqueceu o contrasinal?"
+  label_permissions: Permisos
+  label_permissions_report: Informe de permisos
+  label_plugins: Complementos
+  label_precedes: anterior a
+  label_preferences: Preferencias
+  label_preview: "Vista previa"
+  label_previous: Anterior
+  label_project: Proxecto
+  label_project_all: Tódolos proxectos
+  label_project_latest: Últimos proxectos
+  label_project_new: Novo proxecto
+  label_project_plural: Proxectos
+  label_x_projects:
+    zero:  "ningún proxecto"
+    one:   "un proxecto"
+    other: "%{count} proxectos"
+  label_public_projects: Proxectos públicos
+  label_query: Consulta personalizada
+  label_query_new: Nova consulta
+  label_query_plural: Consultas personalizadas
+  label_read: Ler…
+  label_register: "Rexistrarse"
+  label_registered_on: Inscrito o
+  label_registration_activation_by_email: activación de conta por correo
+  label_registration_automatic_activation: activación automática de conta
+  label_registration_manual_activation: activación manual de conta
+  label_related_issues: Peticións relacionadas
+  label_relates_to: relacionada con
+  label_relation_delete: Eliminar relación
+  label_relation_new: Nova relación
+  label_renamed: renomeado
+  label_reply_plural: Respostas
+  label_report: Informe
+  label_report_plural: Informes
+  label_reported_issues: "Peticións rexistradas por vostede"
+  label_repository: Repositorio
+  label_repository_plural: Repositorios
+  label_result_plural: Resultados
+  label_reverse_chronological_order: En orde cronolóxica inversa
+  label_revision: Revisión
+  label_revision_plural: Revisións
+  label_roadmap: Planificación
+  label_roadmap_due_in: "Remata en %{value}"
+  label_roadmap_no_issues: Non hai peticións para esta versión
+  label_roadmap_overdue: "%{value} tarde"
+  label_role: Perfil
+  label_role_and_permissions: Perfís e permisos
+  label_role_new: Novo perfil
+  label_role_plural: Perfís
+  label_scm: SCM
+  label_search: Busca
+  label_search_titles_only: Buscar só en títulos
+  label_send_information: Enviar información da conta ao usuario
+  label_send_test_email: Enviar un correo de proba
+  label_settings: Configuración
+  label_show_completed_versions: Mostra as versións rematadas
+  label_sort_by: "Ordenar por %{value}"
+  label_spent_time: Tempo dedicado
+  label_statistics: Estatísticas
+  label_stay_logged_in: "Lembrar o contrasinal."
+  label_string: Texto
+  label_subproject_plural: Proxectos secundarios
+  label_text: Texto largo
+  label_theme: Tema
+  label_this_month: este mes
+  label_this_week: esta semana
+  label_this_year: este ano
+  label_time_tracking: Control de tempo
+  label_today: hoxe
+  label_topic_plural: Temas
+  label_total: Total
+  label_tracker: Tipo
+  label_tracker_new: Novo tipo
+  label_tracker_plural: Tipos de peticións
+  label_updated_time: "Actualizado hai %{value}"
+  label_updated_time_by: "Actualizado por %{author} hai %{age}"
+  label_used_by: Utilizado por
+  label_user: Usuario
+  label_user_activity: "Actividade de %{value}"
+  label_user_mail_no_self_notified: "Non quero ser avisado de cambios feitos por min mesmo."
+  label_user_mail_option_all: "Para calquera evento en todos os proxectos."
+  label_user_mail_option_selected: "Para calquera evento dos proxectos seleccionados…"
+  label_user_new: Novo usuario
+  label_user_plural: Usuarios
+  label_version: Versión
+  label_version_new: Nova versión
+  label_version_plural: Versións
+  label_view_diff: Ver diferencias
+  label_view_revisions: Ver as revisións
+  label_watched_issues: Peticións monitorizadas
+  label_week: Semana
+  label_wiki: Wiki
+  label_wiki_edit: Wiki edición
+  label_wiki_edit_plural: Wiki edicións
+  label_wiki_page: Wiki páxina
+  label_wiki_page_plural: Wiki páxinas
+  label_workflow: Fluxo de traballo
+  label_year: Ano
+  label_yesterday: onte
+  mail_body_account_activation_request: "Inscribiuse un novo usuario (%{value}). A conta está pendente de aprobación:"
+  mail_body_account_information: Información sobre a súa conta
+  mail_body_account_information_external: "Pode usar a súa conta %{value} para conectarse."
+  mail_body_lost_password: 'Para cambiar o seu contrasinal, prema a seguinte ligazón:'
+  mail_body_register: 'Para activar a súa conta, prema a seguinte ligazón:'
+  mail_body_reminder: "%{count} petición(s) asignadas a ti rematan nos próximos %{days} días:"
+  mail_subject_account_activation_request: "Petición de activación de conta %{value}"
+  mail_subject_lost_password: "O teu contrasinal de %{value}"
+  mail_subject_register: "Activación da conta de %{value}"
+  mail_subject_reminder: "%{count} petición(s) rematarán nos próximos %{days} días"
+  notice_account_activated: A súa conta foi activada. Xa pode conectarse.
+  notice_account_invalid_credentials: "O usuario ou contrasinal non é correcto."
+  notice_account_lost_email_sent: Enviouse un correo con instrucións para elixir un novo contrasinal.
+  notice_account_password_updated: Contrasinal modificado correctamente.
+  notice_account_pending: "A súa conta creouse e está pendente da aprobación por parte do administrador."
+  notice_account_register_done: "A conta creouse correctamente. Recibirá unha ligazón na súa conta de correo electrónico, sígaa para activar a nova conta."
+  notice_account_updated: Conta actualizada correctamente.
+  notice_account_wrong_password: Contrasinal incorrecto.
+  notice_can_t_change_password: Esta conta utiliza unha fonte de autenticación externa. Non é posible cambiar o contrasinal.
+  notice_default_data_loaded: "A configuración predeterminada cargouse correctamente."
+  notice_email_error: "Ocorreu un error enviando o correo (%{value})"
+  notice_email_sent: "Enviouse un correo a %{value}"
+  notice_failed_to_save_issues: "Imposible gravar %{count} petición(s) de %{total} seleccionada(s): %{ids}."
+  notice_feeds_access_key_reseted: A súa chave de acceso para Atom reiniciouse.
+  notice_file_not_found: A páxina á que tenta acceder non existe.
+  notice_locking_conflict: Os datos modificáronse por outro usuario.
+  notice_not_authorized: Non ten autorización para acceder a esta páxina.
+  notice_successful_connection: "Accedeu correctamente."
+  notice_successful_create: Creación correcta.
+  notice_successful_delete: Borrado correcto.
+  notice_successful_update: Modificación correcta.
+  notice_unable_delete_version: Non se pode borrar a versión
+  permission_add_issue_notes: Engadir notas
+  permission_add_issue_watchers: Engadir seguidores
+  permission_add_issues: Engadir peticións
+  permission_add_messages: Enviar mensaxes
+  permission_browse_repository: Ollar repositorio
+  permission_comment_news: Comentar noticias
+  permission_commit_access: Acceso de escritura
+  permission_delete_issues: Borrar peticións
+  permission_delete_messages: Borrar mensaxes
+  permission_delete_own_messages: Borrar mensaxes propios
+  permission_delete_wiki_pages: Borrar páxinas wiki
+  permission_delete_wiki_pages_attachments: Borrar ficheiros
+  permission_edit_issue_notes: Modificar notas
+  permission_edit_issues: Modificar peticións
+  permission_edit_messages: Modificar mensaxes
+  permission_edit_own_issue_notes: Modificar notas propias
+  permission_edit_own_messages: Editar mensaxes propios
+  permission_edit_own_time_entries: Modificar tempos dedicados propios
+  permission_edit_project: Modificar proxecto
+  permission_edit_time_entries: Modificar tempos dedicados
+  permission_edit_wiki_pages: Modificar páxinas wiki
+  permission_log_time: Anotar tempo dedicado
+  permission_manage_boards: Administrar foros
+  permission_manage_categories: Administrar categorías de peticións
+  permission_manage_files: Administrar ficheiros
+  permission_manage_issue_relations: Administrar relación con outras peticións
+  permission_manage_members: Administrar membros
+  permission_manage_news: Administrar noticias
+  permission_manage_public_queries: Administrar consultas públicas
+  permission_manage_repository: Administrar repositorio
+  permission_manage_versions: Administrar versións
+  permission_manage_wiki: Administrar wiki
+  permission_protect_wiki_pages: Protexer páxinas wiki
+  permission_rename_wiki_pages: Renomear páxinas wiki
+  permission_save_queries: Gravar consultas
+  permission_select_project_modules: Seleccionar módulos do proxecto
+  permission_view_calendar: Ver calendario
+  permission_view_changesets: Ver cambios
+  permission_view_documents: Ver documentos
+  permission_view_files: Ver ficheiros
+  permission_view_gantt: Ver diagrama de Gantt
+  permission_view_issue_watchers: Ver lista de seguidores
+  permission_view_messages: Ver mensaxes
+  permission_view_time_entries: Ver tempo dedicado
+  permission_view_wiki_edits: Ver histórico do wiki
+  permission_view_wiki_pages: Ver wiki
+  project_module_boards: Foros
+  project_module_documents: Documentos
+  project_module_files: Ficheiros
+  project_module_issue_tracking: Peticións
+  project_module_news: Noticias
+  project_module_repository: Repositorio
+  project_module_time_tracking: Control de tempo
+  project_module_wiki: Wiki
+  setting_activity_days_default: Días a mostrar na actividade do proxecto
+  setting_app_title: Título da aplicación
+  setting_attachment_max_size: Tamaño máximo do ficheiro
+  setting_autofetch_changesets: Autorechear as remisións do repositorio
+  setting_autologin: "Identificarse automaticamente."
+  setting_commit_fix_keywords: Palabras chave para a corrección
+  setting_commit_ref_keywords: Palabras chave para a referencia
+  setting_cross_project_issue_relations: Permitir relacionar peticións de distintos proxectos
+  setting_date_format: Formato da data
+  setting_default_language: Idioma predeterminado
+  setting_default_projects_public: "Os proxectos novos son públicos de maneira predeterminada."
+  setting_diff_max_lines_displayed: Número máximo de diferencias mostradas
+  setting_display_subprojects_issues: "Mostrar peticións de prox. secundarios no principal de maneira predeterminada."
+  setting_emails_footer: Pe de mensaxes
+  setting_enabled_scm: Activar SCM
+  setting_feeds_limit: Límite de contido para sindicación
+  setting_gravatar_enabled: Usar iconas de usuario (Gravatar)
+  setting_host_name: Nome e ruta do servidor
+  setting_issue_list_default_columns: "Columnas predeterminadas para a lista de peticións."
+  setting_issues_export_limit: Límite de exportación de peticións
+  setting_login_required: Requírese identificación
+  setting_mail_from: Correo dende o que enviar mensaxes
+  setting_mail_handler_api_enabled: Activar o programa para mensaxes entrantes
+  setting_mail_handler_api_key: Chave da API
+  setting_per_page_options: Obxectos por páxina
+  setting_plain_text_mail: só texto plano (non HTML)
+  setting_protocol: Protocolo
+  setting_self_registration: Rexistro permitido
+  setting_sequential_project_identifiers: Xerar identificadores de proxecto
+  setting_sys_api_enabled: Activar o programa para a xestión do repositorio
+  setting_text_formatting: Formato de texto
+  setting_time_format: Formato de hora
+  setting_user_format: Formato de nome de usuario
+  setting_welcome_text: Texto de benvida
+  setting_wiki_compression: Compresión do historial do Wiki
+  status_active: activo
+  status_locked: bloqueado
+  status_registered: rexistrado
+  text_are_you_sure: Está seguro?
+  text_assign_time_entries_to_project: Asignar as horas ao proxecto
+  text_caracters_maximum: "%{count} caracteres como máximo."
+  text_caracters_minimum: "%{count} caracteres como mínimo."
+  text_comma_separated: Múltiples valores permitidos (separados por coma).
+  text_default_administrator_account_changed: "Cambiouse a conta predeterminada de administrador."
+  text_destroy_time_entries: Borrar as horas
+  text_destroy_time_entries_question: Existen %{hours} horas asignadas á petición que quere borrar. Que quere facer ?
+  text_diff_truncated: '… Diferencia truncada por exceder o máximo tamaño visíbel.'
+  text_email_delivery_not_configured: "O envío de correos non está configurado, e as notificacións desactiváronse. \n Configure o servidor de SMTP en config/configuration.yml e reinicie a aplicación para activar os cambios."
+  text_enumeration_category_reassign_to: 'Reasignar ao seguinte valor:'
+  text_enumeration_destroy_question: "%{count} obxectos con este valor asignado."
+  text_file_repository_writable: Pódese escribir no repositorio
+  text_issue_added: "Petición %{id} engadida por %{author}."
+  text_issue_category_destroy_assignments: Deixar as peticións sen categoría
+  text_issue_category_destroy_question: "Algunhas peticións (%{count}) están asignadas a esta categoría. Que desexa facer?"
+  text_issue_category_reassign_to: Reasignar as peticións á categoría
+  text_issue_updated: "A petición %{id} actualizouse por %{author}."
+  text_issues_destroy_confirmation: 'Seguro que quere borrar as peticións seleccionadas?'
+  text_issues_ref_in_commit_messages: Referencia e petición de corrección nas mensaxes
+  text_length_between: "Lonxitude entre %{min} e %{max} caracteres."
+  text_load_default_configuration: "Cargar a configuración predeterminada"
+  text_no_configuration_data: "Inda non se configuraron perfiles, nin tipos, estados e fluxo de traballo asociado a peticións. Recoméndase encarecidamente cargar a configuración predeterminada. Unha vez cargada, poderá modificala."
+  text_project_destroy_confirmation: Estás seguro de querer eliminar o proxecto?
+  text_reassign_time_entries: 'Reasignar as horas a esta petición:'
+  text_regexp_info: ex. ^[A-Z0-9]+$
+  text_repository_usernames_mapping: "Estableza a correspondencia entre os usuarios de Redmine e os presentes no historial do repositorio.\nOs usuarios co mesmo nome ou correo en Redmine e no repositorio serán asociados automaticamente."
+  text_minimagick_available: MiniMagick dispoñíbel (opcional)
+  text_select_mail_notifications: Seleccionar os eventos a notificar
+  text_select_project_modules: 'Seleccione os módulos a activar para este proxecto:'
+  text_status_changed_by_changeset: "Aplicado nos cambios %{value}"
+  text_subprojects_destroy_warning: "Os proxectos secundarios: %{value} tamén se eliminarán"
+  text_tip_issue_begin_day: tarefa que comeza este día
+  text_tip_issue_begin_end_day: tarefa que comeza e remata este día
+  text_tip_issue_end_day: tarefa que remata este día
+  text_tracker_no_workflow: Non hai ningún fluxo de traballo definido para este tipo de petición
+  text_unallowed_characters: Caracteres non permitidos
+  text_user_mail_option: "Dos proxectos non seleccionados, só recibirá notificacións sobre elementos monitorizados ou elementos nos que estea involucrado (por exemplo, peticións das que vostede sexa autor ou asignadas a vostede)."
+  text_user_wrote: "%{value} escribiu:"
+  text_user_wrote_in: "%{value} escribiu (%{link}):"
+  text_wiki_destroy_confirmation: Seguro que quere borrar o wiki e todo o seu contido?
+  text_workflow_edit: Seleccionar un fluxo de traballo para actualizar
+  warning_attachments_not_saved: "Non foi posíbel gardar %{count} ficheiros."
+  field_editable: "Editábel"
+  text_plugin_assets_writable: "Ten permisos de escritura no cartafol de recursos do complemento."
+  label_display: "Mostrar"
+  button_create_and_continue: "Crear en continuar"
+  text_custom_field_possible_values_info: "Cada valor nunha liña."
+  setting_repository_log_display_limit: "Número máximo de revisións que se mostran no ficheiro do historial."
+  setting_file_max_size_displayed: "Tamaño máximo dos ficheiros de texto que se mostran liña por liña."
+  field_watcher: "Seguidor"
+  field_content: "Contido"
+  label_descending: "Descendente"
+  label_sort: "Ordenar"
+  label_ascending: "Ascendente"
+  label_date_from_to: "De %{start} a %{end}"
+  label_greater_or_equal: ">="
+  label_less_or_equal: "<="
+  text_wiki_page_destroy_question: "Esta páxina ten %{descendants} subpáxinas e descendentes. Que quere facer?"
+  text_wiki_page_reassign_children: "Asignar as subpáxinas a esta páxina superior."
+  text_wiki_page_nullify_children: "Manter as subpáxinas como páxinas raíz."
+  text_wiki_page_destroy_children: "Eliminar as subpáxinas e todas as súas descendentes."
+  setting_password_min_length: "Lonxitude mínima dos contrasinais"
+  field_group_by: "Agrupar os resultados por"
+  mail_subject_wiki_content_updated: "Actualizouse a páxina «%{id}» do wiki."
+  label_wiki_content_added: "Engadiuse unha páxina ao wiki."
+  mail_subject_wiki_content_added: "Engadiuse a páxina «%{id}» ao wiki."
+  mail_body_wiki_content_added: "%{author} engadiu a páxina «%{id}» ao wiki."
+  label_wiki_content_updated: "Actualizouse a páxina."
+  mail_body_wiki_content_updated: "%{author} actualizou a páxina «%{id}» do wiki."
+  permission_add_project: "Crear un proxecto"
+  setting_new_project_user_role_id: "Rol que se lle dá aos usuarios que non son administradores e crear algún proxecto."
+  label_view_all_revisions: "Ver todas as revisións"
+  label_tag: "Etiqueta"
+  label_branch: "Rama"
+  error_no_tracker_in_project: "Non hai ningún tipo de petición asociado con este proxecto. Revise a configuración do proxecto."
+  error_no_default_issue_status: "Non se definiu  un estado predeterminado para as peticións. Revise a configuración desde «Administración → Estados das peticións»."
+  text_journal_changed: "O campo «%{label}» cambiou de «%{old}» a «%{new}»."
+  text_journal_set_to: "O campo «%{label}» é agora «%{value}»."
+  text_journal_deleted: "Eliminouse o campo «%{label}» (%{old})."
+  label_group_plural: "Grupos"
+  label_group: "Grupo"
+  label_group_new: "Crear un grupo"
+  label_time_entry_plural: "Tempo empregado"
+  text_journal_added: "Engadiuse o campo «%{label}» co valor «%{value}»."
+  field_active: "Activo"
+  enumeration_system_activity: "Actividade do sistema"
+  permission_delete_issue_watchers: "Eliminar os seguidores"
+  version_status_closed: "pechada"
+  version_status_locked: "bloqueada"
+  version_status_open: "aberta"
+  error_can_not_reopen_issue_on_closed_version: "Non se pode volver abrir unha petición que estea asignada a unha versión pechada."
+  label_user_anonymous: "Anónimo"
+  button_move_and_follow: "Mover e seguir"
+  setting_default_projects_modules: "Módulos activados de maneira predeterminada para novos proxectos."
+  setting_gravatar_default: "Imaxe de Gravatar predeterminada"
+  field_sharing: "Compartir"
+  label_version_sharing_hierarchy: "Coa xerarquía do proxecto"
+  label_version_sharing_system: "Con todos os proxectos"
+  label_version_sharing_descendants: "Cos subproxectos"
+  label_version_sharing_tree: "Coa árbore de proxectos"
+  label_version_sharing_none: "Non compartir"
+  error_can_not_archive_project: "Non é posíbel arquivar este proxecto."
+  button_copy_and_follow: "Copiar e seguir"
+  label_copy_source: "Fonte"
+  setting_issue_done_ratio: "Calcular a proporción de peticións completadas mediante"
+  setting_issue_done_ratio_issue_status: "O estado das peticións"
+  error_issue_done_ratios_not_updated: "Non se actualizaron as proporcións de peticións completadas."
+  error_workflow_copy_target: "Seleccione os tipos de petición e os roles."
+  setting_issue_done_ratio_issue_field: "Use o campo da petición"
+  label_copy_same_as_target: "O mesmo que o de destino"
+  label_copy_target: "Petición de destino"
+  notice_issue_done_ratios_updated: "Actualizáronse as proporcións de peticións completadas."
+  error_workflow_copy_source: "Seleccione un tipo de petición e rol de orixe."
+  label_update_issue_done_ratios: "Actualizar as proporcións de peticións completadas"
+  setting_start_of_week: "Que os calendarios comecen o"
+  permission_view_issues: "Ver as peticións"
+  label_display_used_statuses_only: "Só mostrar os estados que osa este tipo de petición."
+  label_revision_id: "Revisión %{value}"
+  label_api_access_key: "Chave de acceso á API"
+  label_api_access_key_created_on: "A chave de acceso á API creouse hai %{value}."
+  label_feeds_access_key: "Chave de acceso mediante Atom"
+  notice_api_access_key_reseted: "Restableceuse a súa chave de acceso á API."
+  setting_rest_api_enabled: "Activar o servizo web REST."
+  label_missing_api_access_key: "Necesita unha chave de acceso á API."
+  label_missing_feeds_access_key: "Necesita unha chave de acceso mediante Atom."
+  button_show: "Mostrar"
+  text_line_separated: "Permítense varios valores (un por liña)."
+  setting_mail_handler_body_delimiters: "Acurtar as mensaxes a partir dunha destas liñas."
+  permission_add_subprojects: "Crear subproxectos"
+  label_subproject_new: "Crear un sobproxecto"
+  text_own_membership_delete_confirmation: |-
+    Está a piques de eliminar todos ou parte dos permisos de que dispón, e pode
+    que en canto remate perda a capacidade de facer máis cambios neste proxecto.
+    Está seguro de que quere continuar?
+  label_close_versions: "Pechar as versións completadas"
+  label_board_sticky: "Destacado"
+  label_board_locked: "Bloqueado"
+  permission_export_wiki_pages: "Exportar as páxinas do wiki"
+  setting_cache_formatted_text: "Gardar o texto formatado na caché."
+  permission_manage_project_activities: "Xestionar as actividades do proxecto"
+  error_unable_delete_issue_status: "Non foi posíbel eliminar o estado da petición. (%{value})"
+  label_profile: "Perfil"
+  permission_manage_subtasks: "Xestionar as subtarefas"
+  field_parent_issue: "Tarefa superior"
+  label_subtask_plural: "Subtarefas"
+  label_project_copy_notifications: "Enviar notificacións por correo electrónico durante a copia do proxecto."
+  error_can_not_delete_custom_field: "Non foi posíbel eliminar o campo personalizado."
+  error_unable_to_connect: "Non foi posíbel conectarse (%{value})."
+  error_can_not_remove_role: "Este rol non pode eliminarse porque está a usarse."
+  error_can_not_delete_tracker: "Este tipo de petición non pode eliminarse porque existen peticións deste tipo."
+  field_principal: Usuario ou Grupo
+  notice_failed_to_save_members: "Non foi posíbel gardar os membros: %{errors}."
+  text_zoom_out: "Afastar"
+  text_zoom_in: "Achegar"
+  notice_unable_delete_time_entry: "Non foi posíbel eliminar a entrada do historial."
+  field_time_entries: "Rexistrar tempo"
+  project_module_gantt: "Gantt"
+  project_module_calendar: "Calendario"
+  button_edit_associated_wikipage: "Editar a páxina do wiki asociada: %{page_title}"
+  field_text: "Campo de texto"
+  setting_default_notification_option: "Opción de notificación predeterminada"
+  label_user_mail_option_only_my_events: "Só para as cousas que sigo ou nas que estou involucrado"
+  label_user_mail_option_none: "Non hai eventos."
+  field_member_of_group: "Grupo do asignado"
+  field_assigned_to_role: "Rol do asignado"
+  notice_not_authorized_archived_project: "O proxecto ao que intenta acceder está arquivado."
+  label_principal_search: "Buscar un usuario ou grupo:"
+  label_user_search: "Buscar un usuario:"
+  field_visible: "Visíbel"
+  setting_commit_logtime_activity_id: "Actividade de tempo rexistrado"
+  text_time_logged_by_changeset: "Aplicado nos cambios %{value}."
+  setting_commit_logtime_enabled: "Activar o rexistro de tempo."
+  notice_gantt_chart_truncated: "O diagrama recortouse porque se superou o número de elementos que pode mostrar (%{max})."
+  setting_gantt_items_limit: "Número máximo de elementos que se poden mostrar no diagrama de Gantt."
+  field_warn_on_leaving_unsaved: "Avisarme antes de pechar unha páxina que conteña texto sen gardar."
+  text_warn_on_leaving_unsaved: "A páxina actual contén texto sen gardar que se perderá se continúa."
+  label_my_queries: "Consultas personalizadas"
+  text_journal_changed_no_detail: "Actualizouse o campo «%{label}»."
+  label_news_comment_added: "Engadiuse un comentario a unha nova."
+  button_expand_all: "Expandilo todo"
+  button_collapse_all: "Recollelo todo"
+  label_additional_workflow_transitions_for_assignee: "Transicións adicionais que se lle permiten ao asignado"
+  label_additional_workflow_transitions_for_author: "Transicións adicionais que se lle permiten ao autor"
+  label_bulk_edit_selected_time_entries: "Editar as entradas de tempo seleccionadas á vez"
+  text_time_entries_destroy_confirmation: "Está seguro de que quere eliminar as entradas de tempo seleccionadas?"
+  label_role_anonymous: "Anónimo"
+  label_role_non_member: "Non membro"
+  label_issue_note_added: "Engadiuse a nota."
+  label_issue_status_updated: "Actualizouse o estado."
+  label_issue_priority_updated: "Actualizouse a prioridade."
+  label_issues_visibility_own: "Peticións creadas polo usuario ou asignadas a el"
+  field_issues_visibility: "Visibilidade das peticións"
+  label_issues_visibility_all: "Todas as peticións"
+  permission_set_own_issues_private: "Peticións propias públicas ou privadas"
+  field_is_private: "Privadas"
+  permission_set_issues_private: "Peticións públicas ou privadas"
+  label_issues_visibility_public: "Todas as peticións non privadas"
+  text_issues_destroy_descendants_confirmation: "Isto tamén eliminará %{count} subtareas."
+  field_commit_logs_encoding: "Codificación das mensaxes das remisións"
+  field_scm_path_encoding: "Codificación das rutas"
+  text_scm_path_encoding_note: "Predeterminada: UTF-8"
+  field_path_to_repository: "Ruta do repositorio"
+  field_root_directory: "Cartafol raíz"
+  field_cvs_module: "Módulo"
+  field_cvsroot: "CVSROOT"
+  text_mercurial_repository_note: "Repositorio local (por exemplo «/hgrepo» ou «C:\\hgrepo»)"
+  text_scm_command: "Orde"
+  text_scm_command_version: "Versión"
+  label_git_report_last_commit: "Informar da última remisión de ficheiros e cartafoles"
+  notice_issue_successful_create: "Creouse a petición %{id}."
+  label_between: "entre"
+  setting_issue_group_assignment: "Permitir asignar peticións a grupos."
+  label_diff: "Diferencias"
+  text_git_repository_note: "O repositorio está baleiro e é local (por exemplo, «/gitrepo» ou «C:\\gitrepo»)"
+  description_query_sort_criteria_direction: "Dirección da orde"
+  description_project_scope: "Ámbito da busca"
+  description_filter: "Filtro"
+  description_user_mail_notification: "Configuración das notificacións por correo electrónico"
+  description_message_content: "Contido da mensaxe"
+  description_available_columns: "Columnas dispoñíbeis"
+  description_issue_category_reassign: "Escolla a categoría da petición."
+  description_search: "Campo de busca"
+  description_notes: "Notas"
+  description_choose_project: "Proxectos"
+  description_query_sort_criteria_attribute: "Ordenar polo atributo"
+  description_wiki_subpages_reassign: "Escoller unha nova páxina superior"
+  description_selected_columns: "Columnas seleccionadas"
+  label_parent_revision: "Revisión superior"
+  label_child_revision: "Subrevisión"
+  error_scm_annotate_big_text_file: "Non pode engadirse unha anotación á entrada, supera o tamaño máximo para os ficheiros de texto."
+  setting_default_issue_start_date_to_creation_date: "usar a data actual como a data de inicio das novas peticións."
+  button_edit_section: "Editar esta sección"
+  setting_repositories_encodings: "Anexos e codificación dos repositorios"
+  description_all_columns: "Todas as columnas"
+  button_export: "Exportar"
+  label_export_options: "Opcións de exportación a %{export_format}"
+  error_attachment_too_big: "Non é posíbel enviar este ficheiro porque o seu tamaño supera o máximo permitido (%{max_size})."
+  notice_failed_to_save_time_entries: "Non foi posíbel gardar %{count} das %{total} entradas de tempo seleccionadas: %{ids}."
+  label_x_issues:
+    zero:  "0 peticións"
+    one:   "1 petición"
+    other: "%{count} peticións"
+  label_repository_new: "Engadir un repositorio"
+  field_repository_is_default: "Repositorio principal"
+  label_copy_attachments: "Copiar os anexos"
+  label_item_position: "%{position}/%{count}"
+  label_completed_versions: "Versións completadas"
+  text_project_identifier_info: "Só se permiten letras latinas minúsculas (a-z), díxitos, guións e guións baixos.<br />Non pode cambiar o identificador despois de gardalo."
+  field_multiple: "Varios valores"
+  setting_commit_cross_project_ref: "Permitir ligar e solucionar peticións do resto de proxectos."
+  text_issue_conflict_resolution_add_notes: "Engadir as notas e descartar o resto dos cambios."
+  text_issue_conflict_resolution_overwrite: "Aplicar os cambios de todos xeitos (as notas anteriores manteranse, pero pode que se perda algún dos outros cambios)."
+  notice_issue_update_conflict: "Outro usuario actualizou a petición mentres vostede estaba a modificala."
+  text_issue_conflict_resolution_cancel: "Descartar todos os meus cambios e volver mostrar %{link}."
+  permission_manage_related_issues: "Xestionar as peticións relacionadas"
+  field_auth_source_ldap_filter: "Filtro de LDAP"
+  label_search_for_watchers: "Buscar seguidores que engadir"
+  notice_account_deleted: "A súa conta eliminouse de maneira permanente."
+  setting_unsubscribe: "Permitirlle aos usuarios eliminar as súas contas."
+  button_delete_my_account: "Eliminar a miña conta."
+  text_account_destroy_confirmation: |-
+    Está seguro de que quere continuar?
+    A súa conta eliminarase de maneira permanente, e non poderá volvela activar nunca.
+  error_session_expired: "Caducou a sesión, acceda de novo ao sitio."
+  text_session_expiration_settings: "Advertencia: ao cambiar estas opcións é posíbel que caduquen todas as sesións actuais, incluída a súa, e todos os usuarios deban identificarse de novo."
+  setting_session_lifetime: "Tempo de vida máximo das sesións"
+  setting_session_timeout: "Tempo de inactividade máximo das sesións"
+  label_session_expiration: "Caducidade das sesións"
+  permission_close_project: "Pechar ou volver abrir o proxecto"
+  button_close: "Pechar"
+  button_reopen: "Volver abrir"
+  project_status_active: "activo"
+  project_status_closed: "pechado"
+  project_status_archived: "arquivado"
+  text_project_closed: "O proxecto está pechado, e só admite accións de lectura."
+  notice_user_successful_create: "Creouse o usuario %{id}."
+  field_core_fields: "Campos estándar"
+  field_timeout: "Tempo límite (en segundos)"
+  setting_thumbnails_enabled: "Mostrar as miniaturas dos anexos."
+  setting_thumbnails_size: "Tamaño das miniaturas (en píxeles)"
+  label_status_transitions: "Transicións de estado"
+  label_fields_permissions: "Permisos dos campos"
+  label_readonly: "Só lectura"
+  label_required: "Necesario"
+  text_repository_identifier_info: "Só se permiten letras minúsculas latinas (a-z), díxitos, guións e guións baixos.<br />Non pode cambiar o identificador unha vez queda gardado."
+  field_board_parent: "Foro superior"
+  label_attribute_of_project: "%{name} do proxecto"
+  label_attribute_of_author: "%{name} do autor"
+  label_attribute_of_assigned_to: "%{name} do asignado"
+  label_attribute_of_fixed_version: "%{name} da versión de destino"
+  label_copy_subtasks: "Copiar as subtarefas"
+  label_copied_to: "copiado a"
+  label_copied_from: "copiado de"
+  label_any_issues_in_project: "calquera petición do proxecto"
+  label_any_issues_not_in_project: "calquera petición fóra do proxecto"
+  field_private_notes: "Notas privadas"
+  permission_view_private_notes: "Ver as notas privadas"
+  permission_set_notes_private: "Marcar as notas como privadas"
+  label_no_issues_in_project: "O proxecto non ten peticións."
+  label_any: "todos"
+  label_last_n_weeks: "ultimas %{count} semanas"
+  setting_cross_project_subtasks: "Permitir tarefas en varios proxectos"
+  label_cross_project_descendants: "Con subproxectos"
+  label_cross_project_tree: "Con árbore de proxectos"
+  label_cross_project_hierarchy: "Con xerarquía de proxectos"
+  label_cross_project_system: "Con todos os proxectos"
+  button_hide: "Agochar"
+  setting_non_working_week_days: "Días non lectivos"
+  label_in_the_next_days: "nos seguintes"
+  label_in_the_past_days: "nos últimos"
+  label_attribute_of_user: "%{name} do usuario"
+  text_turning_multiple_off: "Se desactiva varios valores, eliminaranse varios valores para preservar só un valor por elemento."
+  label_attribute_of_issue: "%{name} da petición"
+  permission_add_documents: "Engadir documentos"
+  permission_edit_documents: "Editar os documentos"
+  permission_delete_documents: "Eliminar os documentos"
+  label_gantt_progress_line: "Liña do progreso"
+  setting_jsonp_enabled: "Activar a compatibilidade con JSONP."
+  field_inherit_members: "Herdar os membros"
+  field_closed_on: "Pechado"
+  field_generate_password: "Xerar un contrasinal"
+  setting_default_projects_tracker_ids: "Tipos de petición predeterminados para novos proxectos."
+  label_total_time: "Total"
+  text_scm_config: "Pode configurar as súas ordes de SCM en «config/configuration.yml». Reinicie o programa despois de gardar os cambios."
+  text_scm_command_not_available: "A orde de SCM non está dispoñíbel. Revise a opción desde o panel de administración."
+  setting_emails_header: "Cabeceira da mensaxe"
+  notice_account_not_activated_yet: 'Aínda non activou a conta. <a href="%{url}">Siga esta ligazón</a> para solicitar unha nova mensaxe de confirmación.'
+  notice_account_locked: "A conta está bloqueada."
+  label_hidden: "Agochado"
+  label_visibility_private: "só para min"
+  label_visibility_roles: "só para estes roles"
+  label_visibility_public: "para calquera usuario"
+  field_must_change_passwd: "Debe cambiar de contrasinal a seguinte vez que acceda ao sitio."
+  notice_new_password_must_be_different: "O novo contrasinal non pode ser idéntico ao contrasinal actual."
+  setting_mail_handler_excluded_filenames: "Excluír anexos por nome"
+  text_convert_available: "O programa «convert» de ImageMagick está dispoñíbel (opcional)."
+  label_link: "Ligazón"
+  label_only: "só"
+  label_drop_down_list: "lista despregábel"
+  label_checkboxes: "caixas de opción múltiple"
+  label_link_values_to: "Ligar os valores co URL"
+  setting_force_default_language_for_anonymous: "Definir un idioma predeterminado para os usuarios anónimos."
+  setting_force_default_language_for_loggedin: "Definir un idioma predeterminado para os usuarios rexistrados."
+  label_custom_field_select_type: "Seleccionar o tipo de obxecto ao que se anexará o campo personalizado."
+  label_issue_assigned_to_updated: "Actualizouse o asignado."
+  label_check_for_updates: "Comprobar se hai actualizacións"
+  label_latest_compatible_version: "Última versión compatíbel"
+  label_unknown_plugin: "Complemento descoñecido"
+  label_radio_buttons: "caixas de opción única"
+  label_group_anonymous: "Usuarios anónimos"
+  label_group_non_member: "Usuarios non membros"
+  label_add_projects: "Engadir proxectos"
+  field_default_status: "Estado predeterminado"
+  text_subversion_repository_note: "Exemplos: file:///, http://, https://, svn://, svn+[esquema de túnel]://"
+  field_users_visibility: "Visibilidade dos usuarios"
+  label_users_visibility_all: "Todos os usuarios activos"
+  label_users_visibility_members_of_visible_projects: "Membros de proxectos visíbeis"
+  label_edit_attachments: "Editar os ficheiros anexos"
+  setting_link_copied_issue: "Ligar aos tíckets ao copialos"
+  label_link_copied_issue: "Ligar ao tícket copiado"
+  label_ask: "Preguntar"
+  label_search_attachments_yes: Buscar nomes e descricións dos ficheiros
+  label_search_attachments_no: Non buscar ficheiros
+  label_search_attachments_only: Buscar só ficheiros
+  label_search_open_issues_only: Só peticións abertas
+  field_address: Correo electrónico
+  setting_max_additional_emails: Máximo número de enderezos de correo adicionais
+  label_email_address_plural: Correos
+  label_email_address_add: Engadir enderezo de correo
+  label_enable_notifications: Activar notificacións
+  label_disable_notifications: Desactivar notificacións
+  setting_search_results_per_page: Resultados da busca por páxina
+  label_blank_value: En branco
+  permission_copy_issues: Copiar peticións
+  error_password_expired: A túa contrasinal caducou ou o administrador obrígate
+    a cambiala.
+  field_time_entries_visibility: Visibilidade das entradas de tempo
+  setting_password_max_age: Obrigar a cambiar a contrasinal despois de
+  label_parent_task_attributes: Atributos da tarefa pai
+  label_parent_task_attributes_derived: Calculada a partir das subtarefas
+  label_parent_task_attributes_independent: Independente das subtarefas
+  label_time_entries_visibility_all: Todas as entradas de tempo
+  label_time_entries_visibility_own: Horas creadas polo usuario
+  label_member_management: Xestión de membros
+  label_member_management_all_roles: Todos os roles
+  label_member_management_selected_roles_only: Só estes roles
+  label_password_required: Confirma a túa contrasinal para continuar
+  label_total_spent_time: "Tempo total empregado"
+  notice_import_finished: "%{count} elementos foron importados"
+  notice_import_finished_with_errors: "%{count} dun total de %{total} elementos non puideron ser importados"
+  error_invalid_file_encoding: O ficheiro non é un ficheiro codificado %{encoding} válido
+  error_invalid_csv_file_or_settings: O ficheiro non é un arquivo CSV ou non coincide coas
+    opcións de abaixo (%{value})
+  error_can_not_read_import_file: Aconteceu un erro lendo o ficheiro a importar
+  permission_import_issues: Importar peticións
+  label_import_issues: Importar peticións
+  label_select_file_to_import: Selecciona o ficheiro a importar
+  label_fields_separator: Separador dos campos
+  label_fields_wrapper: Envoltorio dos campos
+  label_encoding: Codificación
+  label_comma_char: Coma
+  label_semi_colon_char: Punto e coma
+  label_quote_char: Comilla simple
+  label_double_quote_char: Comilla dobre
+  label_fields_mapping: Mapeo de campos
+  label_file_content_preview: Vista previa do contido
+  label_create_missing_values: Crear valores non presentes
+  button_import: Importar
+  field_total_estimated_hours: Total de tempo estimado
+  label_api: API
+  label_total_plural: Totais
+  label_assigned_issues: Peticións asignadas
+  label_field_format_enumeration: Listaxe chave/valor
+  label_f_hour_short: '%{value} h'
+  field_default_version: Versión predeterminada
+  error_attachment_extension_not_allowed: A extensión anexada %{extension} non é permitida
+  setting_attachment_extensions_allowed: Extensións permitidas
+  setting_attachment_extensions_denied: Extensións prohibidas
+  label_any_open_issues: Calquera petición aberta
+  label_no_open_issues: Peticións non abertas
+  label_default_values_for_new_users: Valor predeterminado para novos usuarios
+  error_ldap_bind_credentials: A conta/contrasinal do LDAP non é válida
+  setting_sys_api_key: Chave da API
+  setting_lost_password: Esqueceu a contrasinal?
+  mail_subject_security_notification: Notificación de seguridade
+  mail_body_security_notification_change: ! '%{field} modificado.'
+  mail_body_security_notification_change_to: ! '%{field} modificado por %{value}.'
+  mail_body_security_notification_add: ! '%{field} %{value} engadido.'
+  mail_body_security_notification_remove: ! '%{field} %{value} eliminado.'
+  mail_body_security_notification_notify_enabled: O correo electrónico %{value} agora recibirá
+    notificacións
+  mail_body_security_notification_notify_disabled: O correo electrónico %{value} deixará de recibir
+    notificacións
+  mail_body_settings_updated: ! 'As seguintes opcións foron actualizadas:'
+  field_remote_ip: Enderezo IP
+  label_wiki_page_new: Nova páxina wiki
+  label_relations: Relacións
+  button_filter: Filtro
+  mail_body_password_updated: A súa contrasinal foi cambiada.
+  label_no_preview: Non hai vista previa dispoñible
+  error_no_tracker_allowed_for_new_issue_in_project: O proxecto non ten ningún tipo
+    para que poida crear unha petición
+  label_tracker_all: Tódolos tipos
+  label_new_project_issue_tab_enabled: Amosar a lapela "Nova petición"
+  setting_new_item_menu_tab: Lapela no menú de cada proxecto para creación de novos obxectos
+  label_new_object_tab_enabled: Amosar a lista despregable "+"
+  error_no_projects_with_tracker_allowed_for_new_issue: Non hai proxectos con tipos
+    para as que poida crear unha petición
+  field_textarea_font: Fonte usada nas áreas de texto
+  label_font_default: Fonte por defecto
+  label_font_monospace: Fonte Monospaced
+  label_font_proportional: Fonte Proporcional
+  setting_timespan_format: Formato de período temporal
+  label_table_of_contents: Índice de contidos
+  setting_commit_logs_formatting: Aplicar formateo de texto para as mensaxes de commit
+  setting_mail_handler_enable_regex: Activar expresións regulares
+  error_move_of_child_not_possible: 'A subtarefa %{child} non se pode mover ao novo
+    proxecto: %{errors}'
+  error_cannot_reassign_time_entries_to_an_issue_about_to_be_deleted: O tempo empregado non pode
+    ser reasignado a unha petición que vai ser eliminada
+  setting_timelog_required_fields: Campos obrigatorios para as imputacións de tempo
+  label_attribute_of_object: '%{object_name}''s %{name}'
+  label_user_mail_option_only_assigned: Só para as cousas que sigo ou que teño asignado
+  label_user_mail_option_only_owner: Só para as cousas que sigo ou son o propietario
+  warning_fields_cleared_on_bulk_edit: Os cambios provocarán o borrado automático
+    dos valores de un ou máis campos dos obxectos seleccionados
+  field_updated_by: Actualizado por
+  field_last_updated_by: Última actualización por
+  field_full_width_layout: Deseño para ancho completo
+  label_last_notes: Últimas notas
+  field_digest: Suma de verificación
+  field_default_assigned_to: Asignado por defecto
+  setting_show_custom_fields_on_registration: Amosar os campos personalizados no rexistro
+  permission_view_news: Ver noticias
+  label_no_preview_alternative_html: Non hai vista previa dispoñible. %{link} o ficheiro no seu lugar.
+  label_no_preview_download: Descargar
+  setting_close_duplicate_issues: Pechar as peticións duplicadas de xeito automático
+  error_exceeds_maximum_hours_per_day: Non se poden imputar máis de %{max_hours} horas no
+    mesmo día (%{logged_hours} horas teñen sido xa imputadas)
+  setting_time_entry_list_defaults: Configuración por defecto do tempo imputado
+  setting_timelog_accept_0_hours: Admitir tempo imputado con 0 horas
+  setting_timelog_max_hours_per_day: Máximo número de horas que poden imputarse por día e usuario
+  label_x_revisions: "%{count} revisións"
+  error_can_not_delete_auth_source: Este método de autenticación está en uso e non pode
+    ser borrado.
+  button_actions: Accións
+  mail_body_lost_password_validity: Por favor, teña en conta que só pode cambiar a contrasinal
+    unha vez usando esta ligazón.
+  text_login_required_html: Cando non precisan autenticación os proxectos públicos e os seus
+    contidos están dispoñibles libremente na rede. Vostede pode <a href="%{anonymous_role_path}">editar
+    os permisos aplicados</a>.
+  label_login_required_yes: 'Si'
+  label_login_required_no: Non, permitir acceso anónimo aos proxectos públicos
+  text_project_is_public_non_member: Os proxectos públicos e os seus contidos están dispoñibles
+    para todos os usuarios logueados.
+  text_project_is_public_anonymous: Os proxectos públicos e os seus contidos están dispoñibles libremente
+    na rede.
+  label_version_and_files: Versións (%{count}) e Ficheiros
+  label_ldap: LDAP
+  label_ldaps_verify_none: LDAPS (sen comprobación de certificado)
+  label_ldaps_verify_peer: LDAPS
+  label_ldaps_warning: Se recomenda usar unha conexión LDAPS con comprobación de
+    certificado para evitar calquera manipulación durante o proceso de autenticación.
+  label_nothing_to_preview: Nada que previsualizar
+  error_token_expired: Esta ligazón para recuperar a contrasinal ten caducado, por favor, tente de novo.
+  error_spent_on_future_date: Non pode imputar tempo nunha data futura
+  setting_timelog_accept_future_dates: Permitir imputar tempo en datas futuras
+  label_delete_link_to_subtask: Eliminar relación
+  error_not_allowed_to_log_time_for_other_users: Vostede non ten permitido imputar tempo para outros usuarios
+  permission_log_time_for_other_users: Imputar tempo dedicado a outros usuarios
+  label_tomorrow: mañá
+  label_next_week: próxima semana
+  label_next_month: próximo mes
+  text_role_no_workflow: Non hai fluxo de traballo definido para este rol
+  text_status_no_workflow: Ningún tipo de tarefa usa este estado nos fluxos de traballo
+  setting_mail_handler_preferred_body_part: Parte preferida dos correos multiparte (HTML)
+  setting_show_status_changes_in_mail_subject: Amosar os cambios de estado no asunto das notificacións de correo das
+    tarefas
+  label_inherited_from_parent_project: Herdado do proxecto pai
+  label_inherited_from_group: Herdado do grupo %{name}
+  label_trackers_description: Descricións dos tipos de tarefas
+  label_open_trackers_description: Ver as descricións de todos os tipos de tarefas
+  label_preferred_body_part_text: Texto
+  label_preferred_body_part_html: HTML
+  field_parent_issue_subject: Asunto da tarefa pai
+  permission_edit_own_issues: Editar as propias tarefas
+  text_select_apply_tracker: Seleccionar o tipo de tarefa
+  label_updated_issues: Tarefas actualizadas
+  text_avatar_server_config_html: O servidor de avatares é actualmente <a href="%{url}">%{url}</a>.
+    Vostede o pode configurar en config/configuration.yml.
+  setting_gantt_months_limit: Máximo número de meses amosados no diagrama de gantt
+  permission_import_time_entries: Importar tempos dedicados
+  label_import_notifications: Enviar notificacións de correo durante a importación
+  text_gs_available: Soporte de PDF ImageMagick dispoñible (opcional)
+  field_recently_used_projects: Número de proxectos recentemente usados no despregable de proxectos
+  label_optgroup_bookmarks: Favoritos
+  label_optgroup_recents: Usado recentemente
+  button_project_bookmark: Engadir favoritos
+  button_project_bookmark_delete: Borrar favoritos
+  field_history_default_tab: Lapela por defecto no histórico de tarefas
+  label_issue_history_properties: Cambios nas propiedades
+  label_issue_history_notes: Notas
+  label_last_tab_visited: Última lapela visitada
+  field_unique_id: ID único
+  text_no_subject: sen asunto
+  setting_password_required_char_classes: Clases de caracteres requeridos para as contrasinais
+  label_password_char_class_uppercase: letras maiúsculas
+  label_password_char_class_lowercase: letras minúsculas
+  label_password_char_class_digits: díxitos
+  label_password_char_class_special_chars: caracteres especiais
+  text_characters_must_contain: Debe conter %{character_classes}.
+  label_starts_with: comeza con
+  label_ends_with: finaliza con
+  label_issue_fixed_version_updated: Versión destino actualizada
+  setting_project_list_defaults: Listaxes por defecto dos proxectos
+  label_display_type: Amosar os resultados coma
+  label_display_type_list: Listaxe
+  label_display_type_board: Taboleiro
+  label_my_bookmarks: Meus favoritos
+  label_import_time_entries: Importar tempos dedicados
+  field_toolbar_language_options: Idiomas da barra de ferramentas de resaltado de código
+  label_user_mail_notify_about_high_priority_issues_html: Tamén notifícame sobre as tarefas
+    cunha prioridade <em>%{prio}</em> ou maior
+  label_assign_to_me: Asignar a min
+  notice_issue_not_closable_by_open_tasks: Esta tarefa non pode ser pechada porque ten
+    polo menos unha subtarefa aberta.
+  notice_issue_not_closable_by_blocking_issue: Esta tarefa non pode ser pechada porque
+    está bloqueada polo menos por unha tarefa aberta.
+  notice_issue_not_reopenable_by_closed_parent_issue: Esta tarefa non pode ser reaberta
+    porque a súa tarefa pai está pechada.
+  error_bulk_download_size_too_big: Os ficheiros non poden ser descargados á vez porque
+    o tamaño total excede o máximo autorizado (%{max_size})
+  setting_bulk_download_max_size: Tamaño máximo para descargar á vez
+  label_download_all_attachments: Descargar todos os ficheiros
+  error_attachments_too_many: Este ficheiro non pode ser subido porque excede o número
+    máximo de ficheiros que poden ser achegados de xeito simultáneo (%{max_number_of_files})
+  setting_email_domains_allowed: Dominios de correo permitidos
+  setting_email_domains_denied: Dominios de correo prohibidos
+  field_passwd_changed_on: Password cambiado por última vez
+  label_relations_mapping: Correspondencia de relacións
+  label_import_users: Importar usuarios
+  label_days_to_html: "%{days} días ata %{date}"
+  setting_twofa: Autenticación de dous factores
+  label_optional: opcional
+  label_required_lower: obrigatorio
+  button_disable: Deshabilitar
+  twofa__totp__name: Aplicación de autenticación
+  twofa__totp__text_pairing_info_html: Escanea este código QR ou introduce a chave de texto plano
+    nunha aplicación de 2 factores (e.x. <a href="https://support.google.com/accounts/answer/1066447">Google
+    Authenticator</a>, <a href="https://authy.com/download/">Authy</a>, <a href="https://guide.duo.com/third-party-accounts">Duo
+    Mobile</a>) e mete o código no campo de debaixo para activar a autenticación de 2 factores.
+  twofa__totp__label_plain_text_key: Chave de texto plano
+  twofa__totp__label_activate: Habilitar aplicación de atenticación
+  twofa_currently_active: 'Activo agora mesmo: %{twofa_scheme_name}'
+  twofa_not_active: Sen activar
+  twofa_label_code: Código
+  twofa_hint_disabled_html: Configurar <strong>%{label}</strong> desactivará e desvinculará
+    a autenticación de dous factores para todos os usuarios.
+  twofa_hint_required_html: Configurar <strong>%{label}</strong> requerirá a todos os usuarios
+    configurar autenticación de dous factores no seu seguinte acceso.
+  twofa_label_setup: Establecer autenticación de dous factores
+  twofa_label_deactivation_confirmation: Desactivar autenticación de dous factores
+  twofa_notice_select: 'Por favor seleccione o esquema de dous factores que desexa usar:'
+  twofa_warning_require: O administrador obriga a que habilite autenticación de dous factores.
+  twofa_activated: Autenticación de dous factores habilitada con éxito. Se recomenda
+    <a data-method="post" href="%{bc_path}">xerar códigos de respaldo</a> para a súa conta.
+  twofa_deactivated: Autenticación de dous factores deshabilitada.
+  twofa_mail_body_security_notification_paired: Autenticación de dous factores habilitada
+    con éxito usando %{field}.
+  twofa_mail_body_security_notification_unpaired: Autenticación de dous factores deshabilitada
+    para a túa conta.
+  twofa_mail_body_backup_codes_generated: Xerados novos códigos de respaldo de autenticación de dous
+    factores.
+  twofa_mail_body_backup_code_used: Un código de respaldo de autenticación de dous factores foi
+    utilizado.
+  twofa_invalid_code: O código non é válido ou caducou.
+  twofa_label_enter_otp: Por favor, introduza su código de autenticación de dous factores.
+  twofa_too_many_tries: Demasiados intentos.
+  twofa_resend_code: Reenviar código
+  twofa_code_sent: Enviouse a vostede un código de autenticación.
+  twofa_generate_backup_codes: Xerar códigos de respaldo
+  twofa_text_generate_backup_codes_confirmation: Esto invalidará todos os códigos de respaldo
+    existentes e xerará uns novos. Desexa continuar?
+  twofa_notice_backup_codes_generated: Os seus códigos de respaldo foron xerados
+  twofa_warning_backup_codes_generated_invalidated: Novos códigos de respaldo foron xerados.
+    Os seus códigos existentes de %{time} agora son inválidos.
+  twofa_label_backup_codes: Códigos de respaldo de autenticación de dous factores
+  twofa_text_backup_codes_hint: Use estes códigos en troques de contrasinais dun único uso caso
+    de non ter acceso ao seu segundo factor. Cada código só pode usarse unha vez. É
+    recomendable imprimilos e gardalos nun lugar seguro.
+  twofa_text_backup_codes_created_at: Códigos de respaldo xerados o %{datetime}.
+  twofa_backup_codes_already_shown: Os códigos de respaldo non pode ser amosados de novo, por favor <a data-method="post"
+    href="%{bc_path}">cree novos códigos de respaldo</a> se é preciso.
+  error_can_not_execute_macro_html: Error ao executar a <strong>%{name}</strong> macro
+    (%{error})
+  error_macro_does_not_accept_block: Esta macro non acepta un bloque de texto
+  error_childpages_macro_no_argument: Sen argumento esta macro só pode ser chamada dende
+    as páxinas wiki
+  error_circular_inclusion: Detectada unha inclusión circular
+  error_page_not_found: Páxina no atopada
+  error_filename_required: Se precisa nome de ficheiro
+  error_invalid_size_parameter: O parámetro de tamaño é inválido
+  error_attachment_not_found: Ficheiro %{name} non atopado
+  permission_delete_project: Borrar o proxecto
+  field_twofa_scheme: Esquema de autenticación de dous factores
+  text_user_destroy_confirmation: Está vostede seguro de querer borrar este usuario e eliminar
+    todas as referencias a el? Isto non se pode desfacer. Ás veces bloquear un usuario en troques de
+    borralo é a mellor solución. Para confirmar, por favor introduza o seu usuario (%{login})
+    debaixo.
+  text_project_destroy_enter_identifier: Para confirmar, por favor introduza o identificador do proxecto.
+    (%{identifier}) debaixo.
+  button_add_subtask: Engadir subtarefa
+  notice_invalid_watcher: 'Invalid watcher: O usuario non recibirá ningunha notificación
+    porque non ten acceso a ver este obxecto.'
+  button_fetch_changesets: Recoller os cambios
+  permission_view_message_watchers: Ver a listaxe de seguidores da mensaxe
+  permission_add_message_watchers: Engadir seguidores na mensaxe
+  permission_delete_message_watchers: Borrar seguidores da mensaxe
+  label_message_watchers: Seguidores
+  button_copy_link: Copiar ligazón
+  error_invalid_authenticity_token: Sesión non válida.
+  error_query_statement_invalid: Aconteceu un erro executando a consulta e ten sido
+    engadido no log. Por favor, informe deste erro ao administrador do Redmine.
+  permission_view_wiki_page_watchers: Ver a listaxe de seguidores da páxina da wiki
+  permission_add_wiki_page_watchers: Engadir seguidores á páxina da wiki
+  permission_delete_wiki_page_watchers: Borrar os seguidores da páxina da wiki
+  label_wiki_page_watchers: Seguidores
+  label_attachment_description: Descrición do ficheiro
+  error_no_data_in_file: O ficheiro non contén ningún tipo de datos
+  field_twofa_required: Precisa autenticación de dous factores
+  twofa_hint_optional_html: A configuración <strong>%{label}</strong> permitirá aos usuarios estabrecer
+    autenticación de dous factores á súa vontade, a menos que sexa requerido por un dos seus grupos.
+  twofa_text_group_required: Esta configuración só é efectiva cando a configuración de autenticación global
+    de dous factores estea estabrecida a 'opcional'. Actualmente, a autenticación de dous factores
+    é obrigatoria para todos os usuarios.
+  twofa_text_group_disabled: Esta configuración só é efectiva cando a configuración de autenticación global
+    de dous factores estea estabrecida a 'opcional'. Actualmente, a autenticación de dous factores
+    está deshabilitada.
+  field_default_issue_query: Consulta de peticións por defecto
+  label_default_queries:
+    for_all_projects: Para todos os proxectos
+    for_current_project: Para o proxecto actual
+    for_all_users: Para todos os usuarios
+    for_this_user: Para este usuario
+  text_allowed_queries_to_select: Soamente seleccionables consultas públicas (para calquera usuario)
+  text_all_migrations_have_been_run: Foron executadas todas as migracións de base de datos
+  button_save_object: Gardar %{object_name}
+  button_edit_object: Editar %{object_name}
+  button_delete_object: Borrar %{object_name}
+  text_setting_config_change: Podes configurar o comportamento en config/configuration.yml.
+    Por favor, reinicia a aplicación despois de editalo.
+  label_bulk_edit: Editar á vez
+  button_create_and_follow: Crear e seguir
+  label_subtask: Subtarefa
+  label_default_query: Consulta por defecto
+  field_default_project_query: Consulta por defecto do proxecto
+  label_required_administrators: Obrigatorio para os administradores
+  twofa_hint_required_administrators_html: A opción <strong>%{label}</strong> compórtase
+    coma opcional, pero requirirá que todos os usuarios con dereitos de administración configuren autenticación de dous factores
+    no seu próximo inicio de sesión.
+  label_auto_watch_on: Auto monitorizar
+  label_auto_watch_on_issue_contributed_to: Tarefas ás que teño contribuído
+  text_project_close_confirmation: Seguro que quere pechar o proxecto '%{value}'
+    para facelo de só lectura?
+  text_project_reopen_confirmation: Seguro que quere reabrir o proxecto '%{value}'?
+  text_project_archive_confirmation: Seguro que quere arquivar o proxecto '%{value}'?
+  mail_destroy_project_failed: O proxecto %{value} non pode ser borrado.
+  mail_destroy_project_successful: O proxecto %{value} foi borrado con éxito.
+  mail_destroy_project_with_subprojects_successful: O proxecto %{value} e os seus proxectos
+    foron borrados con éxito.
+  project_status_scheduled_for_deletion: programado para o seu borrado
+  text_projects_bulk_destroy_confirmation: Seguro que quere borrar o proxecto seleccionado
+    e os datos asociados?
+  text_projects_bulk_destroy_head: |
+    Está a punto de borrar de xeito permanente os seguintes proxectos, incluíndo posibles subproxectos e datos asociados.
+    Por favor, revise a información de abaixo e confirme que isto é o que quere facer.
+    Esta acción non pode ser desfeita.
+  text_projects_bulk_destroy_confirm: Para confirmar por favor teclee "%{yes}" na caixa de debaixo.
+  text_subprojects_bulk_destroy: 'incluíndo os seus subproxecto(s): %{value}'
+  field_current_password: Contrasinal actual
+  sudo_mode_new_info_html: "<strong>Que está a acontecer?</strong> Vostede necesita reconfirmar
+    a súa contrasinal antes de realizar calquera acción de administración, isto asegura que a súa conta
+    permañece protexida."
+  label_edited: Editado
+  label_time_by_author: "%{time} por %{author}"
+  field_default_time_entry_activity: Actividade por defecto para o tempo imputado
+  field_is_member_of_group: Membro do grupo
+  text_users_bulk_destroy_head: Vas borrar os seguintes usuarios e quitar todas as
+    referencias a eles. Isto non pode desfacerse. En xeral, bloquear os usuarios en troques de borralos
+    é a mellor solución.
+  text_users_bulk_destroy_confirm: Para confirmar por favor teclee "%{yes}" debaixo.
+  permission_select_project_publicity: Configurar o proxecto coma público ou privado
+  label_auto_watch_on_issue_created: Tarefas creadas por min
+  field_any_searchable: Calquera texto buscable
+  label_contains_any_of: contén calquera de
+  button_apply_issues_filter: Aplicar os filtro de tarefas
+  label_view_previous_annotation: Ver anotación anterior a este cambio
+  label_has_been: ten sido
+  label_has_never_been: nunca ten sido
+  label_changed_from: cambiou de
+  label_issue_statuses_description: Issue statuses description
+  label_open_issue_statuses_description: View all issue statuses description
+  text_select_apply_issue_status: Select issue status
+  field_name_or_email_or_login: Name, email or login
+  text_default_active_job_queue_changed: Default queue adapter which is well suited
+    only for dev/test changed

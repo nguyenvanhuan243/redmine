@@ -1,0 +1,13 @@
+<div class="contextual">
+<%= link_to l(:label_profile), user_path(@user), :class => 'icon icon-user' %>
+<%= additional_emails_link(@user) %>
+<%= change_status_link(@user) %>
+<%= delete_link user_path(@user) if User.current != @user %>
+</div>
+
+<%=
+  page_title = title [l(:label_user_plural), users_path], @user.login
+  page_title.insert(page_title.rindex(' ') + 1, avatar(@user).to_s)
+%>
+
+<%= render_tabs user_settings_tabs %>

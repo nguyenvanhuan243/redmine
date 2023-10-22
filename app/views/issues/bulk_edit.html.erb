@@ -1,0 +1,277 @@
+<h2><%= @copy ? l(:button_copy) : l(:label_bulk_edit_selected_issues) %></h2>
+
+<% if @saved_issues && @unsaved_issues.present? %>
+<div id="errorExplanation">
+  <span>
+    <%= l(:notice_failed_to_save_issues,
+        :count => @unsaved_issues.size,
+        :total => @saved_issues.size,
+        :ids => @unsaved_issues.map {|i| "##{i.id}"}.join(', ')) %>
+  </span>
+  <ul>
+  <% bulk_edit_error_messages(@unsaved_issues).each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+  </ul>
+</div>
+<% end %>
+
+<ul id="bulk-selection">
+<% @issues.each do |issue| %>
+  <%= content_tag 'li', link_to_issue(issue) %>
+<% end %>
+</ul>
+
+<%= form_tag(bulk_update_issues_path, :id => 'bulk_edit_form') do %>
+<%= @issues.collect {|i| hidden_field_tag('ids[]', i.id, :id => nil)}.join("\n").html_safe %>
+<div class="box tabular">
+<fieldset class="attributes">
+<legend><%= l(:label_change_properties) %></legend>
+
+<div class="splitcontent">
+<div class="splitcontentleft">
+<% if @allowed_projects.present? %>
+<p>
+  <label for="issue_project_id"><%= l(:field_project) %></label>
+  <%= select_tag('issue[project_id]',
+                 project_tree_options_for_select(@allowed_projects,
+                   :include_blank => ((!@copy || (@projects & @allowed_projects == @projects)) ? l(:label_no_change_option) : false),
+                   :selected => @target_project),
+                 :onchange => "updateBulkEditFrom('#{escape_javascript url_for(:action => 'bulk_edit', :format => 'js')}')") %>
+</p>
+<% end %>
+<p>
+  <label for="issue_tracker_id"><%= l(:field_tracker) %></label>
+  <%= select_tag('issue[tracker_id]',
+                 content_tag('option', l(:label_no_change_option), :value => '') +
+                   options_from_collection_for_select(@trackers, :id, :name, @issue_params[:tracker_id]),
+                   :onchange => "updateBulkEditFrom('#{escape_javascript url_for(:action => 'bulk_edit', :format => 'js')}')") %>
+</p>
+<% if @available_statuses.any? %>
+<p>
+  <label for='issue_status_id'><%= l(:field_status) %></label>
+  <%= select_tag('issue[status_id]',
+                 content_tag('option', l(:label_no_change_option), :value => '') +
+                   options_from_collection_for_select(@available_statuses, :id, :name, @issue_params[:status_id]),
+                   :onchange => "updateBulkEditFrom('#{escape_javascript url_for(:action => 'bulk_edit', :format => 'js')}')") %>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('priority_id') -%>
+<p>
+  <label for='issue_priority_id'><%= l(:field_priority) %></label>
+  <%= select_tag('issue[priority_id]',
+                 content_tag('option', l(:label_no_change_option), :value => '') +
+                   options_from_collection_for_select(IssuePriority.active, :id, :name, @issue_params[:priority_id])) %>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('assigned_to_id') -%>
+<p>
+  <label for='issue_assigned_to_id'><%= l(:field_assigned_to) %></label>
+  <%= select_tag('issue[assigned_to_id]',
+                 content_tag('option', l(:label_no_change_option), :value => '') +
+                   content_tag('option', l(:label_nobody), :value => 'none', :selected => (@issue_params[:assigned_to_id] == 'none')) +
+                   principals_options_for_select(@assignables, @issue_params[:assigned_to_id])) %>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('category_id') -%>
+<p>
+  <label for='issue_category_id'><%= l(:field_category) %></label>
+  <%= select_tag('issue[category_id]', content_tag('option', l(:label_no_change_option), :value => '') +
+                                content_tag('option', l(:label_none), :value => 'none', :selected => (@issue_params[:category_id] == 'none')) +
+                                options_from_collection_for_select(@categories, :id, :name, @issue_params[:category_id])) %>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('fixed_version_id') -%>
+<p>
+  <label for='issue_fixed_version_id'><%= l(:field_fixed_version) %></label>
+  <%= select_tag('issue[fixed_version_id]', content_tag('option', l(:label_no_change_option), :value => '') +
+                                   content_tag('option', l(:label_none), :value => 'none', :selected => (@issue_params[:fixed_version_id] == 'none')) +
+                                   version_options_for_select(@versions.sort, @issue_params[:fixed_version_id])) %>
+</p>
+<% end %>
+
+<% if @copy && Setting.link_copied_issue == 'ask' %>
+<p>
+  <label for='link_copy'><%= l(:label_link_copied_issue) %></label>
+  <%= hidden_field_tag 'link_copy', '0' %>
+  <%= check_box_tag 'link_copy', '1', params[:link_copy] != 0 %>
+</p>
+<% end %>
+
+<% if @copy && (@attachments_present || @subtasks_present || @watchers_present) %>
+<p>
+  <label><%= l(:button_copy) %></label>
+  <% if @attachments_present %>
+    <label class="block">
+      <%= hidden_field_tag 'copy_attachments', '0' %>
+      <%= check_box_tag 'copy_attachments', '1', params[:copy_attachments] != '0' %>
+      <%= l(:label_attachment_plural) %>
+    </label>
+  <% end %>
+  <% if @subtasks_present %>
+    <label class="block">
+      <%= hidden_field_tag 'copy_subtasks', '0' %>
+      <%= check_box_tag 'copy_subtasks', '1', params[:copy_subtasks] != '0' %>
+      <%= l(:label_subtask_plural) %>
+    </label>
+  <% end %>
+  <% if @watchers_present %>
+    <label class="block">
+      <%= hidden_field_tag 'copy_watchers', '0' %>
+      <%= check_box_tag 'copy_watchers', '1',  params[:copy_watchers] != '0' %>
+      <%= l(:label_issue_watchers) %>
+    </label>
+  <% end %>
+</p>
+<% end %>
+
+<%= call_hook(:view_issues_bulk_edit_details_bottom, { :issues => @issues }) %>
+</div>
+
+<div class="splitcontentright">
+<% if @safe_attributes.include?('is_private') %>
+<p>
+  <label for='issue_is_private'><%= l(:field_is_private) %></label>
+  <%= select_tag('issue[is_private]', content_tag('option', l(:label_no_change_option), :value => '') +
+                                content_tag('option', l(:general_text_Yes), :value => '1', :selected => (@issue_params[:is_private] == '1')) +
+                                content_tag('option', l(:general_text_No), :value => '0', :selected => (@issue_params[:is_private] == '0'))) %>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('parent_issue_id') && @project %>
+<p>
+  <label for='issue_parent_issue_id'><%= l(:field_parent_issue) %></label>
+  <%= text_field_tag 'issue[parent_issue_id]', '', :size => 10, :value => @issue_params[:parent_issue_id] %>
+  <label class="inline"><%= check_box_tag 'issue[parent_issue_id]', 'none', (@issue_params[:parent_issue_id] == 'none'), :id => nil, :data => {:disables => '#issue_parent_issue_id'} %><%= l(:button_clear) %></label>
+</p>
+<%= javascript_tag "observeAutocompleteField('issue_parent_issue_id', '#{escape_javascript auto_complete_issues_path(:project_id => @project, :scope => Setting.cross_project_subtasks)}')" %>
+<% end %>
+
+<% if @safe_attributes.include?('start_date') %>
+<p>
+  <label for='issue_start_date'><%= l(:field_start_date) %></label>
+  <%= date_field_tag 'issue[start_date]', '', :value => @issue_params[:start_date], :size => 10 %><%= calendar_for('issue_start_date') %>
+  <label class="inline"><%= check_box_tag 'issue[start_date]', 'none', (@issue_params[:start_date] == 'none'), :id => nil, :data => {:disables => '#issue_start_date'} %><%= l(:button_clear) %></label>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('due_date') %>
+<p>
+  <label for='issue_due_date'><%= l(:field_due_date) %></label>
+  <%= date_field_tag 'issue[due_date]', '', :value => @issue_params[:due_date], :size => 10 %><%= calendar_for('issue_due_date') %>
+  <label class="inline"><%= check_box_tag 'issue[due_date]', 'none', (@issue_params[:due_date] == 'none'), :id => nil, :data => {:disables => '#issue_due_date'} %><%= l(:button_clear) %></label>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('estimated_hours') %>
+<p>
+  <label for='issue_estimated_hours'><%= l(:field_estimated_hours) %></label>
+  <%= text_field_tag 'issue[estimated_hours]', '', :value => @issue_params[:estimated_hours], :size => 10 %>
+  <label class="inline"><%= check_box_tag 'issue[estimated_hours]', 'none', (@issue_params[:estimated_hours] == 'none'), :id => nil, :data => {:disables => '#issue_estimated_hours'} %><%= l(:button_clear) %></label>
+</p>
+<% end %>
+
+<% if @safe_attributes.include?('done_ratio') && Issue.use_field_for_done_ratio? %>
+<p>
+  <label for='issue_done_ratio'><%= l(:field_done_ratio) %></label>
+  <%= select_tag 'issue[done_ratio]', options_for_select([[l(:label_no_change_option), '']] + (0..10).to_a.collect {|r| ["#{r*10} %", r*10] }, @issue_params[:done_ratio]) %>
+</p>
+<% end %>
+</div>
+</div>
+
+<% custom_fields = @custom_fields %>
+<% custom_fields_full_width = custom_fields.select { |value| value.full_width_layout? } %>
+<% custom_fields -= custom_fields_full_width %>
+
+<% if custom_fields.present? %>
+<div class="splitcontent">
+  <div class="splitcontentleft">
+   <% i = 0 %>
+   <% split_on = (custom_fields.size / 2.0).ceil - 1 %>
+   <% custom_fields.each do |custom_field| %>
+     <p>
+       <label><%= custom_field.name %></label>
+       <%= custom_field_tag_for_bulk_edit('issue', custom_field, @issues, @issue_params[:custom_field_values][custom_field.id.to_s]) %>
+     </p>
+     <% if i == split_on %>
+       </div><div class="splitcontentright">
+     <% end %>
+     <% i += 1 %>
+   <% end %>
+  </div>
+</div>
+<% end %>
+
+<% custom_fields_full_width.each do |custom_field| %>
+  <p>
+    <label><%= custom_field.name %></label>
+    <%= custom_field_tag_for_bulk_edit('issue', custom_field, @issues, @issue_params[:custom_field_values][custom_field.id.to_s]) %>
+  </p>
+  <%= wikitoolbar_for "issue_custom_field_values_#{custom_field.id}", preview_issue_path(:project_id => @project, :issue_id => nil) if custom_field.full_text_formatting? %>
+<% end %>
+
+</fieldset>
+
+<fieldset>
+<legend><%= l(:field_notes) %></legend>
+<%= text_area_tag 'notes', @notes, :cols => 60, :rows => 10, :class => 'wiki-edit',
+                  :data => {
+                      :auto_complete => true
+                  }
+%>
+<%= wikitoolbar_for 'notes' %>
+
+<% if User.current.allowed_to?(:add_issue_watchers, nil, global: true)%>
+  <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(q: '', object_type: 'issue', object_id: @issues.map(&:id) )}) %>
+<% end %>
+
+<% if @safe_attributes.include?('private_notes') %>
+  <label class="inline">
+  	<%= check_box_tag 'issue[private_notes]', 1, false %>
+  	<%= l(:field_private_notes) %>
+  </label>
+<% end %>
+</fieldset>
+</div>
+
+<% if @values_by_custom_field.present? %>
+<div class="flash warning">
+  <%= l(:warning_fields_cleared_on_bulk_edit) %>:<br />
+  <%= safe_join(@values_by_custom_field.map {|field, ids| content_tag "span", "#{field.name} (#{ids.size})"}, ', ') %>
+</div>
+<% end %>
+
+<p>
+  <% if @copy %>
+    <%= hidden_field_tag 'copy', '1' %>
+    <%= submit_tag l(:button_copy) %>
+    <%= submit_tag l(:button_copy_and_follow), :name => 'follow' %>
+  <% elsif @target_project %>
+    <%= submit_tag l(:button_move) %>
+    <%= submit_tag l(:button_move_and_follow), :name => 'follow' %>
+  <% else %>
+    <%= submit_tag l(:button_submit) %>
+  <% end %>
+</p>
+
+<% end %>
+
+<%= javascript_tag do %>
+$(window).on('load', function(){
+  $(document).on('change', 'input[data-disables]', function(){
+    if ($(this).prop('checked')){
+      $($(this).data('disables')).attr('disabled', true).val('');
+    } else {
+      $($(this).data('disables')).attr('disabled', false);
+    }
+  });
+});
+$(document).ready(function(){
+  $('input[data-disables]').trigger('change');
+});
+<% end %>

@@ -1,0 +1,20 @@
+api.version do
+  api.id @version.id
+  api.project(:id => @version.project_id, :name => @version.project.name) unless @version.project.nil?
+
+  api.name            @version.name
+  api.description     @version.description
+  api.status          @version.status
+  api.due_date        @version.effective_date
+  api.sharing         @version.sharing
+  api.wiki_page_title @version.wiki_page_title
+  if User.current.allowed_to?(:view_time_entries, @project)
+    api.estimated_hours(@version.visible_fixed_issues.estimated_hours)
+    api.spent_hours(@version.spent_hours)
+  end
+
+  render_api_custom_values @version.visible_custom_field_values, api
+
+  api.created_on @version.created_on
+  api.updated_on @version.updated_on
+end

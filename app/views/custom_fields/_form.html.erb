@@ -1,0 +1,68 @@
+<%= error_messages_for 'custom_field' %>
+
+<div class="splitcontent">
+<div class="splitcontentleft">
+<div class="box tabular">
+<p><%= f.select :field_format, custom_field_formats_for_select(@custom_field), {}, :disabled => !@custom_field.new_record? %></p>
+<p><%= f.text_field :name, :size => 50, :required => true %></p>
+<p><%= f.text_area :description, :rows => 7 %></p>
+
+<% if @custom_field.format.multiple_supported %>
+<p>
+  <%= f.check_box :multiple %>
+  <% if !@custom_field.new_record? && @custom_field.multiple %>
+  <em class="info"><%= l(:text_turning_multiple_off) %></em>
+  <% end %>
+</p>
+<% end %>
+
+<%= render_custom_field_format_partial f, @custom_field %>
+
+<%= call_hook(:view_custom_fields_form_upper_box, :custom_field => @custom_field, :form => f) %>
+</div>
+<p>
+  <% if @custom_field.new_record? %>
+    <%= submit_tag l(:button_create) %>
+    <%= submit_tag l(:button_create_and_continue), :name => 'continue' %>
+  <% else %>
+    <%= submit_tag l(:button_save) %>
+  <% end %>
+</p>
+</div>
+
+<div class="splitcontentright">
+  <div class="box tabular">
+    <p><%= f.check_box :is_required %></p>
+
+    <% if %w(UserCustomField).include?(@custom_field.class.name) %>
+      <p><%= f.check_box :visible %></p>
+    <% end %>
+
+    <% if @custom_field.is_a?(UserCustomField) %>
+      <p><%= f.check_box :editable %></p>
+    <% end %>
+
+    <% if %w(IssueCustomField UserCustomField ProjectCustomField VersionCustomField GroupCustomField TimeEntryCustomField).include?(@custom_field.class.name) &&
+        @custom_field.format.is_filter_supported %>
+      <p><%= f.check_box :is_filter %></p>
+    <% end %>
+
+    <% if %w(IssueCustomField ProjectCustomField).include?(@custom_field.class.name) && @custom_field.format.searchable_supported %>
+      <p><%= f.check_box :searchable %></p>
+    <% end %>
+    <%= call_hook(:"view_custom_fields_form_#{@custom_field.type.to_s.underscore}", :custom_field => @custom_field, :form => f) %>
+  </div>
+
+  <% if %w(IssueCustomField TimeEntryCustomField ProjectCustomField VersionCustomField).include?(@custom_field.class.name) %>
+    <%= render :partial => 'visibility_by_role_selector', :locals => { :f => f } %>
+  <% end %>
+
+  <% if @custom_field.is_a?(IssueCustomField) %>
+    <%= render :partial => 'visibility_by_tracker_selector', :locals => { :f => f } %>
+
+    <%= render :partial => 'visibility_by_project_selector', :locals => { :f => f } %>
+  <% end %>
+</div>
+</div>
+
+<% include_calendar_headers_tags %>

@@ -1,0 +1,126 @@
+<%= error_messages_for 'query' %>
+
+<div class="box">
+<div class="tabular">
+<%= hidden_field_tag 'gantt', '1' if params[:gantt] %>
+<%= hidden_field_tag 'calendar', '1' if params[:calendar] %>
+<%= hidden_field_tag 'admin_projects', '1' if params[:admin_projects] %>
+
+<p><label for="query_name"><%=l(:field_name)%></label>
+<%= text_field 'query', 'name', :size => 80 %></p>
+
+<% if User.current.admin? ||
+      User.current.allowed_to?(:manage_public_queries, @query.project) %>
+<p><label><%=l(:field_visible)%></label>
+  <label class="block"><%= radio_button 'query', 'visibility', Query::VISIBILITY_PRIVATE %> <%= l(:label_visibility_private) %></label>
+  <label class="block"><%= radio_button 'query', 'visibility', Query::VISIBILITY_PUBLIC %> <%= l(:label_visibility_public) %></label>
+  <% unless @query.type == 'ProjectQuery' %>
+    <label class="block"><%= radio_button 'query', 'visibility', Query::VISIBILITY_ROLES %> <%= l(:label_visibility_roles) %>:</label>
+      <% Role.givable.sorted.each do |role| %>
+        <label class="block role-visibility"><%= check_box_tag 'query[role_ids][]', role.id, @query.roles.include?(role), :id => nil %> <%= role.name %></label>
+      <% end %>
+      <%= hidden_field_tag 'query[role_ids][]', '' %>
+  <% end %>
+</p>
+<% end %>
+
+<% unless @query.type == 'ProjectQuery' %>
+  <p><label for="query_is_for_all"><%=l(:field_is_for_all)%></label>
+  <%= check_box_tag 'query_is_for_all', 1, @query.project.nil?, :class => (User.current.admin? ? '' : 'disable-unless-private') %></p>
+<% end %>
+
+<% unless params[:calendar] %>
+  <fieldset id="options"><legend><%= l(:label_options) %></legend>
+    <% if @query.available_display_types.size > 1 %>
+      <p><label for='display_type'><%= l(:label_display_type) %></label>
+        <%= available_display_types_tags(@query) %>
+      </p>
+    <% elsif @query.available_display_types.size == 1 %>
+      <%= hidden_field_tag 'query[display_type]', @query.available_display_types.first %>
+    <% end %>
+
+    <p id ="default_columns"><label for="query_default_columns"><%=l(:label_default_columns)%></label>
+    <%= check_box_tag 'default_columns', 1, @query.has_default_columns?, :id => 'query_default_columns',
+          :data => {:disables => "#columns, .block_columns input"} %></p>
+
+    <% unless params[:gantt] %>
+      <p id="group_by"><label for="query_group_by"><%= l(:field_group_by) %></label>
+      <%= select 'query', 'group_by', @query.groupable_columns.collect {|c| [c.caption, c.name.to_s]}, :include_blank => true %></p>
+
+      <% unless @query.available_block_columns.empty? %>
+        <p class="block_columns"><label><%= l(:button_show) %></label>
+        <%= available_block_columns_tags(@query) %></p>
+      <% end %>
+
+      <% unless @query.available_totalable_columns.empty? %>
+        <p class="totable_columns"><label><%= l(:label_total_plural) %></label>
+        <%= available_totalable_columns_tags(@query) %></p>
+      <% end %>
+    <% else %>
+      <p><label><%= l(:button_show) %></label>
+      <%= hidden_field_tag 'query[draw_relations]', '0' %>
+      <%= hidden_field_tag 'query[draw_progress_line]', '0' %>
+      <%= hidden_field_tag 'query[draw_selected_columns]', '0' %>
+      <label class="inline"><%= check_box_tag "query[draw_relations]", "1", @query.draw_relations %> <%= l(:label_related_issues) %></label>
+      <label class="inline"><%= check_box_tag "query[draw_progress_line]", "1", @query.draw_progress_line %> <%= l(:label_gantt_progress_line) %></label>
+      <label class="inline"><%= check_box_tag "query[draw_selected_columns]", "1", @query.draw_selected_columns, :data => { :enables => 'span.query-columns select, span.query-columns input'} %> <%= l(:description_selected_columns) %></label>
+      </p>
+    <% end %>
+  </fieldset>
+<% end %>
+</div>
+
+<fieldset id="filters"><legend><%= l(:label_filter_plural) %></legend>
+<%= render :partial => 'queries/filters', :locals => {:query => query}%>
+</fieldset>
+
+<% if params[:calendar].nil? && params[:gantt].nil? %>
+  <fieldset id="sort"><legend><%= l(:label_sort) %></legend>
+    <% 3.times do |i| %>
+    <%= content_tag(:span, "#{i+1}:", :class => 'query_sort_criteria_count')%>
+    <%= label_tag "query_sort_criteria_attribute_" + i.to_s,
+                  l(:description_query_sort_criteria_attribute), :class => "hidden-for-sighted" %>
+    <%= select_tag("query[sort_criteria][#{i}][]",
+                  options_for_select([[]] + query.available_columns.select(&:sortable?).collect {|column| [column.caption, column.name.to_s]}, @query.sort_criteria_key(i)),
+                  :id => "query_sort_criteria_attribute_" + i.to_s)%>
+    <%= label_tag "query_sort_criteria_direction_" + i.to_s,
+                  l(:description_query_sort_criteria_direction), :class => "hidden-for-sighted" %>
+    <%= select_tag("query[sort_criteria][#{i}][]",
+                    options_for_select([[], [l(:label_ascending), 'asc'], [l(:label_descending), 'desc']], @query.sort_criteria_order(i)),
+                    :id => "query_sort_criteria_direction_" + i.to_s) %>
+    <br />
+    <% end %>
+  </fieldset>
+<% end %>
+
+<% unless params[:calendar] %>
+  <%= content_tag 'fieldset', :id => 'columns' do %>
+  <legend><%= l(:field_column_names) %></legend>
+  <%= render_query_columns_selection(query) %>
+  <% end %>
+<% end %>
+
+</div>
+
+<%= javascript_tag do %>
+$(document).ready(function(){
+  $("input[name='query[visibility]']").change(function(){
+    var roles_checked = $('#query_visibility_1').is(':checked');
+    var private_checked = $('#query_visibility_0').is(':checked');
+    $("input[name='query[role_ids][]'][type=checkbox]").attr('disabled', !roles_checked);
+    if (!private_checked) $("input.disable-unless-private").attr('checked', false);
+    $("input.disable-unless-private").attr('disabled', !private_checked);
+  }).trigger('change');
+});
+
+$(function ($) {
+  $('input[name=display_type]').change(function () {
+    var option = $('input[name=display_type]:checked').val();
+    if (option == 'board') {
+      $('fieldset#columns, fieldset#sort, p#default_columns, p#group_by').hide();
+    } else {
+      $('fieldset#columns, fieldset#sort, p#default_columns, p#group_by').show();
+    }
+  }).change();
+});
+<% end %>

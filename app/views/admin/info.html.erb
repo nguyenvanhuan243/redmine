@@ -1,0 +1,18 @@
+<h2><%=l(:label_information_plural)%></h2>
+
+<p><strong><%= Redmine::Info.versioned_name %></strong></p>
+
+<table class="list">
+<% @checklist.each do |label, result| %>
+  <tr>
+    <td class="name"><%= label.is_a?(Symbol) ? l(label) : label %></td>
+    <td class="tick"><span class="icon-only <%= (result ? 'icon-ok' : 'icon-error') %>"></span></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<div class="box autoscroll">
+<pre><%= Redmine::Info.environment %></pre>
+</div>
+
+<% html_title(l(:label_information_plural)) -%>

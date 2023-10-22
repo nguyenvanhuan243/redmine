@@ -1,0 +1,218 @@
+--- 
+queries_001: 
+  id: 1
+  type: IssueQuery
+  project_id: 1
+  visibility: 2
+  name: Multiple custom fields query
+  filters: |
+    --- 
+    cf_1: 
+      :values: 
+      - MySQL
+      :operator: "="
+    status_id: 
+      :values: 
+      - "1"
+      :operator: o
+    cf_2: 
+      :values: 
+      - "125"
+      :operator: "="
+
+  user_id: 1
+  column_names: 
+queries_002: 
+  id: 2
+  type: IssueQuery
+  project_id: 1
+  visibility: 0
+  name: Private query for cookbook
+  filters: |
+    --- 
+    tracker_id: 
+      :values: 
+      - "3"
+      :operator: "="
+    status_id: 
+      :values: 
+      - "1"
+      :operator: o
+
+  user_id: 3
+  column_names: 
+queries_003: 
+  id: 3
+  type: IssueQuery
+  project_id: 
+  visibility: 0
+  name: Private query for all projects
+  filters: |
+    --- 
+    tracker_id: 
+      :values: 
+      - "3"
+      :operator: "="
+
+  user_id: 3
+  column_names: 
+queries_004: 
+  id: 4
+  type: IssueQuery
+  project_id: 
+  visibility: 2
+  name: Public query for all projects
+  filters: |
+    --- 
+    tracker_id: 
+      :values: 
+      - "3"
+      :operator: "="
+
+  user_id: 2
+  column_names: 
+queries_005: 
+  id: 5
+  type: IssueQuery
+  project_id: 
+  visibility: 2
+  name: Open issues by priority and tracker
+  filters: |
+    --- 
+    status_id: 
+      :values: 
+      - "1"
+      :operator: o
+
+  user_id: 1
+  column_names: 
+  sort_criteria: |
+    --- 
+    - - priority
+      - desc
+    - - tracker
+      - asc
+queries_006: 
+  id: 6
+  type: IssueQuery
+  project_id: 
+  visibility: 2
+  name: Open issues grouped by tracker
+  filters: |
+    --- 
+    status_id: 
+      :values: 
+      - "1"
+      :operator: o
+
+  user_id: 1
+  column_names: 
+  group_by: tracker
+  sort_criteria: |
+    --- 
+    - - priority
+      - desc
+queries_007: 
+  id: 7
+  type: IssueQuery
+  project_id: 2
+  visibility: 2
+  name: Public query for project 2
+  filters: |
+    --- 
+    tracker_id: 
+      :values: 
+      - "3"
+      :operator: "="
+
+  user_id: 2
+  column_names: 
+queries_008: 
+  id: 8
+  type: IssueQuery
+  project_id: 2
+  visibility: 0
+  name: Private query for project 2
+  filters: |
+    --- 
+    tracker_id: 
+      :values: 
+      - "3"
+      :operator: "="
+
+  user_id: 2
+  column_names: 
+queries_009: 
+  id: 9
+  type: IssueQuery
+  project_id: 
+  visibility: 2
+  name: Open issues grouped by list custom field
+  filters: |
+    --- 
+    status_id: 
+      :values: 
+      - "1"
+      :operator: o
+
+  user_id: 1
+  column_names: 
+  group_by: cf_1
+  sort_criteria: |
+    --- 
+    - - priority
+      - desc
+queries_010: 
+  id: 10
+  type: TimeEntryQuery
+  project_id: 1
+  visibility: 2
+  name: My spent time
+  filters: |
+    --- 
+    user_id: 
+      :values: 
+      - "me"
+      :operator: =
+
+  user_id: 1
+  column_names: 
+  group_by: 
+  sort_criteria: |
+    --- 
+    - - spent_on
+      - desc
+queries_011:
+  id: 11
+  type: ProjectQuery
+  visibility: 2
+  name: Projects as list
+  filters: |
+    ---
+    id:
+      :values:
+      - "mine"
+      :operator: =
+
+  column_names:
+  group_by:
+  sort_criteria:
+  options: |
+    ---
+    :display_type: list
+queries_012:
+  id: 12
+  type: ProjectQuery
+  visibility: 1
+  name: My bookmarks
+  filters: |
+    ---
+    id:
+      :values:
+      - "bookmarks"
+      :operator: =
+
+  user_id: 1
+  options: |
+    ---
+    :display_type: board

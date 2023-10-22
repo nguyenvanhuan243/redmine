@@ -1,0 +1,41 @@
+<%= call_hook(:view_repositories_show_contextual, { :repository => @repository, :project => @project }) %>
+
+<div class="contextual">
+  <%= render :partial => 'navigation' %>
+</div>
+
+<h2 class="breadcrumbs"><%= render :partial => 'breadcrumbs', :locals => { :path => @path, :kind => 'file', :revision => @rev } %></h2>
+
+<%= render :partial => 'link_to_functions' %>
+
+<% if Redmine::MimeType.is_type?('image', @path) %>
+  <%= render :partial => 'common/image', :locals => {:path => @raw_url, :alt => @path} %>
+<% elsif Redmine::MimeType.of(@path) == 'text/x-textile' %>
+  <%= render :partial => 'common/markup', :locals => {:markup_text_formatting => 'textile', :markup_text => @content} %>
+<% elsif Redmine::MimeType.of(@path) == 'text/markdown' %>
+  <%= render :partial => 'common/markup', :locals => {:markup_text_formatting => markdown_formatter, :markup_text => @content} %>
+<% elsif @content %>
+  <%= render :partial => 'common/file', :locals => {:filename => @path, :content => @content} %>
+<% else %>
+  <% kind = if Redmine::MimeType.is_type?('video', @path)
+       'video'
+     elsif Redmine::MimeType.is_type?('audio', @path)
+       'audio'
+     end %>
+  <%= render :partial => 'common/other',
+             :locals => {
+               :path => (@raw_url if @repository.supports_cat?),
+               :kind => kind,
+               :download_link => @repository.supports_cat? ? link_to(
+                 l(:label_no_preview_download),
+                 @raw_url,
+                :class => 'icon icon-download') : nil } %>
+<% end %>
+
+<span class="pagination filepreview">
+  <%= render_pagination %>
+</span>
+
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag "scm" %>
+<% end %>

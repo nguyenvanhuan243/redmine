@@ -1,0 +1,6 @@
+<%= title [l(:label_role_plural), roles_path], @role.name %>
+
+<%= labelled_form_for @role do |f| %>
+<%= render :partial => 'form', :locals => { :f => f } %>
+<%= submit_tag l(:button_save) %>
+<% end %>

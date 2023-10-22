@@ -1,0 +1,57 @@
+<%= form_tag({:action => 'edit'}) do %>
+
+<div class="box tabular settings">
+<p><%= setting_text_field :app_title, :size => 30 %></p>
+
+<p><%= setting_text_area :welcome_text, :cols => 60, :rows => 5, :class => 'wiki-edit' %></p>
+<%= wikitoolbar_for 'settings_welcome_text' %>
+
+
+<p><%= setting_text_field :per_page_options, :size => 20 %>
+<em class="info"><%= l(:text_comma_separated) %></em></p>
+
+<p><%= setting_text_field :search_results_per_page, :size => 6 %>
+
+<p><%= setting_text_field :activity_days_default, :size => 6 %> <%= l(:label_day_plural) %></p>
+
+<p><%= setting_text_field :host_name, :size => 60 %>
+<em class="info"><%= l(:label_example) %>: <%= @guessed_host_and_path %></em></p>
+
+<p><%= setting_select :protocol, [['HTTP', 'http'], ['HTTPS', 'https']] %></p>
+
+<p><%= setting_select :text_formatting, Redmine::WikiFormatting.formats_for_select, :blank => :label_none %>
+  <span id="common_mark_info" class="<%= "hidden" unless Setting.text_formatting == "common_mark" %>">
+    <label class="block">
+      <%= check_box_tag(nil, '', Redmine::Configuration['common_mark_enable_hardbreaks'] == true, disabled: true) %>
+      Hardbreaks
+    </label>
+    <em class="info">
+      <%= l(:text_setting_config_change) %>
+    </em>
+  </span>
+</p>
+
+<p><%= setting_check_box :cache_formatted_text %></p>
+
+<p><%= setting_select :wiki_compression, [['Gzip', 'gzip']], :blank => :label_none %></p>
+
+<p><%= setting_text_field :feeds_limit, :size => 6 %></p>
+
+<%= call_hook(:view_settings_general_form) %>
+</div>
+
+<%= submit_tag l(:button_save) %>
+<% end %>
+
+<%= javascript_tag do %>
+  $('#settings_text_formatting').on('change', function(e){
+    const formatter = e.target.value;
+    const parent_block = document.getElementById("common_mark_info");
+
+    if (formatter == "common_mark") {
+      parent_block.classList.remove('hidden');
+    } else {
+      parent_block.classList.add('hidden');
+    }
+  });
+<% end %>

@@ -1,0 +1,31 @@
+<%= title l(:label_confirmation) %>
+
+<%= form_tag(project_path(@project_to_destroy), :method => :delete) do %>
+<div class="warning">
+<p><strong><%=h @project_to_destroy %></strong></p>
+
+<p>
+<%=l(:text_project_destroy_confirmation)%>
+<% if @project_to_destroy.descendants.any? %>
+  <br />
+  <%= l(:text_subprojects_destroy_warning,
+          content_tag('strong', @project_to_destroy.descendants.collect{|p| p.to_s}.join(', '))).html_safe %>
+<% end %>
+</p>
+
+<p>
+  <%= l :text_project_destroy_enter_identifier, identifier: @project_to_destroy.identifier %>
+</p>
+
+<p>
+  <label for="confirm"><%= l :field_identifier %></label>
+  <%= text_field_tag 'confirm' %>
+</p>
+
+</div>
+
+<p>
+  <%= submit_tag l(:button_delete) %>
+  <%= link_to l(:button_cancel), User.current.admin? ? admin_projects_path : projects_path %>
+</p>
+<% end %>

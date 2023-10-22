@@ -1,0 +1,89 @@
+<%= labelled_fields_for :issue, @issue do |f| %>
+<%= call_hook(:view_issues_form_details_top, { :issue => @issue, :form => f }) %>
+<%= hidden_field_tag 'form_update_triggered_by', '' %>
+<%= hidden_field_tag 'back_url', params[:back_url], :id => nil if params[:back_url].present? %>
+
+<% if @issue.safe_attribute? 'is_private' %>
+<p id="issue_is_private_wrap">
+  <%= f.check_box :is_private, :no_label => true %><label class="inline" for="issue_is_private" id="issue_is_private_label"><%= l(:field_is_private) %></label>
+</p>
+<% end %>
+
+<% projects = projects_for_select(@issue) %>
+<% if (@issue.safe_attribute?('project_id') || @issue.project_id_changed?) && (@project.nil? || projects.length > 1 || @issue.copy?) %>
+<p><%= f.select :project_id, project_tree_options_for_select(projects, :selected => @issue.project), {:required => true},
+                :onchange => "updateIssueFrom('#{escape_javascript update_issue_form_path(@project, @issue)}', this)" %></p>
+<% end %>
+
+<% if @issue.safe_attribute?('tracker_id') || (@issue.persisted? && @issue.tracker_id_changed?) %>
+<p>
+  <%= f.select :tracker_id, trackers_options_for_select(@issue), {:required => true},
+               :onchange => "updateIssueFrom('#{escape_javascript update_issue_form_path(@project, @issue)}', this)",
+               :title => @issue.tracker.description %>
+  <%= content_tag 'a', l(:label_open_trackers_description), :class => 'icon-only icon-help', :title => l(:label_open_trackers_description), :onclick => "showModal('trackers_description', '500px'); return false;", :href => '#' if trackers_for_select(@issue).any? {|t| t.description.present? } %>
+</p>
+  <%= render partial: 'issues/trackers_description', locals: {trackers: trackers_for_select(@issue)} %>
+<% end %>
+
+<% if @issue.safe_attribute? 'subject' %>
+<p><%= f.text_field :subject, :size => 80, :maxlength => 255, :required => true %></p>
+<% end %>
+
+<% if @issue.safe_attribute? 'description' %>
+<p>
+  <%= f.label_for_field :description, :required => @issue.required_attribute?('description') %>
+  <%= link_to_function content_tag(:span, l(:button_edit), :class => 'icon icon-edit'), '$(this).hide(); $("#issue_description_and_toolbar").show()' unless @issue.new_record? %>
+  <%= content_tag 'span', :id => "issue_description_and_toolbar", :style => (@issue.new_record? ? nil : 'display:none') do %>
+    <%= f.text_area :description, :cols => 60, :accesskey => accesskey(:edit), :class => 'wiki-edit',
+                   :rows => [[10, @issue.description.to_s.length / 50].max, 20].min,
+                   :data => {
+                       :auto_complete => true,
+                   },
+                   :no_label => true %>
+  <% end %>
+</p>
+<%= wikitoolbar_for 'issue_description', preview_issue_path(:project_id => @issue.project, :issue_id => @issue.id) %>
+<% end %>
+
+<div id="attributes" class="attributes">
+  <%= render :partial => 'issues/attributes' %>
+</div>
+
+<%= call_hook(:view_issues_form_details_bottom, { :issue => @issue, :form => f }) %>
+<% end %>
+
+<% heads_for_wiki_formatter %>
+<%= heads_for_auto_complete(@issue.project) %>
+
+<% if User.current.allowed_to?(:add_issue_watchers, @issue.project)%>
+  <%= update_data_sources_for_auto_complete({users: watchers_autocomplete_for_mention_path(project_id: @issue.project, q: '', object_type: 'issue',
+   object_id: @issue.id)}) %>
+<% end %>
+
+<%= javascript_tag do %>
+$(document).ready(function(){
+  $("#issue_tracker_id, #issue_status_id").each(function(){
+    $(this).val($(this).find("option[selected=selected]").val());
+  });
+  $(".assign-to-me-link").click(function(event){
+    event.preventDefault();
+    var element = $(event.target);
+    $('#issue_assigned_to_id').val(element.data('id'));
+    element.hide();
+  });
+  $('#issue_assigned_to_id').change(function(event){
+    var assign_to_me_link = $(".assign-to-me-link");
+
+    if (assign_to_me_link.length > 0) {
+      var user_id = $(event.target).val();
+      var current_user_id = assign_to_me_link.data('id');
+
+      if (user_id == current_user_id) {
+        assign_to_me_link.hide();
+      } else {
+        assign_to_me_link.show();
+      }
+    }
+  });
+});
+<% end %>

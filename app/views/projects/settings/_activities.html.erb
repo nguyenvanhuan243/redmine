@@ -1,0 +1,45 @@
+<div class="contextual">
+<%= link_to(l(:button_reset), project_enumerations_path(@project),
+            :method => :delete,
+            :data => {:confirm => l(:text_are_you_sure)},
+            :class => 'icon icon-del') %>
+<% if User.current.admin? %>
+<%= link_to l(:label_administration), enumerations_path, :class => "icon icon-settings" %>
+<% end %>
+</div>
+
+<%= form_tag(project_enumerations_path(@project), :method => :put, :class => "tabular") do %>
+
+<table class="list">
+  <thead><tr>
+    <th><%= l(:field_name) %></th>
+    <th><%= l(:enumeration_system_activity) %></th>
+    <% TimeEntryActivity.new.available_custom_fields.each do |value| %>
+    <th><%= value.name %></th>
+    <% end %>
+    <th><%= toggle_checkboxes_link('input.enumerations_active') %> <%= l(:field_active) %></th>
+  </tr></thead>
+
+  <% @project.activities(true).each do |enumeration| %>
+  <%= fields_for "enumerations[#{enumeration.id}]", enumeration do |ff| %>
+  <tr>
+    <td class="name">
+      <%= ff.hidden_field :parent_id, :value => enumeration.id unless enumeration.project %>
+      <%= enumeration %>
+    </td>
+    <td class="tick"><%= checked_image !enumeration.project %></td>
+    <% enumeration.custom_field_values.each do |value| %>
+    <td>
+      <%= custom_field_tag "enumerations[#{enumeration.id}]", value %>
+    </td>
+    <% end %>
+    <td>
+      <%= ff.check_box :active, :class => 'enumerations_active' %>
+    </td>
+  </tr>
+  <% end %>
+  <% end %>
+</table>
+
+<%= submit_tag l(:button_save) %>
+<% end %>

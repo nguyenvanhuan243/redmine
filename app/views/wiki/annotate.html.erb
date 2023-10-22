@@ -1,0 +1,40 @@
+<div class="contextual">
+<%= link_to(l(:button_edit), {:action => 'edit', :id => @page.title}, :class => 'icon icon-edit') %>
+<%= link_to(l(:label_history),
+            {:action => 'history', :id => @page.title}, :class => 'icon icon-history') %>
+</div>
+
+<%= wiki_page_breadcrumb(@page) %>
+
+<%= title [@page.pretty_title, project_wiki_page_path(@page.project, @page.title, :version => nil)],
+      [l(:label_history), history_project_wiki_page_path(@page.project, @page.title)],
+      "#{l(:label_version)} #{@annotate.content.version}" %>
+
+<p>
+  <em><%= @annotate.content.author ? link_to_user(@annotate.content.author) : l(:label_user_anonymous)
+       %>, <%= format_time(@annotate.content.updated_on) %> </em><br />
+  <%= @annotate.content.comments %>
+</p>
+
+<% colors = Hash.new {|k,v| k[v] = (k.size % 12) } %>
+
+<table class="filecontent annotate">
+<tbody>
+<% line_num = 1; prev_version = nil %>
+<% @annotate.lines.each do |line| -%>
+<tr class="bloc-<%= colors[line[0]] %>">
+    <th class="line-num"><%= line_num %></th>
+    <td class="revision"><%= link_to line[0], :controller => 'wiki',
+                             :action => 'show', :project_id => @project,
+                             :id => @page.title, :version => line[0] unless prev_version == line[0] %></td>
+    <td class="author"><%= line[1] unless prev_version == line[0] %></td>
+    <td class="line-code"><pre><%= line[2] %></pre></td>
+</tr>
+<% line_num += 1; prev_version = line[0] %>
+<% end -%>
+</tbody>
+</table>
+
+<% content_for :header_tags do %>
+<%= stylesheet_link_tag 'scm' %>
+<% end %>

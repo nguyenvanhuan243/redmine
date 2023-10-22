@@ -1,0 +1,40 @@
+<%= form_tag({:action => 'edit', :tab => 'projects'}) do %>
+
+<div class="box tabular settings">
+<p><%= setting_check_box :default_projects_public %></p>
+
+<p><%= setting_multiselect(:default_projects_modules,
+        Redmine::AccessControl.available_project_modules.collect {|m| [l_or_humanize(m, :prefix => "project_module_"), m.to_s]}) %></p>
+
+<p><%= setting_multiselect(:default_projects_tracker_ids,
+        Tracker.sorted.collect {|t| [t.name, t.id.to_s]}) %></p>
+
+<p><%= setting_check_box :sequential_project_identifiers %></p>
+
+<p><%= setting_select :new_project_user_role_id,
+                      Role.find_all_givable.collect {|r| [r.name, r.id.to_s]},
+                      :blank => "--- #{l(:actionview_instancetag_blank_option)} ---" %></p>
+</div>
+
+<fieldset class="box">
+  <legend><%= l(:setting_project_list_defaults) %></legend>
+  <% query = ProjectQuery.new(Setting.project_list_defaults) %>
+  <p>
+    <label><%= l(:label_display_type) %></label>
+    <% query.available_display_types.each do |t| %>
+      <%= radio_button_tag('settings[project_list_display_type]', t, Setting.project_list_display_type == t, :id => "setting_project_list_display_type_#{t}") %>
+      <%= content_tag('label', l(:"label_display_type_#{t}"), :for => "settings_project_list_display_type_#{t}", :class => "inline") %>
+    <% end %>
+  </p>
+  <%= render_query_columns_selection(query,
+        :name => 'settings[project_list_defaults][column_names]') %>
+
+  <p>
+    <label><%= l(:label_default_query) %></label>
+    <%= setting_select :default_project_query, default_global_project_query_options, label: false %>
+  </p>
+</fieldset>
+
+
+<%= submit_tag l(:button_save) %>
+<% end %>

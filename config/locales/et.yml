@@ -1,0 +1,1493 @@
+# Estonian localization for Redmine
+# Copyright (C) 2012 Kaitseministeerium
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+et:
+  # Text direction: Left-to-Right (ltr) or Right-to-Left (rtl)
+  direction: ltr
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%d.%m.%Y"
+      short: "%d.%b"
+      long: "%d. %B %Y"
+
+    day_names: [Pühapäev, Esmaspäev, Teisipäev, Kolmapäev, Neljapäev, Reede, Laupäev]
+    abbr_day_names: [P, E, T, K, N, R, L]
+
+    # Don't forget the nil at the beginning; there's no such thing as a 0th month
+    month_names: [~, Jaanuar, Veebruar, Märts, Aprill, Mai, Juuni, Juuli, August, September, Oktoober, November, Detsember]
+    abbr_month_names: [~, jaan, veebr, märts, apr, mai, juuni, juuli, aug, sept, okt, nov, dets]
+    # Used in date_select and datime_select.
+    order:
+      - :year
+      - :month
+      - :day
+
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      time: "%H:%M"
+      short: "%d.%b %H:%M"
+      long: "%d. %B %Y %H:%M %z"
+    am: "enne lõunat"
+    pm: "peale lõunat"
+
+  datetime:
+    distance_in_words:
+      half_a_minute: "pool minutit"
+      less_than_x_seconds:
+        one:   "vähem kui sekund"
+        other: "vähem kui %{count} sekundit"
+      x_seconds:
+        one:   "1 sekund"
+        other: "%{count} sekundit"
+      less_than_x_minutes:
+        one:   "vähem kui minut"
+        other: "vähem kui %{count} minutit"
+      x_minutes:
+        one:   "1 minut"
+        other: "%{count} minutit"
+      about_x_hours:
+        one:   "umbes tund"
+        other: "umbes %{count} tundi"
+      x_hours:
+        one:   "1 tund"
+        other: "%{count} tundi"
+      x_days:
+        one:   "1 päev"
+        other: "%{count} päeva"
+      about_x_months:
+        one:   "umbes kuu"
+        other: "umbes %{count} kuud"
+      x_months:
+        one:   "1 kuu"
+        other: "%{count} kuud"
+      about_x_years:
+        one:   "umbes aasta"
+        other: "umbes %{count} aastat"
+      over_x_years:
+        one:   "rohkem kui aasta"
+        other: "rohkem kui %{count} aastat"
+      almost_x_years:
+        one:   "peaaegu aasta"
+        other: "peaaegu %{count} aastat"
+
+  number:
+    format:
+      separator: "."
+      delimiter: ""
+      precision: 3
+
+    human:
+      format:
+        delimiter: ""
+        precision: 3
+      storage_units:
+        format: "%n %u"
+        units:
+          byte:
+            one: "bait"
+            other: "baiti"
+          kb: "KB"
+          mb: "MB"
+          gb: "GB"
+          tb: "TB"
+
+# Used in array.to_sentence.
+  support:
+    array:
+      sentence_connector: "ja"
+      skip_last_comma: false
+
+  activerecord:
+    errors:
+      template:
+        header:
+          one: "1 viga ei võimaldanud selle %{model} salvestamist"
+          other: "%{count} viga ei võimaldanud selle %{model} salvestamist"
+      messages:
+        inclusion: "ei ole nimekirjas"
+        exclusion: "on reserveeritud"
+        invalid: "ei sobi"
+        confirmation: "ei lange kinnitusega kokku"
+        accepted: "peab olema aktsepteeritud"
+        empty: "ei või olla tühi"
+        blank: "ei või olla täitmata"
+        too_long: "on liiga pikk (lubatud on kuni %{count} märki)"
+        too_short: "on liiga lühike (vaja on vähemalt %{count} märki)"
+        wrong_length: "on vale pikkusega (peaks olema %{count} märki)"
+        taken: "on juba võetud"
+        not_a_number: "ei ole arv"
+        not_a_date: "ei ole korrektne kuupäev"
+        greater_than: "peab olema suurem kui %{count}"
+        greater_than_or_equal_to: "peab olema võrdne või suurem kui %{count}"
+        equal_to: "peab võrduma %{count}-ga"
+        less_than: "peab olema väiksem kui %{count}"
+        less_than_or_equal_to: "peab olema võrdne või väiksem kui %{count}"
+        odd: "peab olema paaritu arv"
+        even: "peab olema paarisarv"
+        greater_than_start_date: "peab olema suurem kui alguskuupäev"
+        not_same_project: "ei kuulu sama projekti juurde"
+        circular_dependency: "See suhe looks vastastikuse sõltuvuse"
+        cant_link_an_issue_with_a_descendant: "Teemat ei saa sidustada tema enda alamteemaga"
+        earlier_than_minimum_start_date: "Tähtpäev ei saa olla varasem kui %{date} eelnevate teemade tähtpäevade tõttu"
+        not_a_regexp: "is not a valid regular expression"
+        open_issue_with_closed_parent: "An open issue cannot be attached to a closed parent task"
+        must_contain_uppercase: "must contain uppercase letters (A-Z)"
+        must_contain_lowercase: "must contain lowercase letters (a-z)"
+        must_contain_digits: "must contain digits (0-9)"
+        must_contain_special_chars: "must contain special characters (!, $, %, ...)"
+        domain_not_allowed: "contains a domain not allowed (%{domain})"
+
+  actionview_instancetag_blank_option: "Palun vali"
+
+  general_text_No: "Ei"
+  general_text_Yes: "Jah"
+  general_text_no: "ei"
+  general_text_yes: "jah"
+  general_lang_name: "Estonian (Eesti)"
+  general_csv_separator: ","
+  general_csv_decimal_separator: "."
+  general_csv_encoding: ISO-8859-13
+  general_pdf_fontname: freesans
+  general_pdf_monospaced_fontname: freemono
+  general_first_day_of_week: "1"
+
+  notice_account_updated: "Konto uuendamine õnnestus."
+  notice_account_invalid_credentials: "Sobimatu kasutajanimi või parool"
+  notice_account_password_updated: "Parooli uuendamine õnnestus."
+  notice_account_wrong_password: "Vale parool"
+  notice_account_register_done: "Konto loomine õnnestus. Konto aktiveerimiseks vajuta vastaval lingil Sulle saadetud e-kirjas."
+  notice_can_t_change_password: "See konto kasutab välist autentimisallikat. Siin ei saa selle konto parooli vahetada."
+  notice_account_lost_email_sent: "Sulle saadeti e-kiri parooli vahetamise juhistega."
+  notice_account_activated: "Su konto on aktiveeritud. Saad nüüd sisse logida."
+  notice_successful_create: "Loomine õnnestus."
+  notice_successful_update: "Uuendamine õnnestus."
+  notice_successful_delete: "Kustutamine õnnestus."
+  notice_successful_connection: "Ühenduse loomine õnnestus."
+  notice_file_not_found: "Sellist lehte ei leitud."
+  notice_locking_conflict: "Teine kasutaja uuendas vahepeal neid andmeid."
+  notice_not_authorized: "Sul ei ole sellele lehele ligipääsuks õigusi."
+  notice_not_authorized_archived_project: "See projekt on arhiveeritud."
+  notice_email_sent: "%{value}-le saadeti kiri"
+  notice_email_error: "Kirja saatmisel tekkis viga (%{value})"
+  notice_feeds_access_key_reseted: "Sinu Atom juurdepääsuvõti nulliti."
+  notice_api_access_key_reseted: "Sinu API juurdepääsuvõti nulliti."
+  notice_failed_to_save_issues: "%{count} teemat %{total}-st ei õnnestunud salvestada: %{ids}."
+  notice_failed_to_save_time_entries: "%{count} ajakulu kannet %{total}-st ei õnnestunud salvestada: %{ids}."
+  notice_failed_to_save_members: "Liiget/liikmeid ei õnnestunud salvestada: %{errors}."
+  notice_account_pending: "Sinu konto on loodud ja ootab nüüd administraatori kinnitust."
+  notice_default_data_loaded: "Algseadistuste laadimine õnnestus."
+  notice_unable_delete_version: "Versiooni kustutamine ei õnnestunud."
+  notice_unable_delete_time_entry: "Ajakulu kande kustutamine ei õnnestunud."
+  notice_issue_done_ratios_updated: "Teema edenemise astmed on uuendatud."
+  notice_gantt_chart_truncated: "Diagrammi kärbiti kuna ületati kuvatavate objektide suurim hulk (%{max})"
+  notice_issue_successful_create: "Teema %{id} loodud."
+  notice_issue_update_conflict: "Teine kasutaja uuendas seda teemat Sinuga samaaegselt."
+  notice_account_deleted: "Sinu konto on lõplikult kustutatud."
+
+  error_can_t_load_default_data: "Algseadistusi ei saanud laadida: %{value}"
+  error_scm_not_found: "Seda sissekannet hoidlast ei leitud."
+  error_scm_command_failed: "Hoidla poole pöördumisel tekkis viga: %{value}"
+  error_scm_annotate: "Sissekannet ei eksisteeri või ei saa annoteerida."
+  error_scm_annotate_big_text_file: "Sissekannet ei saa annoteerida, kuna see on liiga pikk."
+  error_issue_not_found_in_project: "Teemat ei leitud või see ei kuulu siia projekti"
+  error_no_tracker_in_project: "Selle projektiga ei ole seostatud ühtegi valdkonda. Palun vaata üle projekti seaded."
+  error_no_default_issue_status: 'Teema algolek on määramata. Palun vaata asetused üle ("Seadistused -> Olekud").'
+  error_can_not_delete_custom_field: "Omaloodud välja kustutamine ei õnnestunud"
+  error_can_not_delete_tracker: "See valdkond on mõnes teemas kasutusel ja seda ei saa kustutada."
+  error_can_not_remove_role: "See roll on mõnes projektis kasutusel ja seda ei saa kustutada."
+  error_can_not_reopen_issue_on_closed_version: "Suletud versiooni juurde kuulunud teemat ei saa taasavada"
+  error_can_not_archive_project: "Seda projekti ei saa arhiveerida"
+  error_issue_done_ratios_not_updated: "Teema edenemise astmed jäid uuendamata."
+  error_workflow_copy_source: "Palun vali algne valdkond või roll"
+  error_workflow_copy_target: "Palun vali sihtvaldkon(na)d või -roll(id)"
+  error_unable_delete_issue_status: "Oleku kustutamine ei õnnestunud (%{value})"
+  error_unable_to_connect: "Ühenduse loomine ei õnnestunud (%{value})"
+  error_attachment_too_big: "Faili ei saa üles laadida, sest see on lubatust (%{max_size}) mahukam"
+  warning_attachments_not_saved: "%{count} faili salvestamine ei õnnestunud."
+
+  mail_subject_lost_password: "Sinu %{value} parool"
+  mail_body_lost_password: "Parooli vahetamiseks vajuta järgmisele lingile:"
+  mail_subject_register: "Sinu %{value} konto aktiveerimine"
+  mail_body_register: "Konto aktiveerimiseks vajuta järgmisele lingile:"
+  mail_body_account_information_external: "Sisse logimiseks saad kasutada oma %{value} kontot."
+  mail_body_account_information: "Sinu konto teave"
+  mail_subject_account_activation_request: "%{value} konto aktiveerimise nõue"
+  mail_body_account_activation_request: "Registreerus uus kasutaja (%{value}). Konto avamine ootab Sinu kinnitust:"
+  mail_subject_reminder: "%{count} teema tähtpäev jõuab kätte järgmise %{days} päeva jooksul"
+  mail_body_reminder: "%{count} Sulle määratud teema tähtpäev jõuab kätte järgmise %{days} päeva jooksul:"
+  mail_subject_wiki_content_added: "Lisati vikileht '%{id}'"
+  mail_body_wiki_content_added: "Vikileht '%{id}' lisati %{author} poolt."
+  mail_subject_wiki_content_updated: "Uuendati '%{id}' vikilehte"
+  mail_body_wiki_content_updated: "Vikilehte '%{id}' uuendati %{author} poolt."
+
+
+  field_name: "Nimi"
+  field_description: "Kirjeldus"
+  field_summary: "Kokkuvõte"
+  field_is_required: "Kohustuslik"
+  field_firstname: "Eesnimi"
+  field_lastname: "Perekonnanimi"
+  field_mail: "E-post"
+  field_filename: "Fail"
+  field_filesize: "Maht"
+  field_downloads: "Allalaadimist"
+  field_author: "Autor"
+  field_created_on: "Loodud"
+  field_updated_on: "Uuendatud"
+  field_field_format: "Tüüp"
+  field_is_for_all: "Kõigile projektidele"
+  field_possible_values: "Võimalikud väärtused"
+  field_regexp: "Regulaaravaldis"
+  field_min_length: "Vähim maht"
+  field_max_length: "Suurim naht"
+  field_value: "Väärtus"
+  field_category: "Kategooria"
+  field_title: "Pealkiri"
+  field_project: "Projekt"
+  field_issue: "Teema"
+  field_status: "Olek"
+  field_notes: "Märkused"
+  field_is_closed: "Sulgeb teema"
+  field_is_default: "Algolek"
+  field_tracker: "Valdkond"
+  field_subject: "Teema"
+  field_due_date: "Tähtaeg"
+  field_assigned_to: "Tegeleja"
+  field_priority: "Prioriteet"
+  field_fixed_version: "Sihtversioon"
+  field_user: "Kasutaja"
+  field_principal: User or Group
+  field_role: "Roll"
+  field_homepage: "Koduleht"
+  field_is_public: "Avalik"
+  field_parent: "Emaprojekt"
+  field_is_in_roadmap: "Teemad on teekaardil näha"
+  field_login: "Kasutajanimi"
+  field_mail_notification: "Teated e-kirjaga"
+  field_admin: "Admin"
+  field_last_login_on: "Viimane ühendus"
+  field_language: "Keel"
+  field_effective_date: "Tähtaeg"
+  field_password: "Parool"
+  field_new_password: "Uus parool"
+  field_password_confirmation: "Kinnitus"
+  field_version: "Versioon"
+  field_type: "Tüüp"
+  field_host: "Server"
+  field_port: "Port"
+  field_account: "Konto"
+  field_base_dn: "Baas DN"
+  field_attr_login: "Kasutajanime atribuut"
+  field_attr_firstname: "Eesnime atribuut"
+  field_attr_lastname: "Perekonnanime atribuut"
+  field_attr_mail: "E-posti atribuut"
+  field_onthefly: "Kasutaja automaatne loomine"
+  field_start_date: "Alguskuupäev"
+  field_done_ratio: "% tehtud"
+  field_auth_source: "Autentimise viis"
+  field_hide_mail: "Peida e-posti aadress"
+  field_comments: "Kommentaar"
+  field_url: "URL"
+  field_start_page: "Esileht"
+  field_subproject: "Alamprojekt"
+  field_hours: "tundi"
+  field_activity: "Tegevus"
+  field_spent_on: "Kuupäev"
+  field_identifier: "Tunnus"
+  field_is_filter: "Kasutatav filtrina"
+  field_issue_to: "Seotud teema"
+  field_delay: "Viivitus"
+  field_assignable: "Saab määrata teemadega tegelema"
+  field_redirect_existing_links: "Suuna olemasolevad lingid ringi"
+  field_estimated_hours: "Eeldatav ajakulu"
+  field_column_names: "Veerud"
+  field_time_entries: "Ajakulu"
+  field_time_zone: "Ajatsoon"
+  field_searchable: "Otsitav"
+  field_default_value: "Vaikimisi"
+  field_comments_sorting: "Kommentaaride järjestus"
+  field_parent_title: "Pärineb lehest"
+  field_editable: "Muudetav"
+  field_watcher: "Jälgija"
+  field_content: "Sisu"
+  field_group_by: "Rühmita tulemus"
+  field_sharing: "Teemade jagamine"
+  field_parent_issue: "Pärineb teemast"
+  field_member_of_group: "Tegeleja rühm"
+  field_assigned_to_role: "Tegeleja roll"
+  field_text: "Tekstiväli"
+  field_visible: "Nähtav"
+  field_warn_on_leaving_unsaved: "Hoiata salvestamata sisuga lehtedelt lahkumisel"
+  field_issues_visibility: "See roll näeb"
+  field_is_private: "Privaatne"
+  field_commit_logs_encoding: "Sissekannete kodeering"
+  field_scm_path_encoding: "Teeraja märkide kodeering"
+  field_path_to_repository: "Hoidla teerada"
+  field_root_directory: "Juurkataloog"
+  field_cvsroot: "CVSROOT"
+  field_cvs_module: "Moodul"
+  field_repository_is_default: "Peamine hoidla"
+  field_multiple: "Korraga mitu väärtust"
+  field_auth_source_ldap_filter: "LDAP filter"
+
+  setting_app_title: "Veebilehe pealkiri"
+  setting_welcome_text: "Tervitustekst"
+  setting_default_language: "Vaikimisi keel"
+  setting_login_required: "Autentimine on kohustuslik"
+  setting_self_registration: "Omaloodud konto aktiveerimine"
+  setting_attachment_max_size: "Manuse suurim maht"
+  setting_issues_export_limit: "Teemade ekspordi limiit"
+  setting_mail_from: "Saatja e-posti aadress"
+  setting_plain_text_mail: "E-kiri tavalise tekstina (ilma HTML-ta)"
+  setting_host_name: "Serveri nimi ja teerada"
+  setting_text_formatting: "Vormindamise abi"
+  setting_wiki_compression: "Viki ajaloo pakkimine"
+  setting_feeds_limit: "Atom voogude suurim objektide arv"
+  setting_default_projects_public: "Uued projektid on vaikimisi avalikud"
+  setting_autofetch_changesets: "Lae uuendused automaatselt"
+  setting_sys_api_enabled: "Hoidlate haldamine veebiteenuse kaudu"
+  setting_commit_ref_keywords: "Viitade võtmesõnad"
+  setting_commit_fix_keywords: "Paranduste võtmesõnad"
+  setting_autologin: "Automaatne sisselogimine"
+  setting_date_format: "Kuupäeva formaat"
+  setting_time_format: "Ajaformaat"
+  setting_cross_project_issue_relations: "Luba siduda eri projektide teemasid"
+  setting_issue_list_default_columns: "Teemade nimekirja vaikimisi veerud"
+  setting_repositories_encodings: "Manuste ja hoidlate kodeering"
+  setting_emails_header: "E-kirja päis"
+  setting_emails_footer: "E-kirja jalus"
+  setting_protocol: "Protokoll"
+  setting_per_page_options: "Objekte lehe kohta variandid"
+  setting_user_format: "Kasutaja nime esitamise vorm"
+  setting_activity_days_default: "Projektide ajalugu näidatakse"
+  setting_display_subprojects_issues: "Näita projektis vaikimisi ka alamprojektide teemasid"
+  setting_enabled_scm: "Kasutatavad lähtekoodi haldusvahendid"
+  setting_mail_handler_body_delimiters: "Kärbi e-kirja lõpp peale sellist rida"
+  setting_mail_handler_api_enabled: "E-kirjade vastuvõtt veebiteenuse kaudu"
+  setting_mail_handler_api_key: "Veebiteenuse API võti"
+  setting_sequential_project_identifiers: "Genereeri järjestikused projektitunnused"
+  setting_gravatar_enabled: "Kasuta Gravatari kasutajaikoone"
+  setting_gravatar_default: "Vaikimisi kasutatav ikoon"
+  setting_diff_max_lines_displayed: "Enim korraga näidatavaid erinevusi"
+  setting_file_max_size_displayed: "Kuvatava tekstifaili suurim maht"
+  setting_repository_log_display_limit: "Enim ajaloos näidatavaid sissekandeid"
+  setting_password_min_length: "Lühim lubatud parooli pikkus"
+  setting_new_project_user_role_id: "Projekti looja roll oma projektis"
+  setting_default_projects_modules: "Vaikimisi moodulid uutes projektides"
+  setting_issue_done_ratio: "Määra teema edenemise aste"
+  setting_issue_done_ratio_issue_field: "kasutades vastavat välja"
+  setting_issue_done_ratio_issue_status: "kasutades teema olekut"
+  setting_start_of_week: "Nädala alguspäev"
+  setting_rest_api_enabled: "Luba REST API kasutamine"
+  setting_cache_formatted_text: "Puhverda vormindatud teksti"
+  setting_default_notification_option: "Vaikimisi teavitatakse"
+  setting_commit_logtime_enabled: "Luba ajakulu sisestamine"
+  setting_commit_logtime_activity_id: "Tegevus kulunud ajal"
+  setting_gantt_items_limit: "Gantti diagrammi objektide suurim hulk"
+  setting_issue_group_assignment: "Luba teemade andmine gruppidele"
+  setting_default_issue_start_date_to_creation_date: "Uute teemade alguskuupäevaks on teema loomise päev"
+  setting_commit_cross_project_ref: "Luba viiteid ja parandusi ka kõigi teiste projektide teemadele"
+  setting_unsubscribe: "Luba kasutajal oma konto kustutada"
+
+  permission_add_project: "Projekte luua"
+  permission_add_subprojects: "Alamprojekte luua"
+  permission_edit_project: "Projekte muuta"
+  permission_select_project_modules: "Projektimooduleid valida"
+  permission_manage_members: "Liikmeid hallata"
+  permission_manage_project_activities: "Projekti tegevusi hallata"
+  permission_manage_versions: "Versioone hallata"
+  permission_manage_categories: "Kategooriaid hallata"
+  permission_view_issues: "Teemasid näha"
+  permission_add_issues: "Teemasid lisada"
+  permission_edit_issues: "Teemasid uuendada"
+  permission_manage_issue_relations: "Teemade seoseid hallata"
+  permission_set_issues_private: "Teemasid avalikeks või privaatseiks seada"
+  permission_set_own_issues_private: "Omi teemasid avalikeks või privaatseiks seada"
+  permission_add_issue_notes: "Märkusi lisada"
+  permission_edit_issue_notes: "Märkusi muuta"
+  permission_edit_own_issue_notes: "Omi märkusi muuta"
+  permission_delete_issues: "Teemasid kustutada"
+  permission_manage_public_queries: "Avalikke päringuid hallata"
+  permission_save_queries: "Päringuid salvestada"
+  permission_view_gantt: "Gantti diagramme näha"
+  permission_view_calendar: "Kalendrit näha"
+  permission_view_issue_watchers: "Jälgijate nimekirja näha"
+  permission_add_issue_watchers: "Jälgijaid lisada"
+  permission_delete_issue_watchers: "Jälgijaid kustutada"
+  permission_log_time: "Ajakulu sisestada"
+  permission_view_time_entries: "Ajakulu näha"
+  permission_edit_time_entries: "Ajakulu kandeid muuta"
+  permission_edit_own_time_entries: "Omi ajakulu kandeid muuta"
+  permission_manage_news: "Uudiseid hallata"
+  permission_comment_news: "Uudiseid kommenteerida"
+  permission_view_documents: "Dokumente näha"
+  permission_manage_files: "Faile hallata"
+  permission_view_files: "Faile näha"
+  permission_manage_wiki: "Vikit hallata"
+  permission_rename_wiki_pages: "Vikilehti ümber nimetada"
+  permission_delete_wiki_pages: "Vikilehti kustutada"
+  permission_view_wiki_pages: "Vikit näha"
+  permission_view_wiki_edits: "Viki ajalugu näha"
+  permission_edit_wiki_pages: "Vikilehti muuta"
+  permission_delete_wiki_pages_attachments: "Vikilehe manuseid kustutada"
+  permission_protect_wiki_pages: "Vikilehti kaitsta"
+  permission_manage_repository: "Hoidlaid hallata"
+  permission_browse_repository: "Hoidlaid sirvida"
+  permission_view_changesets: "Sissekandeid näha"
+  permission_commit_access: "Sissekandeid teha"
+  permission_manage_boards: "Foorumeid hallata"
+  permission_view_messages: "Postitusi näha"
+  permission_add_messages: "Postitusi lisada"
+  permission_edit_messages: "Postitusi muuta"
+  permission_edit_own_messages: "Omi postitusi muuta"
+  permission_delete_messages: "Postitusi kustutada"
+  permission_delete_own_messages: "Omi postitusi kustutada"
+  permission_export_wiki_pages: "Vikilehti eksportida"
+  permission_manage_subtasks: "Alamteemasid hallata"
+  permission_manage_related_issues: "Seotud teemasid hallata"
+
+  project_module_issue_tracking: "Teemade jälgimine"
+  project_module_time_tracking: "Ajakulu arvestus"
+  project_module_news: "Uudised"
+  project_module_documents: "Dokumendid"
+  project_module_files: "Failid"
+  project_module_wiki: "Viki"
+  project_module_repository: "Hoidlad"
+  project_module_boards: "Foorumid"
+  project_module_calendar: "Kalender"
+  project_module_gantt: "Gantt"
+
+  label_user: "Kasutaja"
+  label_user_plural: "Kasutajad"
+  label_user_new: "Uus kasutaja"
+  label_user_anonymous: "Anonüümne"
+  label_project: "Projekt"
+  label_project_new: "Uus projekt"
+  label_project_plural: "Projektid"
+  label_x_projects:
+    zero:  "pole projekte"
+    one:   "1 projekt"
+    other: "%{count} projekti"
+  label_project_all: "Kõik projektid"
+  label_project_latest: "Viimased projektid"
+  label_issue: "Teema"
+  label_issue_new: "Uus teema"
+  label_issue_plural: "Teemad"
+  label_issue_view_all: "Teemade nimekiri"
+  label_issues_by: "Teemad %{value} järgi"
+  label_issue_added: "Teema lisatud"
+  label_issue_updated: "Teema uuendatud"
+  label_issue_note_added: "Märkus lisatud"
+  label_issue_status_updated: "Olek uuendatud"
+  label_issue_priority_updated: "Prioriteet uuendatud"
+  label_document: "Dokument"
+  label_document_new: "Uus dokument"
+  label_document_plural: "Dokumendid"
+  label_document_added: "Dokument lisatud"
+  label_role: "Roll"
+  label_role_plural: "Rollid"
+  label_role_new: "Uus roll"
+  label_role_and_permissions: "Rollid ja õigused"
+  label_role_anonymous: "Registreerimata kasutaja"
+  label_role_non_member: "Projekti kaasamata kasutaja"
+  label_member: "Liige"
+  label_member_new: "Uus liige"
+  label_member_plural: "Liikmed"
+  label_tracker: "Valdkond"
+  label_tracker_plural: "Valdkonnad"
+  label_tracker_new: "Uus valdkond"
+  label_workflow: "Töövood"
+  label_issue_status: "Olek"
+  label_issue_status_plural: "Olekud"
+  label_issue_status_new: "Uus olek"
+  label_issue_category: "Kategooria"
+  label_issue_category_plural: "Kategooriad"
+  label_issue_category_new: "Uus kategooria"
+  label_custom_field: "Omaloodud väli"
+  label_custom_field_plural: "Omaloodud väljad"
+  label_custom_field_new: "Uus väli"
+  label_enumerations: "Loetelud"
+  label_enumeration_new: "Lisa"
+  label_information: "Teave"
+  label_information_plural: "Teave"
+  label_register: "Registreeru"
+  label_password_lost: "Kui parool on ununud..."
+  label_home: "Kodu"
+  label_my_page: "Minu leht"
+  label_my_account: "Minu konto"
+  label_my_projects: "Minu projektid"
+  label_administration: "Seadistused"
+  label_login: "Logi sisse"
+  label_logout: "Logi välja"
+  label_help: "Abi"
+  label_reported_issues: "Minu poolt lisatud teemad"
+  label_assigned_to_me_issues: "Minu teha olevad teemad"
+  label_registered_on: "Registreeritud"
+  label_activity: "Ajalugu"
+  label_user_activity: "%{value} tegevuste ajalugu"
+  label_new: "Uus"
+  label_logged_as: "Sisse logitud kasutajana"
+  label_environment: "Keskkond"
+  label_authentication: "Autentimine"
+  label_auth_source: "Autentimisallikas"
+  label_auth_source_new: "Uus autentimisallikas"
+  label_auth_source_plural: "Autentimisallikad"
+  label_subproject_plural: "Alamprojektid"
+  label_subproject_new: "Uus alamprojekt"
+  label_and_its_subprojects: "%{value} ja selle alamprojektid"
+  label_min_max_length: "Min.-maks. pikkus"
+  label_list: "Nimekiri"
+  label_date: "Kuupäev"
+  label_integer: "Täisarv"
+  label_float: "Ujukomaarv"
+  label_boolean: "Tõeväärtus"
+  label_string: "Tekst"
+  label_text: "Pikk tekst"
+  label_attribute: "Atribuut"
+  label_attribute_plural: "Atribuudid"
+  label_no_data: "Pole"
+  label_change_status: "Muuda olekut"
+  label_history: "Ajalugu"
+  label_attachment: "Fail"
+  label_attachment_new: "Uus fail"
+  label_attachment_delete: "Kustuta fail"
+  label_attachment_plural: "Failid"
+  label_file_added: "Fail lisatud"
+  label_report: "Aruanne"
+  label_report_plural: "Aruanded"
+  label_news: "Uudised"
+  label_news_new: "Lisa uudis"
+  label_news_plural: "Uudised"
+  label_news_latest: "Viimased uudised"
+  label_news_view_all: "Kõik uudised"
+  label_news_added: "Uudis lisatud"
+  label_news_comment_added: "Kommentaar uudisele lisatud"
+  label_settings: "Seaded"
+  label_overview: "Ülevaade"
+  label_version: "Versioon"
+  label_version_new: "Uus versioon"
+  label_version_plural: "Versioonid"
+  label_close_versions: "Sulge lõpetatud versioonid"
+  label_confirmation: "Kinnitus"
+  label_export_to: "Saadaval ka formaadis"
+  label_read: "Loe..."
+  label_public_projects: "Avalikud projektid"
+  label_open_issues: "avatud"
+  label_open_issues_plural: "avatud"
+  label_closed_issues: "suletud"
+  label_closed_issues_plural: "suletud"
+  label_x_open_issues_abbr:
+    zero:  "0 avatud"
+    one:   "1 avatud"
+    other: "%{count} avatud"
+  label_x_closed_issues_abbr:
+    zero:  "0 suletud"
+    one:   "1 suletud"
+    other: "%{count} suletud"
+  label_x_issues:
+    zero:  "0 teemat"
+    one:   "1 teema"
+    other: "%{count} teemat"
+  label_total: "Kokku"
+  label_permissions: "Õigused"
+  label_current_status: "Praegune olek"
+  label_new_statuses_allowed: "Uued lubatud olekud"
+  label_all: "kõik"
+  label_none: "pole"
+  label_nobody: "eikeegi"
+  label_next: "Järgmine"
+  label_previous: "Eelmine"
+  label_used_by: "Kasutab"
+  label_details: "Üksikasjad"
+  label_add_note: "Lisa märkus"
+  label_calendar: "Kalender"
+  label_months_from: "kuu kaugusel"
+  label_gantt: "Gantt"
+  label_internal: "Sisemine"
+  label_last_changes: "viimased %{count} muudatust"
+  label_change_view_all: "Kõik muudatused"
+  label_comment: "Kommentaar"
+  label_comment_plural: "Kommentaarid"
+  label_x_comments:
+    zero: "kommentaare pole"
+    one: "1 kommentaar"
+    other: "%{count} kommentaari"
+  label_comment_add: "Lisa kommentaar"
+  label_comment_added: "Kommentaar lisatud"
+  label_comment_delete: "Kustuta kommentaar"
+  label_query: "Omaloodud päring"
+  label_query_plural: "Omaloodud päringud"
+  label_query_new: "Uus päring"
+  label_my_queries: "Mu omaloodud päringud"
+  label_filter_add: "Lisa filter"
+  label_filter_plural: "Filtrid"
+  label_equals: "on"
+  label_not_equals: "ei ole"
+  label_in_less_than: "on väiksem kui"
+  label_in_more_than: "on suurem kui"
+  label_greater_or_equal: "suurem-võrdne"
+  label_less_or_equal: "väiksem-võrdne"
+  label_between: "vahemikus"
+  label_in: "sisaldub hulgas"
+  label_today: "täna"
+  label_yesterday: "eile"
+  label_this_week: "sel nädalal"
+  label_last_week: "eelmisel nädalal"
+  label_last_n_days: "viimase %{count} päeva jooksul"
+  label_this_month: "sel kuul"
+  label_last_month: "eelmisel kuul"
+  label_this_year: "sel aastal"
+  label_date_range: "Kuupäevavahemik"
+  label_less_than_ago: "uuem kui"
+  label_more_than_ago: "vanem kui"
+  label_ago: "vanus"
+  label_contains: "sisaldab"
+  label_not_contains: "ei sisalda"
+  label_day_plural: "päeva"
+  label_repository: "Hoidla"
+  label_repository_new: "Uus hoidla"
+  label_repository_plural: "Hoidlad"
+  label_browse: "Sirvi"
+  label_branch: "Haru"
+  label_tag: "Sildiga"
+  label_revision: "Sissekanne"
+  label_revision_plural: "Sissekanded"
+  label_revision_id: "Sissekande kood %{value}"
+  label_associated_revisions: "Seotud sissekanded"
+  label_added: "lisatud"
+  label_modified: "muudetud"
+  label_copied: "kopeeritud"
+  label_renamed: "ümber nimetatud"
+  label_deleted: "kustutatud"
+  label_latest_revision: "Viimane sissekanne"
+  label_latest_revision_plural: "Viimased sissekanded"
+  label_view_revisions: "Haru ajalugu"
+  label_view_all_revisions: "Kogu ajalugu"
+  label_max_size: "Suurim maht"
+  label_roadmap: "Teekaart"
+  label_roadmap_due_in: "Tähtaeg %{value}"
+  label_roadmap_overdue: "%{value} hiljaks jäänud"
+  label_roadmap_no_issues: "Selles versioonis ei ole teemasid"
+  label_search: "Otsi"
+  label_result_plural: "Tulemused"
+  label_all_words: "Kõik sõnad"
+  label_wiki: "Viki"
+  label_wiki_edit: "Viki muutmine"
+  label_wiki_edit_plural: "Viki muutmised"
+  label_wiki_page: "Vikileht"
+  label_wiki_page_plural: "Vikilehed"
+  label_index_by_title: "Järjesta pealkirja järgi"
+  label_index_by_date: "Järjesta kuupäeva järgi"
+  label_current_version: "Praegune versioon"
+  label_preview: "Eelvaade"
+  label_feed_plural: "Vood"
+  label_changes_details: "Kõigi muudatuste üksikasjad"
+  label_issue_tracking: "Teemade jälgimine"
+  label_spent_time: "Kulutatud aeg"
+  label_f_hour: "%{value} tund"
+  label_f_hour_plural: "%{value} tundi"
+  label_time_tracking: "Ajakulu arvestus"
+  label_change_plural: "Muudatused"
+  label_statistics: "Statistika"
+  label_commits_per_month: "Sissekandeid kuu kohta"
+  label_commits_per_author: "Sissekandeid autori kohta"
+  label_diff: "erinevused"
+  label_view_diff: "Vaata erinevusi"
+  label_diff_inline: "teksti sees"
+  label_diff_side_by_side: "kõrvuti"
+  label_options: "Valikud"
+  label_copy_workflow_from: "Kopeeri see töövoog"
+  label_permissions_report: "Õiguste aruanne"
+  label_watched_issues: "Jälgitud teemad"
+  label_related_issues: "Seotud teemad"
+  label_applied_status: "Kehtestatud olek"
+  label_loading: "Laadimas..."
+  label_relation_new: "Uus seos"
+  label_relation_delete: "Kustuta seos"
+  label_relates_to: "seostub"
+  label_duplicates: "duplitseerib"
+  label_duplicated_by: "duplitseerijaks"
+  label_blocks: "blokeerib"
+  label_blocked_by: "blokeerijaks"
+  label_precedes: "eelneb"
+  label_follows: "järgneb"
+  label_stay_logged_in: "Püsi sisselogituna"
+  label_disabled: "pole võimalik"
+  label_show_completed_versions: "Näita lõpetatud versioone"
+  label_me: "mina"
+  label_board: "Foorum"
+  label_board_new: "Uus foorum"
+  label_board_plural: "Foorumid"
+  label_board_locked: "Lukus"
+  label_board_sticky: "Püsiteema"
+  label_topic_plural: "Teemad"
+  label_message_plural: "Postitused"
+  label_message_last: "Viimane postitus"
+  label_message_new: "Uus postitus"
+  label_message_posted: "Postitus lisatud"
+  label_reply_plural: "Vastused"
+  label_send_information: "Saada teave konto kasutajale"
+  label_year: "Aasta"
+  label_month: "Kuu"
+  label_week: "Nädal"
+  label_date_from: "Alates"
+  label_date_to: "Kuni"
+  label_language_based: "Kasutaja keele põhjal"
+  label_sort_by: "Sorteeri %{value} järgi"
+  label_send_test_email: "Saada kontrollkiri"
+  label_feeds_access_key: "Atom juurdepääsuvõti"
+  label_missing_feeds_access_key: "Atom juurdepääsuvõti on puudu"
+  label_feeds_access_key_created_on: "Atom juurdepääsuvõti loodi %{value} tagasi"
+  label_module_plural: "Moodulid"
+  label_added_time_by: "Lisatud %{author} poolt %{age} tagasi"
+  label_updated_time_by: "Uuendatud %{author} poolt %{age} tagasi"
+  label_updated_time: "Uuendatud %{value} tagasi"
+  label_jump_to_a_project: "Ava projekt..."
+  label_file_plural: "Failid"
+  label_changeset_plural: "Muudatused"
+  label_default_columns: "Vaikimisi veerud"
+  label_no_change_option: "(Ei muutu)"
+  label_bulk_edit_selected_issues: "Muuda valitud teemasid korraga"
+  label_bulk_edit_selected_time_entries: "Muuda valitud ajakandeid korraga"
+  label_theme: "Visuaalne teema"
+  label_default: "Tavaline"
+  label_search_titles_only: "Ainult pealkirjadest"
+  label_user_mail_option_all: "Kõigist tegevustest kõigis mu projektides"
+  label_user_mail_option_selected: "Kõigist tegevustest ainult valitud projektides..."
+  label_user_mail_option_none: "Teavitusi ei saadeta"
+  label_user_mail_option_only_my_events: "Ainult mu jälgitavatest või minuga seotud tegevustest"
+  label_user_mail_no_self_notified: "Ära teavita mind mu enda tehtud muudatustest"
+  label_registration_activation_by_email: "e-kirjaga"
+  label_registration_manual_activation: "käsitsi"
+  label_registration_automatic_activation: "automaatselt"
+  label_display_per_page: "Lehe kohta: %{value}"
+  label_age: "Vanus"
+  label_change_properties: "Muuda omadusi"
+  label_general: "Üldine"
+  label_scm: "Lähtekoodi haldusvahend"
+  label_plugins: "Lisamoodulid"
+  label_ldap_authentication: "LDAP autentimine"
+  label_downloads_abbr: "A/L"
+  label_optional_description: "Teave"
+  label_add_another_file: "Lisa veel üks fail"
+  label_preferences: "Eelistused"
+  label_chronological_order: "kronoloogiline"
+  label_reverse_chronological_order: "tagurpidi kronoloogiline"
+  label_incoming_emails: "Sissetulevad e-kirjad"
+  label_generate_key: "Genereeri võti"
+  label_issue_watchers: "Jälgijad"
+  label_example: "Näide"
+  label_display: "Kujundus"
+  label_sort: "Sorteeri"
+  label_ascending: "Kasvavalt"
+  label_descending: "Kahanevalt"
+  label_date_from_to: "Alates %{start} kuni %{end}"
+  label_wiki_content_added: "Vikileht lisatud"
+  label_wiki_content_updated: "Vikileht uuendatud"
+  label_group: "Rühm"
+  label_group_plural: "Rühmad"
+  label_group_new: "Uus rühm"
+  label_time_entry_plural: "Kulutatud aeg"
+  label_version_sharing_none: "ei toimu"
+  label_version_sharing_descendants: "alamprojektidega"
+  label_version_sharing_hierarchy: "projektihierarhiaga"
+  label_version_sharing_tree: "projektipuuga"
+  label_version_sharing_system: "kõigi projektidega"
+  label_update_issue_done_ratios: "Uuenda edenemise astmeid"
+  label_copy_source: "Allikas"
+  label_copy_target: "Sihtkoht"
+  label_copy_same_as_target: "Sama mis sihtkoht"
+  label_display_used_statuses_only: "Näita ainult selles valdkonnas kasutusel olekuid"
+  label_api_access_key: "API juurdepääsuvõti"
+  label_missing_api_access_key: "API juurdepääsuvõti on puudu"
+  label_api_access_key_created_on: "API juurdepääsuvõti loodi %{value} tagasi"
+  label_profile: "Profiil"
+  label_subtask_plural: "Alamteemad"
+  label_project_copy_notifications: "Saada projekti kopeerimise kohta teavituskiri"
+  label_principal_search: "Otsi kasutajat või rühma:"
+  label_user_search: "Otsi kasutajat:"
+  label_additional_workflow_transitions_for_author: "Luba ka järgmisi üleminekuid, kui kasutaja on teema looja"
+  label_additional_workflow_transitions_for_assignee: "Luba ka järgmisi üleminekuid, kui kasutaja on teemaga tegeleja"
+  label_issues_visibility_all: "kõiki teemasid"
+  label_issues_visibility_public: "kõiki mitteprivaatseid teemasid"
+  label_issues_visibility_own: "enda poolt loodud või enda teha teemasid"
+  label_git_report_last_commit: "Viimase sissekande teave otse failinimekirja"
+  label_parent_revision: "Eellane"
+  label_child_revision: "Järglane"
+  label_export_options: "%{export_format} ekspordivalikud"
+  label_copy_attachments: "Kopeeri manused"
+  label_item_position: "%{position}/%{count}"
+  label_completed_versions: "Lõpetatud versioonid"
+  label_search_for_watchers: "Otsi lisamiseks jälgijaid"
+
+  button_login: "Logi sisse"
+  button_submit: "Sisesta"
+  button_save: "Salvesta"
+  button_check_all: "Märgi kõik"
+  button_uncheck_all: "Nulli valik"
+  button_collapse_all: "Voldi kõik kokku"
+  button_expand_all: "Voldi kõik lahti"
+  button_delete: "Kustuta"
+  button_create: "Loo"
+  button_create_and_continue: "Loo ja jätka"
+  button_test: "Testi"
+  button_edit: "Muuda"
+  button_edit_associated_wikipage: "Muuda seotud vikilehte: %{page_title}"
+  button_add: "Lisa"
+  button_change: "Muuda"
+  button_apply: "Lae"
+  button_clear: "Puhasta"
+  button_lock: "Lukusta"
+  button_unlock: "Ava lukust"
+  button_download: "Lae alla"
+  button_list: "Listi"
+  button_view: "Vaata"
+  button_move: "Tõsta"
+  button_move_and_follow: "Tõsta ja järgne"
+  button_back: "Tagasi"
+  button_cancel: "Katkesta"
+  button_activate: "Aktiveeri"
+  button_sort: "Sorteeri"
+  button_log_time: "Ajakulu"
+  button_rollback: "Rulli tagasi sellesse versiooni"
+  button_watch: "Jälgi"
+  button_unwatch: "Ära jälgi"
+  button_reply: "Vasta"
+  button_archive: "Arhiveeri"
+  button_unarchive: "Arhiivist tagasi"
+  button_reset: "Nulli"
+  button_rename: "Nimeta ümber"
+  button_change_password: "Vaheta parool"
+  button_copy: "Kopeeri"
+  button_copy_and_follow: "Kopeeri ja järgne"
+  button_annotate: "Annoteeri"
+  button_update: "Muuda"
+  button_configure: "Konfigureeri"
+  button_quote: "Tsiteeri"
+  button_show: "Näita"
+  button_edit_section: "Muuda seda sektsiooni"
+  button_export: "Ekspordi"
+  button_delete_my_account: "Kustuta oma konto"
+
+  status_active: "aktiivne"
+  status_registered: "registreeritud"
+  status_locked: "lukus"
+
+  version_status_open: "avatud"
+  version_status_locked: "lukus"
+  version_status_closed: "suletud"
+
+  field_active: "Aktiivne"
+
+  text_select_mail_notifications: "Tegevused, millest e-kirjaga teavitatakse"
+  text_regexp_info: "nt. ^[A-Z0-9]+$"
+  text_project_destroy_confirmation: "Oled Sa kindel oma soovis see projekt täielikult kustutada?"
+  text_subprojects_destroy_warning: "Alamprojekt(id) - %{value} - kustutatakse samuti."
+  text_workflow_edit: "Töövoo muutmiseks vali roll ja valdkond"
+  text_are_you_sure: "Oled Sa kindel?"
+  text_journal_changed: "%{label} muudetud %{old} -> %{new}"
+  text_journal_changed_no_detail: "%{label} uuendatud"
+  text_journal_set_to: "%{label} uus väärtus on %{value}"
+  text_journal_deleted: "%{label} kustutatud (%{old})"
+  text_journal_added: "%{label} %{value} lisatud"
+  text_tip_issue_begin_day: "teema avamise päev"
+  text_tip_issue_end_day: "teema sulgemise päev"
+  text_tip_issue_begin_end_day: "teema avati ja suleti samal päeval"
+  text_project_identifier_info: "Lubatud on ainult väikesed tähed (a-z), numbrid ja kriipsud.<br />Peale salvestamist ei saa tunnust enam muuta."
+  text_caracters_maximum: "%{count} märki kõige rohkem."
+  text_caracters_minimum: "Peab olema vähemalt %{count} märki pikk."
+  text_length_between: "Pikkus %{min} kuni %{max} märki."
+  text_tracker_no_workflow: "Selle valdkonna jaoks ei ole ühtegi töövoogu kirjeldatud"
+  text_unallowed_characters: "Lubamatud märgid"
+  text_comma_separated: "Lubatud erinevad väärtused (komaga eraldatult)."
+  text_line_separated: "Lubatud erinevad väärtused (igaüks eraldi real)."
+  text_issues_ref_in_commit_messages: "Teemadele ja parandustele viitamine sissekannete märkustes"
+  text_issue_added: "%{author} lisas uue teema %{id}."
+  text_issue_updated: "%{author} uuendas teemat %{id}."
+  text_wiki_destroy_confirmation: "Oled Sa kindel oma soovis kustutada see Viki koos kogu sisuga?"
+  text_issue_category_destroy_question: "Kustutatavat kategooriat kasutab %{count} teema(t). Mis Sa soovid nendega ette võtta?"
+  text_issue_category_destroy_assignments: "Jäta teemadel kategooria määramata"
+  text_issue_category_reassign_to: "Määra teemad teise kategooriasse"
+  text_user_mail_option: "Valimata projektidest saad teavitusi ainult jälgitavate või Sinuga seotud asjade kohta (nt. Sinu loodud või teha teemad)."
+  text_no_configuration_data: "Rollid, valdkonnad, olekud ja töövood ei ole veel seadistatud.\nVäga soovitav on laadida vaikeasetused. Peale laadimist saad neid ise muuta."
+  text_load_default_configuration: "Lae vaikeasetused"
+  text_status_changed_by_changeset: "Kehtestatakse muudatuses %{value}."
+  text_time_logged_by_changeset: "Kehtestatakse muudatuses %{value}."
+  text_issues_destroy_confirmation: "Oled Sa kindel oma soovis valitud teema(d) kustutada?"
+  text_issues_destroy_descendants_confirmation: "See kustutab samuti %{count} alamteemat."
+  text_time_entries_destroy_confirmation: "Oled Sa kindel oma soovis valitud ajakulu kanne/kanded kustutada?"
+  text_select_project_modules: "Projektis kasutatavad moodulid"
+  text_default_administrator_account_changed: "Algne administraatori konto on muudetud"
+  text_file_repository_writable: "Manuste kataloog on kirjutatav"
+  text_plugin_assets_writable: "Lisamoodulite abifailide kataloog on kirjutatav"
+  text_minimagick_available: "MiniMagick on kasutatav (ei ole kohustuslik)"
+  text_destroy_time_entries_question: "Kustutatavatele teemadele oli kirja pandud %{hours} tundi. Mis Sa soovid ette võtta?"
+  text_destroy_time_entries: "Kustuta need tunnid"
+  text_assign_time_entries_to_project: "Vii tunnid üle teise projekti"
+  text_reassign_time_entries: "Määra tunnid sellele teemale:"
+  text_user_wrote: "%{value} kirjutas:"
+  text_user_wrote_in: "%{value} kirjutas (%{link}):"
+  text_enumeration_destroy_question: "Selle väärtusega on seotud %{count} objekt(i)."
+  text_enumeration_category_reassign_to: "Seo nad teise väärtuse külge:"
+  text_email_delivery_not_configured: "E-kirjade saatmine ei ole seadistatud ja teavitusi ei saadeta.\nKonfigureeri oma SMTP server failis config/configuration.yml ja taaskäivita Redmine."
+  text_repository_usernames_mapping: "Seosta Redmine kasutaja hoidlasse sissekannete tegijaga.\nSama nime või e-postiga kasutajad seostatakse automaatselt."
+  text_diff_truncated: "... Osa erinevusi jäi välja, sest neid on näitamiseks liiga palju."
+  text_custom_field_possible_values_info: "Üks rida iga väärtuse jaoks"
+  text_wiki_page_destroy_question: "Sel lehel on %{descendants} järglasleht(e) ja järeltulija(t). Mis Sa soovid ette võtta?"
+  text_wiki_page_nullify_children: "Muuda järglaslehed uuteks juurlehtedeks"
+  text_wiki_page_destroy_children: "Kustuta järglaslehed ja kõik nende järglased"
+  text_wiki_page_reassign_children: "Määra järglaslehed teise lehe külge"
+  text_own_membership_delete_confirmation: "Sa võtad endalt ära osa või kõik õigused ega saa edaspidi seda projekti võib-olla enam muuta.\nOled Sa jätkamises kindel?"
+  text_zoom_in: "Vaata lähemalt"
+  text_zoom_out: "Vaata kaugemalt"
+  text_warn_on_leaving_unsaved: "Sel lehel on salvestamata teksti, mis läheb kaduma, kui siit lehelt lahkud."
+  text_scm_path_encoding_note: "Vaikimisi UTF-8"
+  text_git_repository_note: "Hoidla peab olema paljas (bare) ja kohalik (nt. /gitrepo, c:\\gitrepo)"
+  text_mercurial_repository_note: "Hoidla peab olema kohalik (nt. /hgrepo, c:\\hgrepo)"
+  text_scm_command: "Hoidla poole pöördumise käsk"
+  text_scm_command_version: "Versioon"
+  text_scm_config: "Hoidlate poole pöördumist saab konfigureerida failis config/configuration.yml. Peale selle muutmist taaskäivita Redmine."
+  text_scm_command_not_available: "Hoidla poole pöördumine ebaõnnestus. Palun kontrolli seadistusi."
+  text_issue_conflict_resolution_overwrite: "Kehtesta oma muudatused (kõik märkused jäävad, ent muu võidakse üle kirjutada)"
+  text_issue_conflict_resolution_add_notes: "Lisa oma märkused, aga loobu teistest muudatustest"
+  text_issue_conflict_resolution_cancel: "Loobu kõigist muudatustest ja lae %{link} uuesti"
+  text_account_destroy_confirmation: "Oled Sa kindel?\nSu konto kustutatakse jäädavalt ja seda pole võimalik taastada."
+
+  default_role_manager: "Haldaja"
+  default_role_developer: "Arendaja"
+  default_role_reporter: "Edastaja"
+  default_tracker_bug: "Veaparandus"
+  default_tracker_feature: "Täiendus"
+  default_tracker_support: "Klienditugi"
+  default_issue_status_new: "Avatud"
+  default_issue_status_in_progress: "Töös"
+  default_issue_status_resolved: "Lahendatud"
+  default_issue_status_feedback: "Tagasiside"
+  default_issue_status_closed: "Suletud"
+  default_issue_status_rejected: "Tagasi lükatud"
+  default_doc_category_user: "Juhend lõppkasutajale"
+  default_doc_category_tech: "Tehniline dokumentatsioon"
+  default_priority_low: "Aega on"
+  default_priority_normal: "Tavaline"
+  default_priority_high: "Pakiline"
+  default_priority_urgent: "Täna vaja"
+  default_priority_immediate: "Kohe vaja"
+  default_activity_design: "Kavandamine"
+  default_activity_development: "Arendamine"
+
+  enumeration_issue_priorities: "Teemade prioriteedid"
+  enumeration_doc_categories: "Dokumentide kategooriad"
+  enumeration_activities: "Tegevused (ajakulu)"
+  enumeration_system_activity: "Süsteemi aktiivsus"
+  description_filter: "Filter"
+  description_search: "Otsinguväli"
+  description_choose_project: "Projektid"
+  description_project_scope: "Otsingu ulatus"
+  description_notes: "Märkused"
+  description_message_content: "Postituse sisu"
+  description_query_sort_criteria_attribute: "Sorteerimise kriteerium"
+  description_query_sort_criteria_direction: "Sorteerimise suund"
+  description_user_mail_notification: "E-kirjaga teavitamise seaded"
+  description_available_columns: "Kasutatavad veerud"
+  description_selected_columns: "Valitud veerud"
+  description_all_columns: "Kõik veerud"
+  description_issue_category_reassign: "Vali uus kategooria"
+  description_wiki_subpages_reassign: "Vali lehele uus vanem"
+  error_session_expired: "Sinu sessioon on aegunud. Palun logi uuesti sisse"
+  text_session_expiration_settings: "Hoiatus! Nende sätete muutmine võib kehtivad sessioonid lõpetada. Ka sinu enda oma!"
+  setting_session_lifetime: "Sessiooni eluiga"
+  setting_session_timeout: "Sessiooni aegumine jõudeoleku tõttu"
+  label_session_expiration: "Sessiooni aegumine"
+  permission_close_project: "Sule projekt/ava projekt uuesti"
+  button_close: "Sulge"
+  button_reopen: "Ava uuesti"
+  project_status_active: "Aktiivne"
+  project_status_closed: "Suletud"
+  project_status_archived: "Arhiveeritud"
+  text_project_closed: "See projekt on suletud ja projekti muuta ei saa"
+  notice_user_successful_create: "Kasutaja %{id} loodud."
+  field_core_fields: "Standardväljad"
+  field_timeout: "Aegumine (sekundites)"
+  setting_thumbnails_enabled: "Näita manustest väikest pilti"
+  setting_thumbnails_size: "Väikese pildi suurus (pikslites)"
+  label_status_transitions: "Staatuse muutumine"
+  label_fields_permissions: "Väljade õigused"
+  label_readonly: "Muuta ei saa"
+  label_required: "Kohtustuslik"
+  text_repository_identifier_info: "Lubatud on ainult väikesed tähed (a-z), numbrid ja kriipsud.<br />Peale salvestamist ei saa tunnust enam muuta."
+  field_board_parent: "Ülemfoorum"
+  label_attribute_of_project: "Projekti nimi: %{name}"
+  label_attribute_of_author: "Autori nimi: %{name}"
+  label_attribute_of_assigned_to: "Tegeleja nimi: %{name}"
+  label_attribute_of_fixed_version: "Sihtversiooni nimi: %{name}"
+  label_copy_subtasks: "Kopeeri alamülesanded"
+  label_copied_to: "Kopeeritud siia: "
+  label_copied_from: "Kopeeritud kohast:"
+  label_any_issues_in_project: "Kõik projekti teemad"
+  label_any_issues_not_in_project: "Kõik teemad, mis pole projektis"
+  field_private_notes: "Privaatsed märkmed"
+  permission_view_private_notes: "Vaata privaatseid märkmeid"
+  permission_set_notes_private: "Õigus märkmeid privaatseks teha"
+  label_no_issues_in_project: "Projektis pole teemasid"
+  label_any: "kõik"
+  label_last_n_weeks: "viimased %{count} nädalat"
+  setting_cross_project_subtasks: "Luba projektide vahelisi alamülesandeid"
+  label_cross_project_descendants: "alamprojektidega"
+  label_cross_project_tree: "projektipuuga"
+  label_cross_project_hierarchy: "projektihierarhiaga"
+  label_cross_project_system: "kõigi projektidega"
+  button_hide: "Peida"
+  setting_non_working_week_days: "Puhkepäevad"
+  label_in_the_next_days: "järgmisel päeval"
+  label_in_the_past_days: "eelmisel päeval"
+  label_attribute_of_user: "Kasutaja nimi: %{name}"
+  text_turning_multiple_off: "Kui sa keelad mitme väärtuse võimaluse, siis need eemaldatakse nii, et jääb ainult üks väärtus asja kohta."
+  label_attribute_of_issue: "Teema %{name}"
+  permission_add_documents: "Lisa dokumente"
+  permission_edit_documents: "Muuda dokumente"
+  permission_delete_documents: "Kustuta dokumente"
+  label_gantt_progress_line: "Progressi graafik"
+  setting_jsonp_enabled: "JSONP tugi sees"
+  field_inherit_members: "Päri liikmed"
+  field_closed_on: "Suletud kuupäeval"
+  field_generate_password: "Loo parool"
+  setting_default_projects_tracker_ids: "Uute projektide vaikimisi jälgijad"
+  label_total_time: "Kokku"
+  notice_account_not_activated_yet: "Sa pole veel oma kontot aktiveerinud. Kui sa soovid saada uut aktiveerimise e-posti, siis vajuta <a href=\"%{url}\">siia</a>."
+  notice_account_locked: "Sinu konto on lukus"
+  label_hidden: "Peidetud"
+  label_visibility_private: "ainult minule"
+  label_visibility_roles: "ainult neile rollidele"
+  label_visibility_public: "kõigile kasutajatele"
+  field_must_change_passwd: "Peab parooli järgmisel sisselogimisel ära muutma"
+  notice_new_password_must_be_different: "Uus parool peab olema eelmisest erinev"
+  setting_mail_handler_excluded_filenames: "Välista manuseid nime kaudu"
+  text_convert_available: "ImageMagick teisendaja on saadaval (pole kohustuslik)"
+  label_link: "Viit"
+  label_only: "ainult"
+  label_drop_down_list: "hüpikmenüü"
+  label_checkboxes: "märkeruudud"
+  label_link_values_to: "Lingi väärtused URLiga"
+  setting_force_default_language_for_anonymous: "Anonüümsed kasutajad on vaikimisi keelega"
+  setting_force_default_language_for_loggedin: "Sisse logitud kasutajad on vaikimisi keelega"
+  label_custom_field_select_type: "Vali objekti tüüp, millele omaloodud väli külge pannakse"
+  label_issue_assigned_to_updated: "Tegeleja uuendatud"
+  label_check_for_updates: "Vaata uuendusi"
+  label_latest_compatible_version: "Värskeim ühilduv versioon"
+  label_unknown_plugin: "Tundmatu plugin"
+  label_radio_buttons: "raadionupud"
+  label_group_anonymous: "Anonüümsed kasutajad"
+  label_group_non_member: "Rühmata kasutajad"
+  label_add_projects: "Lisa projekte"
+  field_default_status: "Vaikimisi staatus"
+  text_subversion_repository_note: 'Näited: file:///, http://, https://, svn://, svn+[tunnelscheme]://'
+  field_users_visibility: "Kasutajate nähtavus"
+  label_users_visibility_all: "Kõik aktiivsed kasutajad"
+  label_users_visibility_members_of_visible_projects: "Nähtavate projektide liikmed"
+  label_edit_attachments: "Muuda lisatud faile"
+  setting_link_copied_issue: "Kopeerimisel lingi teemad"
+  label_link_copied_issue: "Lingi kopeeritud teema"
+  label_ask: "Küsi"
+  label_search_attachments_yes: "Otsi manuste nimedest ja kirjeldustest"
+  label_search_attachments_no: "Ära manustest otsi"
+  label_search_attachments_only: "Otsi ainult manustest"
+  label_search_open_issues_only: "Otsi ainult avatud teemadest"
+  field_address: "E-post"
+  setting_max_additional_emails: "Lisa e-posti aadresside suurim kogus"
+  label_email_address_plural: "E-posti aadressid"
+  label_email_address_add: "Lisa e-posti aadress"
+  label_enable_notifications: "Saada teavitusi" 
+  label_disable_notifications: "Ära saada teavitusi"
+  setting_search_results_per_page: "Otsitulemusi lehe kohta"
+  label_blank_value: "tühi"
+  permission_copy_issues: "Kopeeri teemad"
+  error_password_expired: "Su parool on aegunud või administraator nõuab sult selle vahetamist"
+  field_time_entries_visibility: "Ajakannete nähtavus"
+  setting_password_max_age: "Parooli kehtivus"
+  label_parent_task_attributes: Parent tasks attributes
+  label_parent_task_attributes_derived: "Tuletatud alateemadest"
+  label_parent_task_attributes_independent: "Sõltumatu alateemadest"
+  label_time_entries_visibility_all: "Kõik ajakanded"
+  label_time_entries_visibility_own: "Kasutaja poolt loodud ajakanded"
+  label_member_management: "Liikmete haldus"
+  label_member_management_all_roles: "Kõik rollid"
+  label_member_management_selected_roles_only: "Ainult need rollid"
+  label_password_required: "Jätkamiseks kinnita oma parool"
+  label_total_spent_time: "Kokku kulutatud aeg"
+  notice_import_finished: "%{count} rida imporditud"
+  notice_import_finished_with_errors: "%{count} rida %{total}st ei õnnestunud importida"
+  error_invalid_file_encoding: "See fail ei ole õige %{encoding} kodeeringuga"
+  error_invalid_csv_file_or_settings: "See fail kas ei ole CSV formaadis või ei klapi allolevate sätetega (%{value})"
+  error_can_not_read_import_file: "Importfaili sisselugemisel ilmnes viga"
+  permission_import_issues: "Impordi teemasid"
+  label_import_issues: "Impordi teemad"
+  label_select_file_to_import: "Vali fail mida importida"
+  label_fields_separator: "Väljade eristaja"
+  label_fields_wrapper: "Väljade wrapper"
+  label_encoding: "Kodeering"
+  label_comma_char: "Koma"
+  label_semi_colon_char: "Semikoolon"
+  label_quote_char: "Ülakoma"
+  label_double_quote_char: "Jutumärgid"
+  label_fields_mapping: "Väljade mäppimine"
+  label_file_content_preview: "Sisu eelvaade"
+  label_create_missing_values: "Loo puuduolevad väärtused"
+  button_import: "Import"
+  field_total_estimated_hours: "Ennustatud aja summa"
+  label_api: "API"
+  label_total_plural: "Summad"
+  label_assigned_issues: "Määratud väärtused"
+  label_field_format_enumeration: "Võtme/väärtuse nimekiri"
+  label_f_hour_short: "%{value} h"
+  field_default_version: "Vaikimisi versioon"
+  error_attachment_extension_not_allowed: "Manuse laiend %{extension} on keelatud"
+  setting_attachment_extensions_allowed: "Lubatud manuse laiendid"
+  setting_attachment_extensions_denied: "Keelatud manuse laiendid"
+  label_any_open_issues: "Kõik avatud teemad"
+  label_no_open_issues: "Mitte ühtki avatud teemat"
+  label_default_values_for_new_users: Default values for new users
+  error_ldap_bind_credentials: Invalid LDAP Account/Password
+  setting_sys_api_key: "Veebiteenuse API võti"
+  setting_lost_password: "Kui parool on ununud..."
+  mail_subject_security_notification: Security notification
+  mail_body_security_notification_change: ! '%{field} was changed.'
+  mail_body_security_notification_change_to: ! '%{field} was changed to %{value}.'
+  mail_body_security_notification_add: ! '%{field} %{value} was added.'
+  mail_body_security_notification_remove: ! '%{field} %{value} was removed.'
+  mail_body_security_notification_notify_enabled: Email address %{value} now receives
+    notifications.
+  mail_body_security_notification_notify_disabled: Email address %{value} no longer
+    receives notifications.
+  mail_body_settings_updated: ! 'The following settings were changed:'
+  field_remote_ip: IP address
+  label_wiki_page_new: New wiki page
+  label_relations: Relations
+  button_filter: Filter
+  mail_body_password_updated: Your password has been changed.
+  label_no_preview: No preview available
+  error_no_tracker_allowed_for_new_issue_in_project: The project doesn't have any trackers
+    for which you can create an issue
+  label_tracker_all: All trackers
+  label_new_project_issue_tab_enabled: Display the "New issue" tab
+  setting_new_item_menu_tab: Project menu tab for creating new objects
+  label_new_object_tab_enabled: Display the "+" drop-down
+  error_no_projects_with_tracker_allowed_for_new_issue: There are no projects with trackers
+    for which you can create an issue
+  field_textarea_font: Font used for text areas
+  label_font_default: Default font
+  label_font_monospace: Monospaced font
+  label_font_proportional: Proportional font
+  setting_timespan_format: Time span format
+  label_table_of_contents: Table of contents
+  setting_commit_logs_formatting: Apply text formatting to commit messages
+  setting_mail_handler_enable_regex: Enable regular expressions
+  error_move_of_child_not_possible: 'Subtask %{child} could not be moved to the new
+    project: %{errors}'
+  error_cannot_reassign_time_entries_to_an_issue_about_to_be_deleted: Spent time cannot
+    be reassigned to an issue that is about to be deleted
+  setting_timelog_required_fields: Required fields for time logs
+  label_attribute_of_object: '%{object_name}''s %{name}'
+  label_user_mail_option_only_assigned: Only for things I watch or I am assigned to
+  label_user_mail_option_only_owner: Only for things I watch or I am the owner of
+  warning_fields_cleared_on_bulk_edit: Changes will result in the automatic deletion
+    of values from one or more fields on the selected objects
+  field_updated_by: Updated by
+  field_last_updated_by: Last updated by
+  field_full_width_layout: Full width layout
+  label_last_notes: Last notes
+  field_digest: Checksum
+  field_default_assigned_to: Default assignee
+  setting_show_custom_fields_on_registration: Show custom fields on registration
+  permission_view_news: View news
+  label_no_preview_alternative_html: No preview available. %{link} the file instead.
+  label_no_preview_download: Download
+  setting_close_duplicate_issues: Close duplicate issues automatically
+  error_exceeds_maximum_hours_per_day: Cannot log more than %{max_hours} hours on the
+    same day (%{logged_hours} hours have already been logged)
+  setting_time_entry_list_defaults: Timelog list defaults
+  setting_timelog_accept_0_hours: Accept time logs with 0 hours
+  setting_timelog_max_hours_per_day: Maximum hours that can be logged per day and user
+  label_x_revisions: "%{count} revisions"
+  error_can_not_delete_auth_source: This authentication mode is in use and cannot be
+    deleted.
+  button_actions: Actions
+  mail_body_lost_password_validity: Please be aware that you may change the password
+    only once using this link.
+  text_login_required_html: When not requiring authentication, public projects and their
+    contents are openly available on the network. You can <a href="%{anonymous_role_path}">edit
+    the applicable permissions</a>.
+  label_login_required_yes: 'Yes'
+  label_login_required_no: No, allow anonymous access to public projects
+  text_project_is_public_non_member: Public projects and their contents are available
+    to all logged-in users.
+  text_project_is_public_anonymous: Public projects and their contents are openly available
+    on the network.
+  label_version_and_files: Versions (%{count}) and Files
+  label_ldap: LDAP
+  label_ldaps_verify_none: LDAPS (without certificate check)
+  label_ldaps_verify_peer: LDAPS
+  label_ldaps_warning: It is recommended to use an encrypted LDAPS connection with certificate
+    check to prevent any manipulation during the authentication process.
+  label_nothing_to_preview: Nothing to preview
+  error_token_expired: This password recovery link has expired, please try again.
+  error_spent_on_future_date: Cannot log time on a future date
+  setting_timelog_accept_future_dates: Accept time logs on future dates
+  label_delete_link_to_subtask: "Kustuta seos"
+  error_not_allowed_to_log_time_for_other_users: You are not allowed to log time
+    for other users
+  permission_log_time_for_other_users: Log spent time for other users
+  label_tomorrow: tomorrow
+  label_next_week: next week
+  label_next_month: next month
+  text_role_no_workflow: No workflow defined for this role
+  text_status_no_workflow: No tracker uses this status in the workflows
+  setting_mail_handler_preferred_body_part: Preferred part of multipart (HTML) emails
+  setting_show_status_changes_in_mail_subject: Show status changes in issue mail notifications
+    subject
+  label_inherited_from_parent_project: Inherited from parent project
+  label_inherited_from_group: Inherited from group %{name}
+  label_trackers_description: Trackers description
+  label_open_trackers_description: View all trackers description
+  label_preferred_body_part_text: Text
+  label_preferred_body_part_html: HTML
+  field_parent_issue_subject: Parent task subject
+  permission_edit_own_issues: Edit own issues
+  text_select_apply_tracker: Select tracker
+  label_updated_issues: Updated issues
+  text_avatar_server_config_html: The current avatar server is <a href="%{url}">%{url}</a>.
+    You can configure it in config/configuration.yml.
+  setting_gantt_months_limit: Maximum number of months displayed on the gantt chart
+  permission_import_time_entries: Import time entries
+  label_import_notifications: Send email notifications during the import
+  text_gs_available: ImageMagick PDF support available (optional)
+  field_recently_used_projects: Number of recently used projects in jump box
+  label_optgroup_bookmarks: Bookmarks
+  label_optgroup_recents: Recently used
+  button_project_bookmark: Add bookmark
+  button_project_bookmark_delete: Remove bookmark
+  field_history_default_tab: Issue's history default tab
+  label_issue_history_properties: Property changes
+  label_issue_history_notes: Notes
+  label_last_tab_visited: Last visited tab
+  field_unique_id: Unique ID
+  text_no_subject: no subject
+  setting_password_required_char_classes: Required character classes for passwords
+  label_password_char_class_uppercase: uppercase letters
+  label_password_char_class_lowercase: lowercase letters
+  label_password_char_class_digits: digits
+  label_password_char_class_special_chars: special characters
+  text_characters_must_contain: Must contain %{character_classes}.
+  label_starts_with: starts with
+  label_ends_with: ends with
+  label_issue_fixed_version_updated: Target version updated
+  setting_project_list_defaults: Projects list defaults
+  label_display_type: Display results as
+  label_display_type_list: List
+  label_display_type_board: Board
+  label_my_bookmarks: My bookmarks
+  label_import_time_entries: Import time entries
+  field_toolbar_language_options: Code highlighting toolbar languages
+  label_user_mail_notify_about_high_priority_issues_html: Also notify me about issues
+    with a priority of <em>%{prio}</em> or higher
+  label_assign_to_me: Assign to me
+  notice_issue_not_closable_by_open_tasks: This issue cannot be closed because it has
+    at least one open subtask.
+  notice_issue_not_closable_by_blocking_issue: This issue cannot be closed because it
+    is blocked by at least one open issue.
+  notice_issue_not_reopenable_by_closed_parent_issue: This issue cannot be reopened
+    because its parent issue is closed.
+  error_bulk_download_size_too_big: These attachments cannot be bulk downloaded because
+    the total file size exceeds the maximum allowed size (%{max_size})
+  setting_bulk_download_max_size: Maximum total size for bulk download
+  label_download_all_attachments: Download all files
+  error_attachments_too_many: This file cannot be uploaded because it exceeds the maximum
+    number of files that can be attached simultaneously (%{max_number_of_files})
+  setting_email_domains_allowed: Allowed email domains
+  setting_email_domains_denied: Disallowed email domains
+  field_passwd_changed_on: Password last changed
+  label_relations_mapping: Relations mapping
+  label_import_users: Import users
+  label_days_to_html: "%{days} days up to %{date}"
+  setting_twofa: Two-factor authentication
+  label_optional: optional
+  label_required_lower: required
+  button_disable: Disable
+  twofa__totp__name: Authenticator app
+  twofa__totp__text_pairing_info_html: Scan this QR code or enter the plain text key
+    into a TOTP app (e.g. <a href="https://support.google.com/accounts/answer/1066447">Google
+    Authenticator</a>, <a href="https://authy.com/download/">Authy</a>, <a href="https://guide.duo.com/third-party-accounts">Duo
+    Mobile</a>) and enter the code in the field below to activate two-factor authentication.
+  twofa__totp__label_plain_text_key: Plain text key
+  twofa__totp__label_activate: Enable authenticator app
+  twofa_currently_active: 'Currently active: %{twofa_scheme_name}'
+  twofa_not_active: Not activated
+  twofa_label_code: Code
+  twofa_hint_disabled_html: Setting <strong>%{label}</strong> will deactivate and unpair
+    two-factor authentication devices for all users.
+  twofa_hint_required_html: Setting <strong>%{label}</strong> will require all users
+    to set up two-factor authentication at their next login.
+  twofa_label_setup: Enable two-factor authentication
+  twofa_label_deactivation_confirmation: Disable two-factor authentication
+  twofa_notice_select: 'Please select the two-factor scheme you would like to use:'
+  twofa_warning_require: The administrator requires you to enable two-factor authentication.
+  twofa_activated: Two-factor authentication successfully enabled. It is recommended
+    to <a data-method="post" href="%{bc_path}">generate backup codes</a> for your account.
+  twofa_deactivated: Two-factor authentication disabled.
+  twofa_mail_body_security_notification_paired: Two-factor authentication successfully
+    enabled using %{field}.
+  twofa_mail_body_security_notification_unpaired: Two-factor authentication disabled
+    for your account.
+  twofa_mail_body_backup_codes_generated: New two-factor authentication backup codes
+    generated.
+  twofa_mail_body_backup_code_used: A two-factor authentication backup code has been
+    used.
+  twofa_invalid_code: Code is invalid or outdated.
+  twofa_label_enter_otp: Please enter your two-factor authentication code.
+  twofa_too_many_tries: Too many tries.
+  twofa_resend_code: Resend code
+  twofa_code_sent: An authentication code has been sent to you.
+  twofa_generate_backup_codes: Generate backup codes
+  twofa_text_generate_backup_codes_confirmation: This will invalidate all existing backup
+    codes and generate new ones. Would you like to continue?
+  twofa_notice_backup_codes_generated: Your backup codes have been generated.
+  twofa_warning_backup_codes_generated_invalidated: New backup codes have been generated.
+    Your existing codes from %{time} are now invalid.
+  twofa_label_backup_codes: Two-factor authentication backup codes
+  twofa_text_backup_codes_hint: Use these codes instead of a one-time password should
+    you not have access to your second factor. Each code can only be used once. It is
+    recommended to print and store them in a safe place.
+  twofa_text_backup_codes_created_at: Backup codes generated %{datetime}.
+  twofa_backup_codes_already_shown: Backup codes cannot be shown again, please <a data-method="post"
+    href="%{bc_path}">generate new backup codes</a> if required.
+  error_can_not_execute_macro_html: Error executing the <strong>%{name}</strong> macro
+    (%{error})
+  error_macro_does_not_accept_block: This macro does not accept a block of text
+  error_childpages_macro_no_argument: With no argument, this macro can be called from
+    wiki pages only
+  error_circular_inclusion: Circular inclusion detected
+  error_page_not_found: Page not found
+  error_filename_required: Filename required
+  error_invalid_size_parameter: Invalid size parameter
+  error_attachment_not_found: Attachment %{name} not found
+  permission_delete_project: Delete the project
+  field_twofa_scheme: Two-factor authentication scheme
+  text_user_destroy_confirmation: Are you sure you want to delete this user and remove
+    all references to them? This cannot be undone. Often, locking a user instead of
+    deleting them is the better solution. To confirm, please enter their login (%{login})
+    below.
+  text_project_destroy_enter_identifier: To confirm, please enter the project's identifier
+    (%{identifier}) below.
+  button_add_subtask: Add subtask
+  notice_invalid_watcher: 'Invalid watcher: User will not receive any notifications
+    because it does not have access to view this object.'
+  button_fetch_changesets: Fetch commits
+  permission_view_message_watchers: View message watchers list
+  permission_add_message_watchers: Add message watchers
+  permission_delete_message_watchers: Delete message watchers
+  label_message_watchers: Watchers
+  button_copy_link: Copy link
+  error_invalid_authenticity_token: Invalid form authenticity token.
+  error_query_statement_invalid: An error occurred while executing the query and has
+    been logged. Please report this error to your Redmine administrator.
+  permission_view_wiki_page_watchers: View wiki page watchers list
+  permission_add_wiki_page_watchers: Add wiki page watchers
+  permission_delete_wiki_page_watchers: Delete wiki page watchers
+  label_wiki_page_watchers: Watchers
+  label_attachment_description: File description
+  error_no_data_in_file: The file does not contain any data
+  field_twofa_required: Require two factor authentication
+  twofa_hint_optional_html: Setting <strong>%{label}</strong> will let users set up
+    two-factor authentication at will, unless it is required by one of their groups.
+  twofa_text_group_required: This setting is only effective when the global two factor
+    authentication setting is set to 'optional'. Currently, two factor authentication
+    is required for all users.
+  twofa_text_group_disabled: This setting is only effective when the global two factor
+    authentication setting is set to 'optional'. Currently, two factor authentication
+    is disabled.
+  field_default_issue_query: Default issue query
+  label_default_queries:
+    for_all_projects: For all projects
+    for_current_project: For current project
+    for_all_users: For all users
+    for_this_user: For this user
+  text_allowed_queries_to_select: Public (to any users) queries only selectable
+  text_all_migrations_have_been_run: All database migrations have been run
+  button_save_object: Save %{object_name}
+  button_edit_object: Edit %{object_name}
+  button_delete_object: Delete %{object_name}
+  text_setting_config_change: You can configure the behaviour in config/configuration.yml.
+    Please restart the application after editing it.
+  label_bulk_edit: Bulk edit
+  button_create_and_follow: Create and follow
+  label_subtask: Subtask
+  label_default_query: Default query
+  field_default_project_query: Default project query
+  label_required_administrators: required for administrators
+  twofa_hint_required_administrators_html: Setting <strong>%{label}</strong> behaves
+    like optional, but will require all users with administration rights to set up two-factor
+    authentication at their next login.
+  label_auto_watch_on: Auto watch
+  label_auto_watch_on_issue_contributed_to: Issues I contributed to
+  text_project_close_confirmation: Are you sure you want to close the '%{value}' project
+    to make it read-only?
+  text_project_reopen_confirmation: Are you sure you want to reopen the '%{value}' project?
+  text_project_archive_confirmation: Are you sure you want to archive the '%{value}'
+    project?
+  mail_destroy_project_failed: Project %{value} could not be deleted.
+  mail_destroy_project_successful: Project %{value} was deleted successfully.
+  mail_destroy_project_with_subprojects_successful: Project %{value} and its subprojects
+    were deleted successfully.
+  project_status_scheduled_for_deletion: scheduled for deletion
+  text_projects_bulk_destroy_confirmation: Are you sure you want to delete the selected
+    projects and related data?
+  text_projects_bulk_destroy_head: |
+    You are about to permanently delete the following projects, including possible subprojects and any related data.
+    Please review the information below and confirm that this is indeed what you want to do.
+    This action cannot be undone.
+  text_projects_bulk_destroy_confirm: To confirm, please enter "%{yes}" in the box below.
+  text_subprojects_bulk_destroy: 'including its subproject(s): %{value}'
+  field_current_password: Current password
+  sudo_mode_new_info_html: "<strong>What's happening?</strong> You need to reconfirm
+    your password before taking any administrative actions, this ensures your account
+    stays protected."
+  label_edited: Edited
+  label_time_by_author: "%{time} by %{author}"
+  field_default_time_entry_activity: Default spent time activity
+  field_is_member_of_group: Member of group
+  text_users_bulk_destroy_head: You are about to delete the following users and remove
+    all references to them. This cannot be undone. Often, locking users instead of deleting
+    them is the better solution.
+  text_users_bulk_destroy_confirm: To confirm, please enter "%{yes}" below.
+  permission_select_project_publicity: Set project public or private
+  label_auto_watch_on_issue_created: Issues I created
+  field_any_searchable: Any searchable text
+  label_contains_any_of: contains any of
+  button_apply_issues_filter: Apply issues filter
+  label_view_previous_annotation: View annotation prior to this change
+  label_has_been: has been
+  label_has_never_been: has never been
+  label_changed_from: changed from
+  label_issue_statuses_description: Issue statuses description
+  label_open_issue_statuses_description: View all issue statuses description
+  text_select_apply_issue_status: Select issue status
+  field_name_or_email_or_login: Name, email or login
+  text_default_active_job_queue_changed: Default queue adapter which is well suited
+    only for dev/test changed

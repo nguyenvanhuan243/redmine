@@ -1,0 +1,58 @@
+<%= form_tag({:action => 'edit', :tab => 'authentication'}) do %>
+
+<div class="box tabular settings">
+<p><%= setting_select :login_required, [[l(:label_login_required_yes), "1"],
+                                        [l(:label_login_required_no), "0"]] %>
+  <em class="info"><%= t(:text_login_required_html, anonymous_role_path: edit_role_path(Role.anonymous)) %></em>
+</p>
+
+<p><%= setting_select :autologin, [[l(:label_disabled), 0]] + [1, 7, 30, 365].collect{|days| [l('datetime.distance_in_words.x_days', :count => days), days.to_s]} %></p>
+
+<p><%= setting_select :self_registration, [[l(:label_disabled), "0"],
+                                           [l(:label_registration_activation_by_email), "1"],
+                                           [l(:label_registration_manual_activation), "2"],
+                                           [l(:label_registration_automatic_activation), "3"]],
+                      :onchange =>
+                          "if (this.value != '0') { $('#settings_show_custom_fields_on_registration').removeAttr('disabled'); } else { $('#settings_show_custom_fields_on_registration').attr('disabled', true); }" %></p>
+
+<p><%= setting_check_box :show_custom_fields_on_registration,
+                         :disabled => !Setting.self_registration? %></p>
+
+<p><%= setting_text_field :password_min_length, :size => 6 %></p>
+
+<p><%= setting_multiselect :password_required_char_classes, Setting::PASSWORD_CHAR_CLASSES.keys.collect {|c| [l("label_password_char_class_#{c}"), c]} , :inline => true %></p>
+
+<p>
+  <%= setting_select :password_max_age, [[l(:label_disabled), 0]] + [7, 30, 60, 90, 180, 365].collect{|days| [l('datetime.distance_in_words.x_days', :count => days), days.to_s]} %>
+</p>
+
+<p><%= setting_check_box :lost_password %></p>
+
+<p>
+  <%= setting_select :twofa, [[l(:label_disabled), "0"],
+                              [l(:label_optional), "1"],
+                              [l(:label_required_administrators), "3"],
+                              [l(:label_required_lower), "2"]] -%>
+  <em class="info">
+    <%= t 'twofa_hint_disabled_html', label: t(:label_disabled) -%><br/>
+    <%= t 'twofa_hint_optional_html', label: t(:label_optional) -%><br/>
+    <%= t 'twofa_hint_required_administrators_html', label: t(:label_required_administrators) -%><br/>
+    <%= t 'twofa_hint_required_html', label: t(:label_required_lower) -%>
+  </em>
+</p>
+
+</div>
+
+<fieldset class="box">
+  <legend><%= l(:label_session_expiration) %></legend>
+
+  <div class="tabular settings">
+    <p><%= setting_select :session_lifetime, session_lifetime_options %></p>
+    <p><%= setting_select :session_timeout, session_timeout_options %></p>
+  </div>
+
+  <p><em class="info"><%= l(:text_session_expiration_settings) %></em></p>
+</fieldset>
+
+<%= submit_tag l(:button_save) %>
+<% end %>

@@ -1,0 +1,272 @@
+# frozen_string_literal: true
+
+# Redmine - project management software
+# Copyright (C) 2006-2023  Jean-Philippe Lang
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+require_relative '../test_helper'
+
+class AutoCompletesControllerTest < Redmine::ControllerTest
+  fixtures :projects, :issues, :issue_statuses,
+           :enumerations, :users, :issue_categories,
+           :trackers,
+           :projects_trackers,
+           :roles,
+           :member_roles,
+           :members,
+           :enabled_modules,
+           :journals, :journal_details,
+           :wikis, :wiki_pages, :wiki_contents, :wiki_content_versions
+
+  def test_issues_should_not_be_case_sensitive
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => 'ReCiPe'
+      }
+    )
+    assert_response :success
+    assert_include "recipe", response.body
+  end
+
+  def test_issues_should_accept_term_param
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :term => 'ReCiPe'
+      }
+    )
+    assert_response :success
+    assert_include "recipe", response.body
+  end
+
+  def test_issues_should_return_issue_with_given_id
+    get(
+      :issues,
+      :params => {
+        :project_id => 'subproject1',
+        :q => '13'
+      }
+    )
+    assert_response :success
+    assert_include "Bug #13", response.body
+  end
+
+  def test_issues_should_return_issue_with_given_id_preceded_with_hash
+    get(
+      :issues,
+      :params => {
+        :project_id => 'subproject1',
+        :q => '#13'
+      }
+    )
+    assert_response :success
+    assert_include "Bug #13", response.body
+  end
+
+  def test_issues_with_scope_all_should_search_other_projects
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => '13',
+        :scope => 'all'
+      }
+    )
+    assert_response :success
+    assert_include "Bug #13", response.body
+  end
+
+  def test_issues_without_project_should_search_all_projects
+    get(:issues, :params => {:q => '13'})
+    assert_response :success
+    assert_include "Bug #13", response.body
+  end
+
+  def test_issues_without_scope_all_should_not_search_other_projects
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => '13'
+      }
+    )
+    assert_response :success
+    assert_not_include "Bug #13", response.body
+  end
+
+  def test_issues_should_return_json
+    get(
+      :issues,
+      :params => {
+        :project_id => 'subproject1',
+        :q => '13'
+      }
+    )
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_kind_of Array, json
+    issue = json.first
+    assert_kind_of Hash, issue
+    assert_equal 13, issue['id']
+    assert_equal 13, issue['value']
+    assert_equal 'Bug #13: Subproject issue two', issue['label']
+  end
+
+  def test_issues_with_status_o_should_return_open_issues_only
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => 'issue',
+        :status => 'o'
+      }
+    )
+    assert_response :success
+    assert_include "Issue due today", response.body
+    assert_not_include "closed", response.body
+  end
+
+  def test_issues_with_status_c_should_return_closed_issues_only
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => 'issue',
+        :status => 'c'
+      }
+    )
+    assert_response :success
+    assert_include "closed", response.body
+    assert_not_include "Issue due today", response.body
+  end
+
+  def test_issues_with_issue_id_should_not_return_that_issue
+    get(
+      :issues,
+      :params => {
+        :project_id => 'ecookbook',
+        :q => 'issue',
+        :issue_id => '12'
+      }
+    )
+    assert_response :success
+    assert_include "issue", response.body
+    assert_not_include "Bug #12: Closed issue on a locked version", response.body
+  end
+
+  def test_auto_complete_should_return_json_content_type_response
+    get(
+      :issues,
+      :params => {
+        :project_id => 'subproject1',
+        :q => '#13'
+      }
+    )
+    assert_response :success
+    assert_include 'application/json', response.headers['Content-Type']
+  end
+
+  def test_issue_without_term_should_return_last_10_issues
+    # There are 9 issues generated by fixtures
+    # and we need two more to test the 10 limit
+    %w(1..2).each do
+      Issue.generate!
+    end
+
+    get :issues
+
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+
+    assert_equal 10, json.count
+    assert_equal Issue.last.id, json.first['id'].to_i
+  end
+
+  def test_wiki_pages_should_not_be_case_sensitive
+    get(
+      :wiki_pages,
+      params: {
+        project_id: 'ecookbook',
+        q: 'pAgE'
+      }
+    )
+    assert_response :success
+    assert_include 'Page_with_an_inline_image', response.body
+  end
+
+  def test_wiki_pages_should_return_json
+    get(
+      :wiki_pages,
+      params: {
+        project_id: 'ecookbook',
+        q: 'Page_with_an_inline_image'
+      }
+    )
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_kind_of Array, json
+    issue = json.first
+    assert_kind_of Hash, issue
+    assert_equal 4, issue['id']
+    assert_equal 'Page_with_an_inline_image', issue['value']
+    assert_equal 'Page_with_an_inline_image', issue['label']
+  end
+
+  def test_wiki_pages_without_view_wiki_pages_permission_should_not_return_pages
+    Role.anonymous.remove_permission! :view_wiki_pages
+    get :wiki_pages, params: { project_id: 'ecookbook', q: 'Page_with_an_inline_image' }
+
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_equal 0, json.count
+  end
+
+  def test_wiki_pages_without_project_id_params_should_not_return_pages
+    get :wiki_pages, params: { project_id: '' }
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_equal 0, json.count
+  end
+
+  def test_wiki_pages_should_return_json_content_type_response
+    get(
+      :wiki_pages,
+      params: {
+        project_id: 'ecookbook',
+        q: 'Page_with_an_inline_image'
+      }
+    )
+    assert_response :success
+    assert_include 'application/json', response.headers['Content-Type']
+  end
+
+  def test_wiki_pages_without_q_params_should_return_last_10_pages
+    # There are 8 pages generated by fixtures
+    # and we need three more to test the 10 limit
+    wiki = Wiki.find_by(project: Project.first)
+    3.times do |n|
+      WikiPage.create(wiki: wiki, title: "test#{n}")
+    end
+    get :wiki_pages, params: { project_id: 'ecookbook' }
+    assert_response :success
+    json = ActiveSupport::JSON.decode(response.body)
+    assert_equal 10, json.count
+    assert_equal wiki.pages[-2].id, json.first['id'].to_i
+  end
+end

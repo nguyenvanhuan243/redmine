@@ -1,0 +1,160 @@
+<%= form_tag({:action => 'edit', :tab => 'repositories'}) do %>
+
+<fieldset class="box settings enabled_scm">
+<legend><%= l(:setting_enabled_scm) %></legend>
+<%= hidden_field_tag 'settings[enabled_scm][]', '' %>
+<table>
+  <tr>
+    <th></th>
+    <th><%= l(:text_scm_command)         %></th>
+    <th><%= l(:text_scm_command_version) %></th>
+  </tr>
+  <% Redmine::Scm::Base.all.collect do |choice| %>
+    <% scm_class = "Repository::#{choice}".constantize %>
+    <% text, value = (choice.is_a?(Array) ? choice : [choice, choice]) %>
+    <% setting = :enabled_scm %>
+    <% enabled = Setting.send(setting).include?(value) %>
+    <tr>
+      <td class="scm_name">
+        <label>
+          <%= check_box_tag("settings[#{setting}][]", value, enabled, :id => nil) %>
+          <%= text.to_s %>
+        </label>
+      </td>
+      <td>
+        <% if enabled %>
+          <span class="icon <%= (scm_class.scm_available ? 'icon-ok' : 'icon-error') %>"></span>
+          <%= scm_class.scm_command %>
+        <% end %>
+      </td>
+      <td>
+        <%= scm_class.scm_version_string if enabled %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+<p><em class="info"><%= l(:text_scm_config) %></em></p>
+</fieldset>
+
+<div class="box tabular settings">
+<p><%= setting_check_box :autofetch_changesets %></p>
+
+<p><%= setting_check_box :sys_api_enabled,
+                         :onclick =>
+                             "if (this.checked) { $('#settings_sys_api_key').removeAttr('disabled'); } else { $('#settings_sys_api_key').attr('disabled', true); }" %></p>
+
+<p><%= setting_text_field :sys_api_key,
+                          :size     => 30,
+                          :id       => 'settings_sys_api_key',
+                          :disabled => !Setting.sys_api_enabled? %>
+  <%= link_to_function l(:label_generate_key),
+                       "if (!$('#settings_sys_api_key').attr('disabled')) { $('#settings_sys_api_key').val(randomKey(20)) }" %>
+</p>
+
+<p><%= setting_text_field :repository_log_display_limit, :size => 6 %></p>
+
+<p><%= setting_check_box :commit_logs_formatting %></p>
+</div>
+
+<fieldset class="box tabular settings">
+<legend><%= l(:text_issues_ref_in_commit_messages) %></legend>
+<p><%= setting_text_field :commit_ref_keywords, :size => 30 %>
+<em class="info"><%= l(:text_comma_separated) %></em></p>
+
+<p><%= setting_check_box :commit_cross_project_ref %></p>
+
+<p><%= setting_check_box :commit_logtime_enabled,
+                         :onclick =>
+                            "if (this.checked) { $('#settings_commit_logtime_activity_id').removeAttr('disabled'); } else { $('#settings_commit_logtime_activity_id').attr('disabled', true); }"%></p>
+
+<p><%= setting_select :commit_logtime_activity_id,
+                      [[l(:label_default), 0]] +
+                          TimeEntryActivity.shared.active.collect{|activity| [activity.name, activity.id.to_s]},
+                      :disabled => !Setting.commit_logtime_enabled?%></p>
+</fieldset>
+
+<table class="list" id="commit-keywords">
+  <thead>
+    <tr>
+      <th><%= l(:label_tracker) %></th>
+      <th><%= l(:setting_commit_fix_keywords) %></th>
+      <th><%= l(:label_applied_status) %></th>
+      <th><%= l(:field_done_ratio) %></th>
+      <th class="buttons"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @commit_update_keywords.each do |rule| %>
+    <tr class="commit-keywords">
+      <td>
+        <%= select_tag(
+                "settings[commit_update_keywords][if_tracker_id][]",
+                options_for_select(
+                  [[l(:label_all), ""]] +
+                    Tracker.sorted.map {|t| [t.name, t.id.to_s]},
+                rule['if_tracker_id']),
+                :id => nil
+               ) %>
+      </td>
+      <td>
+        <%= text_field_tag("settings[commit_update_keywords][keywords][]",
+                           rule['keywords'], :id => nil, :size => 30) %>
+      </td>
+      <td>
+        <%= select_tag("settings[commit_update_keywords][status_id][]",
+                       options_for_select(
+                         [["", 0]] +
+                         IssueStatus.sorted.
+                           collect{|status| [status.name, status.id.to_s]},
+                         rule['status_id']),
+                       :id => nil
+                   ) %>
+      </td>
+      <td>
+        <%= select_tag("settings[commit_update_keywords][done_ratio][]",
+                       options_for_select(
+                          [["", ""]] +
+                          (0..10).to_a.collect {|r| ["#{r*10} %", "#{r*10}"] },
+                       rule['done_ratio']),
+                       :id => nil
+                    ) %>
+      </td>
+      <td class="buttons">
+        <%= link_to(l(:button_delete), '#',
+                    :class => 'delete-commit-keywords icon-only icon-del',
+                    :title => l(:button_delete)) %>
+      </td>
+    </tr>
+    <% end %>
+    <tr>
+      <td></td>
+      <td><em class="info"><%= l(:text_comma_separated) %></em></td>
+      <td></td>
+      <td></td>
+      <td class="buttons">
+        <%= link_to(l(:button_add), '#',
+                    :class => 'add-commit-keywords icon-only icon-add',
+                    :title => l(:button_add)) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<p><%= submit_tag l(:button_save) %></p>
+<% end %>
+
+<%= javascript_tag do %>
+$('#commit-keywords').on('click', 'a.delete-commit-keywords', function(e){
+  e.preventDefault();
+  if ($('#commit-keywords tbody tr.commit-keywords').length > 1) {
+    $(this).parents('#commit-keywords tr').remove();
+  } else {
+    $('#commit-keywords tbody tr.commit-keywords').find('input, select').val('');
+  }
+});
+$('#commit-keywords').on('click', 'a.add-commit-keywords', function(e){
+  e.preventDefault();
+  var row = $('#commit-keywords tr.commit-keywords:last');
+  row.clone().insertAfter(row).find('input, select').val('');
+});
+<% end %>

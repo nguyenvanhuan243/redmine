@@ -1,0 +1,9 @@
+<p><%= l(:mail_body_reminder, :count => link_to(@issues.size, @reminder_issues_url), :days => @days).html_safe %></p>
+
+<ul>
+<% @issues.each do |issue| -%>
+  <li><%= link_to_issue(issue, :project => true, :only_path => false) %> (<%= due_date_distance_in_words(issue.due_date) %>)</li>
+<% end -%>
+</ul>
+
+<p><%= link_to l(:label_issue_view_all), @open_issues_url %> (<%= l(:label_x_open_issues_abbr, :count => @open_issues_count) %>)</p>

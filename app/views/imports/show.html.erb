@@ -1,0 +1,28 @@
+<h2><%= import_title %></h2>
+
+<% if @import.saved_items.count > 0 %>
+  <p><%= l(:notice_import_finished, :count => @import.saved_items.count) %>:</p>
+
+  <%= render :partial => "#{import_partial_prefix}_saved_objects", :locals => { saved_objects: @import.saved_objects } %>
+<% end %>
+
+<% if @import.unsaved_items.count > 0 %>
+  <p><%= l(:notice_import_finished_with_errors, :count => @import.unsaved_items.count, :total => @import.total_items) %>:</p>
+
+  <table id="unsaved-items" class="list">
+    <thead>
+    <tr>
+      <th>Position</th>
+      <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @import.unsaved_items.each do |item| %>
+    <tr>
+      <td><%= item.position %></td>
+      <td><%= simple_format_without_paragraph item.message %></td>
+    </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

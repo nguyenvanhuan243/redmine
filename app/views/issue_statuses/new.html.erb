@@ -1,0 +1,6 @@
+<%= title [l(:label_issue_status_plural), issue_statuses_path], l(:label_issue_status_new) %>
+
+<%= labelled_form_for @issue_status do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+  <%= submit_tag l(:button_create) %>
+<% end %>

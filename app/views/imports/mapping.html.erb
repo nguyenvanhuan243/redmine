@@ -1,0 +1,33 @@
+<h2><%= import_title %></h2>
+
+<%= form_tag(import_mapping_path(@import), :id => "import-form") do %>
+  <%= render :partial => "#{import_partial_prefix}_mapping" %>
+
+  <fieldset class="box">
+    <legend><%= l(:label_file_content_preview) %></legend>
+
+    <div class="autoscroll">
+      <table class="sample-data">
+      <% @import.first_rows.each do |row| %>
+        <tr>
+          <%= row.map {|c| content_tag 'td', truncate(c.to_s, :length => 50) }.join("").html_safe %>
+        </tr>
+      <% end %>
+      </table>
+    </div>
+  </fieldset>
+
+  <p>
+    <%= button_tag("\xc2\xab " + l(:label_previous), :name => 'previous') %>
+    <%= submit_tag l(:button_import) %>
+  </p>
+<% end %>
+
+<%= javascript_tag do %>
+$(document).ready(function() {
+  $('#import-form').submit(function(){
+    $('#import-details').show().addClass('ajax-loading');
+    $('#import-progress').progressbar({value: 0, max: <%= @import.total_items || 0 %>});
+  });
+});
+<% end %>

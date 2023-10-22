@@ -1,0 +1,48 @@
+<%
+title =
+  if watchables.present?
+    l(:"permission_add_#{watchables.first.class.name.underscore}_watchers")
+  else
+    l(:permission_add_issue_watchers)
+  end
+-%>
+<h3 class="title"><%= title %></h3>
+
+<%= form_tag(watchables.present? ? watchers_path : watchers_append_path,
+             :remote => true,
+             :method => :post,
+             :id => 'new-watcher-form') do %>
+
+  <% if watchables.present? %>
+    <%= hidden_field_tag 'object_type', watchables.first.class.name.underscore %>
+    <% watchables.each do |watchable| %>
+      <%= hidden_field_tag 'object_id[]', watchable.id %>
+    <% end  %>
+  <% end %>
+  <%= hidden_field_tag 'project_id', @project.id if @project %>
+
+  <p><%= label_tag 'user_search', l(:label_user_search) %><%= text_field_tag 'user_search', nil %></p>
+  <%= javascript_tag(
+        "observeSearchfield(
+          'user_search',
+          'users_for_watcher',
+          '#{escape_javascript(
+               url_for(
+                 :controller => 'watchers',
+                 :action => 'autocomplete_for_user',
+                 :object_type => (watchables.present? ? watchables.first.class.name.underscore : nil),
+                 :object_id => (watchables.present? ? watchables.map(&:id) : nil),
+                 :project_id => @project
+               )
+             )}'
+         )"
+       ) %>
+  <div id="users_for_watcher">
+    <%= principals_check_box_tags('watcher[user_ids][]', users) %>
+  </div>
+
+  <p class="buttons">
+    <%= submit_tag l(:button_add), :name => nil, :onclick => "hideModal(this);" %>
+    <%= link_to_function l(:button_cancel), "hideModal(this);" %>
+  </p>
+<% end %>

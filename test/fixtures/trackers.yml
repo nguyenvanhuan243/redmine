@@ -1,0 +1,18 @@
+---
+trackers_001:
+  name: Bug
+  id: 1
+  default_status_id: 1
+  position: 1
+  description: Description for Bug tracker
+trackers_002:
+  name: Feature request
+  id: 2
+  default_status_id: 1
+  position: 2
+  description: Description for Feature request tracker
+trackers_003:
+  name: Support request
+  id: 3
+  default_status_id: 1
+  position: 3

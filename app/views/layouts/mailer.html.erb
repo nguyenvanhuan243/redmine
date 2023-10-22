@@ -1,0 +1,82 @@
+<html>
+<head>
+<style>
+body {
+  font-family: Verdana, sans-serif;
+  font-size: 14px;
+  line-height: 1.4em;
+  color: #222;
+}
+h1, h2, h3 { font-family: "Trebuchet MS", Verdana, sans-serif; margin: 0px; }
+h1 { font-size: 1.3em; line-height: 1.4em;}
+h2, h3 { font-size: 1.1em; }
+a, a:link, a:visited { color: #169;}
+a:hover, a:active { color: #c61a1a; }
+a.wiki-anchor { display: none; }
+fieldset.attachments {border-width: 1px 0 0 0;}
+hr {
+  width: 100%;
+  height: 1px;
+  background: #ccc;
+  border: 0;
+  margin: 1.2em 0;
+}
+span.footer {
+  font-size: 0.8em;
+  font-style: italic;
+}
+blockquote { font-style: italic; border-left: 3px solid #e0e0e0; padding-left: 0.6em; margin-left: 0;}
+blockquote blockquote { margin-left: 0;}
+pre, code {font-family: Consolas, Menlo, "Liberation Mono", Courier, monospace;}
+pre {
+  margin: 1em 1em 1em 1.6em;
+  padding: 8px;
+  background-color: #fafafa;
+  border: 1px solid #e2e2e2;
+  border-radius: 3px;
+  width:auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+ul.details {color:#959595; margin-bottom: 1.5em;}
+table {
+  border-collapse: collapse;
+  margin-bottom: 1em;
+}
+table, td, th {
+  border: 1px solid #bbb;
+  padding: 4px;
+}
+.badge {
+  position:relative;
+  font-weight:bold;
+  font-size: 10px;
+  bottom: 2px;
+  padding: 1px 3px;
+  margin-right: 2px;
+  margin-left: 2px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.badge-status-open {
+  color: #205D86;
+  border: 1px solid #205D86;
+}
+.badge-status-closed {
+  color: #1D781D;
+  border: 1px solid #1D781D;
+}
+</style>
+</head>
+<body>
+<% if Setting.emails_header.present? -%>
+<span class="header"><%= Redmine::WikiFormatting.to_html(Setting.text_formatting, Setting.emails_header).html_safe %></span>
+<% end -%>
+<%= yield %>
+<hr />
+<% if Setting.emails_footer.present? -%>
+<span class="footer"><%= Redmine::WikiFormatting.to_html(Setting.text_formatting, Setting.emails_footer).html_safe %></span>
+<% end -%>
+</body>
+</html>

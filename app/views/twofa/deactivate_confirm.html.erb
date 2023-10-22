@@ -1,0 +1,16 @@
+<h2><%=l 'twofa_label_deactivation_confirmation' -%></h2>
+
+<div class="splitcontentleft">
+  <%= form_tag({ action: :deactivate,
+                 scheme: @twofa_view[:scheme_name] },
+               { method: :post,
+                 id: 'twofa_form' }) do -%>
+    <%= render partial: 'twofa_code_form' -%>
+    <%= submit_tag l('button_disable'), name: :submit_otp -%>
+    <%= link_to l('twofa_resend_code'), { action: 'deactivate_init', scheme: @twofa_view[:scheme_name] }, method: :post if @twofa_view[:resendable] -%>
+  <% end %>
+</div>
+
+<% content_for :sidebar do %>
+<%= render :partial => 'my/sidebar' %>
+<% end %>

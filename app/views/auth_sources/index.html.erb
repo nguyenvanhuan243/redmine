@@ -1,0 +1,31 @@
+<div class="contextual">
+<%= link_to l(:label_auth_source_new), {:action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<%= title l(:label_auth_source_plural) %>
+
+<table class="list">
+  <thead><tr>
+    <th><%=l(:field_name)%></th>
+    <th><%=l(:field_type)%></th>
+    <th><%=l(:field_host)%></th>
+    <th><%=l(:label_user_plural)%></th>
+    <th></th>
+  </tr></thead>
+  <tbody>
+<% for source in @auth_sources %>
+  <tr id="auth-source-<%= source.id %>">
+    <td class="name"><%= link_to(source.name, :action => 'edit', :id => source)%></td>
+    <td><%= source.auth_method_name %></td>
+    <td><%= source.host %></td>
+    <td><%= source.users.count %></td>
+    <td class="buttons">
+      <%= link_to l(:button_test), try_connection_auth_source_path(source), :class => 'icon icon-test' %>
+      <%= delete_link auth_source_path(source) %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span class="pagination"><%= pagination_links_full @auth_source_pages %></span>

@@ -1,0 +1,49 @@
+<div class="contextual">
+<%= link_to(l(:label_news_new),
+            (@project ? project_news_index_path(@project) : news_index_path),
+            :class => 'icon icon-add add-news-link',
+            :onclick => 'showAndScrollTo("add-news", "news_title"); return false;') if User.current.allowed_to?(:manage_news, @project, global: true) %>
+<%= watcher_link(@project.enabled_module('news'), User.current) if @project && User.current.logged? %>
+</div>
+
+<div id="add-news" style="display:none;">
+<h2><%=l(:label_news_new)%></h2>
+<%= labelled_form_for @news, :url => (@project ? project_news_index_path(@project) : news_index_path),
+                                           :html => { :id => 'news-form', :multipart => true } do |f| %>
+<%= render :partial => 'news/form', :locals => { :f => f } %>
+<%= submit_tag l(:button_create) %>
+<%= link_to l(:button_cancel), "#", :onclick => '$("#add-news").hide()' %>
+<% end %>
+</div>
+
+<h2><%=l(:label_news_plural)%></h2>
+
+<% if @newss.empty? %>
+<p class="nodata"><%= l(:label_no_data) %></p>
+<% else %>
+<% @newss.each do |news| %>
+    <article class="news-article">
+      <header>
+        <h3><%= avatar(news.author) %><%= link_to_project(news.project) + ': ' unless news.project == @project %>
+        <%= link_to h(news.title), news_path(news) %>
+        <%= "(#{l(:label_x_comments, :count => news.comments_count)})" if news.comments_count > 0 %></h3>
+        <p class="author"><%= authoring news.created_on, news.author %></p>
+      </header>
+      <div class="wiki">
+      <%= textilizable(news, :description) %>
+      </div>
+    </article>
+<% end %>
+<% end %>
+<span class="pagination"><%= pagination_links_full @news_pages %></span>
+
+<% other_formats_links do |f| %>
+  <%= f.link_to 'Atom', :url => {:project_id => @project, :key => User.current.atom_key} %>
+<% end %>
+
+<% content_for :header_tags do %>
+  <%= auto_discovery_link_tag(:atom, _project_news_path(@project, :key => User.current.atom_key, :format => 'atom')) %>
+  <%= stylesheet_link_tag 'scm' %>
+<% end %>
+
+<% html_title(l(:label_news_plural)) -%>

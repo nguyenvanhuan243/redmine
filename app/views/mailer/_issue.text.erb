@@ -1,0 +1,13 @@
+<%= "#{issue.tracker.name} ##{issue.id}: #{issue.subject}" %>
+<%= issue_url %>
+
+<%= render_email_issue_attributes(issue, user) %>
+----------------------------------------
+<%= issue.description %>
+
+<% if issue.attachments.any? -%>
+---<%= l(:label_attachment_plural).ljust(37, '-') %>
+<% issue.attachments.each do |attachment| -%>
+<%= attachment.filename %> (<%= number_to_human_size(attachment.filesize) %>)
+<% end -%>
+<% end -%>

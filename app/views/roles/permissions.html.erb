@@ -1,0 +1,101 @@
+<%= title [l(:label_role_plural), roles_path], l(:label_permissions_report) %>
+
+<div class="hide-when-print">
+  <fieldset id="filters" class="collapsible collapsed">
+    <legend onclick="toggleFieldset(this);" class="icon icon-collapsed"><%= l(:label_filter_plural) %></legend>
+    <div style="display: none;">
+      <%= form_tag({}, :method => :get) do %>
+        <fieldset>
+          <legend><%= toggle_checkboxes_link('#filters input[type=checkbox]:enabled') %></legend>
+          <% Role.sorted.to_a.each do |role| %>
+            <label>
+              <%= check_box_tag "ids[]", role.id, @roles.include?(role) %>
+              <%= role.name %>
+            </label>
+          <% end %>
+        </fieldset>
+        <p>
+          <%= submit_tag l(:button_apply), :name => nil %>
+          <%= link_to l(:button_clear), permissions_roles_path, :class => 'icon icon-reload' %>
+        </p>
+      <% end %>
+    </div>
+  </fieldset>
+</div>
+
+<%= form_tag(permissions_roles_path, :id => 'permissions_form') do %>
+<% @roles.each do |role| %>
+    <%= hidden_field_tag "permissions[#{role.id}][]", '', :id => nil %>
+<% end %>
+<div class="autoscroll">
+<table class="list permissions">
+<thead>
+    <tr>
+    <th><%=l(:label_permissions)%></th>
+    <% @roles.each do |role| %>
+    <th>
+        <%= link_to_function('',
+                             "toggleCheckboxesBySelector('input.role-#{role.id}')",
+                             :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                             :class => 'icon-only icon-checked') %>
+        <%= content_tag(role.builtin? ? 'em' : 'span', role.name) %>
+    </th>
+    <% end %>
+    </tr>
+</thead>
+<tbody>
+<% perms_by_module = @permissions.group_by {|p| p.project_module.to_s} %>
+<% perms_by_module.keys.sort.each do |mod| %>
+    <% unless mod.blank? %>
+        <tr class="group open">
+          <td>
+            <span class="expander icon icon-expanded" onclick="toggleRowGroup(this);">&nbsp;</span>
+            <%= l_or_humanize(mod, :prefix => 'project_module_') %>
+          </td>
+          <% @roles.each do |role| %>
+          <td class="role"><%= role.name %></td>
+          <% end %>
+        </tr>
+    <% end %>
+    <% perms_by_module[mod].each do |permission| %>
+        <% humanized_perm_name = l_or_humanize(permission.name, :prefix => 'permission_') %>
+        <tr class="permission-<%= permission.name %>">
+        <td class="name">
+            <%= link_to_function('',
+                                 "toggleCheckboxesBySelector('.permission-#{permission.name} input')",
+                                 :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}",
+                                 :class => 'icon-only icon-checked') %>
+            <%= humanized_perm_name %>
+        </td>
+        <% @roles.each do |role| %>
+          <% if role.setable_permissions.include? permission %>
+            <td title="<%= "#{humanized_perm_name} (#{role.name})" %>">
+              <%= check_box_tag "permissions[#{role.id}][]", permission.name, (role.permissions.include? permission.name), :id => nil, :class => "role-#{role.id}" %>
+            </td>
+          <% else %>
+            <td></td>
+          <% end %>
+        <% end %>
+        </tr>
+    <% end %>
+<% end %>
+</tbody>
+</table>
+</div>
+<p><%= check_all_links 'permissions_form' %></p>
+<p><%= submit_tag l(:button_save) %></p>
+<% end %>
+<% other_formats_links do |f| %>
+  <%= f.link_to_with_query_parameters 'CSV', {}, :onclick => "showModal('csv-export-options', '330px'); return false;" %>
+<% end %>
+<div id="csv-export-options" style="display: none;">
+  <h3 class="title"><%= l(:label_export_options, :export_format => 'CSV') %></h3>
+  <%= form_tag(permissions_roles_path(:format => 'csv'), :method => :get, :id => 'csv-export-form') do %>
+  <%= export_csv_encoding_select_tag %>
+  <%= export_csv_separator_select_tag %>
+  <p class="buttons">
+    <%= submit_tag l(:button_export), :name => nil, :onclick => 'hideModal(this);', :data => {:disable_with => false} %>
+    <%= link_to_function l(:button_cancel), 'hideModal(this);' %>
+  </p>
+  <% end %>
+</div>

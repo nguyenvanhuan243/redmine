@@ -1,0 +1,30 @@
+<%= title [l(:label_user_plural), users_path], l(:label_user_new) %>
+
+<%= labelled_form_for @user, :html => {:multipart => true} do |f| %>
+  <%= render :partial => 'form', :locals => { :f => f } %>
+  <% if email_delivery_enabled? %>
+  <p><label><%= check_box_tag 'send_information', 1, params[:send_information] %> <%= l(:label_send_information) %></label></p>
+  <% end %>
+  <p>
+    <%= submit_tag l(:button_create) %>
+    <%= submit_tag l(:button_create_and_continue), :name => 'continue' %>
+  </p>
+<% end %>
+
+<% if @auth_sources.present? && @auth_sources.any?(&:searchable?) %>
+  <%= javascript_tag do %>
+    observeAutocompleteField('user_login', '<%= escape_javascript autocomplete_for_new_user_auth_sources_path %>', {
+      select: function(event, ui) {
+        $('input#user_firstname').val(ui.item.firstname);
+        $('input#user_lastname').val(ui.item.lastname);
+        $('input#user_mail').val(ui.item.mail);
+        $('select#user_auth_source_id option').each(function(){
+          if ($(this).attr('value') == ui.item.auth_source_id) {
+            $(this).prop('selected', true);
+            $('select#user_auth_source_id').trigger('change');
+          }
+        });
+      }
+    });
+  <% end %>
+<% end %>
